@@ -1,3 +1,15 @@
+#' Title
+#'
+#' @param Data
+#' @param Setsize
+#' @param Replace
+#' @param N
+#' @param Model
+#'
+#' @return
+#' @export
+#'
+#' @examples
 JPSLF <- function(Data, Setsize, Replace, N, Model) {
     nK <- dim(Data)
     n <- nK[1]

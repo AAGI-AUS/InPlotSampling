@@ -1,3 +1,16 @@
+#' Title
+#'
+#' @param Data
+#' @param Setsize
+#' @param Replace
+#' @param N
+#' @param Model
+#' @param CoefD0
+#'
+#' @return
+#' @export
+#'
+#' @examples
 ListF <- function(Data, Setsize, Replace, N, Model, CoefD0) {
     Y <- Data[, 1]
     Ranks <- Data[, -1]

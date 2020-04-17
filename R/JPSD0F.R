@@ -1,5 +1,16 @@
-
-
+#' Title
+#'
+#' @param pop
+#' @param n
+#' @param H
+#' @param tau
+#' @param N
+#' @param K
+#'
+#' @return
+#' @export
+#'
+#' @examples
 JPSD0F <- function(pop, n, H, tau, N, K) {
   # tau: controls the ranking quality
   # n:sample size

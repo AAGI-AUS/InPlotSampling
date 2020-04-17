@@ -1,10 +1,24 @@
-###########################################################
-# This function Computes JPS estimator and its variance  ##
-###########################################################
-# JPSD0:
-# First column: Response
-# Second column: Ranks
+#' Title
+#'
+#' @param RV
+#' @param Y
+#' @param H
+#' @param Coef
+#' @param N
+#' @param Replace
+#' @param Model
+#'
+#' @return
+#' @export
+#'
+#' @examples
 JPSED0F <- function(RV, Y, H, Coef, N, Replace, Model) {
+    ###########################################################
+    # This function Computes JPS estimator and its variance  ##
+    ###########################################################
+    # JPSD0:
+    # First column: Response
+    # Second column: Ranks
     # print(Coef)
     RVD <- data.frame(RV)
     M.est <- mean(aggregate(Y, RVD, mean)$x) # JPS estimate

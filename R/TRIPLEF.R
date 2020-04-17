@@ -1,3 +1,13 @@
+#' Title
+#'
+#' @param uv
+#' @param H
+#' @param n
+#'
+#' @return
+#' @export
+#'
+#' @examples
 TRIPLEF <- function(uv, H, n) {
     coef1 <- (-1)^(uv[2] - 1) / (uv[1]^2 * uv[3])
     coef2 <- choose((H - 1), (uv[1] - 1))

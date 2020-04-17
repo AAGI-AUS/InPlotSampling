@@ -1,7 +1,20 @@
-#############################################
-# Ths function generates JPS sample        ##
-#############################################
+#' Title
+#'
+#' @param pop
+#' @param n
+#' @param H
+#' @param tau
+#' @param N
+#' @param K
+#'
+#' @return
+#' @export
+#'
+#' @examples
 JPSD2F <- function(pop, n, H, tau, N, K) {
+    #############################################
+    # Ths function generates JPS sample        ##
+    #############################################
     # K: Number of rankers
     # tau: controls the ranking quality
     # n:sample size
