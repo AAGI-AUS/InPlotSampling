@@ -1,7 +1,7 @@
 Type: Package
 Package: RSS
 Title: A Package to Ease the Application of Ranked Set Sampling
-Version: 0.1.0
+Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Omer",
              family = "Ozturk",
