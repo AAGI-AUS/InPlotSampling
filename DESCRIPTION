@@ -3,11 +3,13 @@ Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
 Authors@R: c(
-    person("Sharon", "Nielsen", email = "biometrytraining@adelaide.edu.au", role = "aut"),
-    person("Sam", "Rogers", email = "biometrytraining@adelaide.edu.au", role = "cre"))
-Maintainer: The package maintainer <yourself@somewhere.net>
+    person("Omer", "Ozturk", email = "omer@stat.osu.edu", role = "aut"),
+    person("Sam", "Rogers", email = "s.rogers@adelaide.edu.au", role = "cre"),
+    person("Peter", "Kasprzak", role = "aut"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
+Suggests: 
+    testthat
