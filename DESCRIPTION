@@ -1,15 +1,23 @@
-Package: RSS
 Type: Package
-Title: What the Package Does (Title Case)
+Package: RSS
+Title: A Package to Ease the Application of Ranked Set Sampling
 Version: 0.1.0
-Authors@R: c(
-    person("Omer", "Ozturk", email = "omer@stat.osu.edu", role = "aut"),
-    person("Sam", "Rogers", email = "s.rogers@adelaide.edu.au", role = "cre"),
-    person("Peter", "Kasprzak", role = "aut"))
+Authors@R: 
+    c(person(given = "Omer",
+             family = "Ozturk",
+             role = "aut",
+             email = "omer@stat.osu.edu"),
+      person(given = "Sam",
+             family = "Rogers",
+             role = "cre",
+             email = "s.rogers@adelaide.edu.au"),
+      person(given = "Peter",
+             family = "Kasprzak",
+             role = "aut"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: file LICENSE
-Encoding: UTF-8
-LazyData: true
 Suggests: 
     testthat
+Encoding: UTF-8
+LazyData: true
