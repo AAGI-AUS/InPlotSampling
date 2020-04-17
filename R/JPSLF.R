@@ -44,7 +44,7 @@ JPSLF <- function(Data, Setsize, Replace, N, Model) {
     }
     JPSE.E <- ListF(Data, Setsize, Replace, N, Model, Coefn) # estimate based on combined ranking method
     ################
-    # create list of deta frames by deleting each row
+    # create list of data frames by deleting each row
     # this is used for Jackknife variance estimate
     DataL <- vector("list", n)
     for (i in (1:n)) {
