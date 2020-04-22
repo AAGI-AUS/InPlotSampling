@@ -4,10 +4,16 @@
 \alias{JPSD0F}
 \title{Title}
 \usage{
-JPSD0F(pop, n, H, tau, N, K)
+JPSD0F(pop, sample_size, set_size, number_rankers, tau)
 }
 \arguments{
-\item{K}{}
+\item{pop}{A vector of values which is the population samples are taken from.}
+
+\item{sample_size}{The size of the sample to be taken.}
+
+\item{number_rankers}{The number of rankers.}
+
+\item{tau}{The ranking quality.}
 }
 \value{
 

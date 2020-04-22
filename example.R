@@ -2,7 +2,7 @@
 N <- 150
 Setsize <- 3
 H <- Setsize
-Replace <- 0 # ( if Replace=0, Design is D_0, if Replace =1, Desing= D_2  )
+Replace <- 0 # ( if Replace=0, Design is D_0, if Replace =1, Design= D_2  )
 Model <- 0 # ( if Model=0, Design based inference, if Model=1, super population model is used)
 sig <- 4
 K <- 6
@@ -28,8 +28,8 @@ EstimatorID <- c("UnWeighted", "Sd.Weighted", "Aggregate Weight", "JPS Estimate"
 colnames(storE) <- EstimatorID
 colnames(storV) <- EstimatorID
 # ( iter in (1:sim)){
-Data0 <- JPSD0F(pop, n, Setsize, tauV, N, K) # this function genereta JPS data from design D_0
-# Data0 <- JPSD2F(pop, n, Setsize, tauV, N, K) # this function genereta JPS data from design D_2
+Data0 <- JPSD0F(pop, n, Setsize, K, tauV) # this function generates JPS data from design D_0
+# Data0 <- JPSD2F(pop, n, Setsize, tauV, N, K) # this function generates JPS data from design D_2
 
 ESTREP0 <- JPSLF(Data0, Setsize, Replace, N, Model = 0) # this function computes the estimators
 # storE[iter,]=ESTREP0[,2]

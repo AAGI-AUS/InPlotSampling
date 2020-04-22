@@ -16,6 +16,8 @@ Authors@R:
              role = "aut"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
+URL: https://biometryhub.github.io/RSS_package/
+BugReports: https://github.com/biometryhub/RSS_package/issues
 License: file LICENSE
 Suggests: 
     testthat

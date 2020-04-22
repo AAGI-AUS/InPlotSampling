@@ -4,9 +4,13 @@
 \alias{JPSLF}
 \title{Title}
 \usage{
-JPSLF(Data, Setsize, Replace, N, Model)
+JPSLF(data, set_size, replace, population_size, Model)
 }
 \arguments{
+\item{replace}{Are}
+
+\item{population_size}{Population size}
+
 \item{Model}{}
 }
 \value{

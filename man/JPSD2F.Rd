@@ -4,7 +4,7 @@
 \alias{JPSD2F}
 \title{Title}
 \usage{
-JPSD2F(pop, n, H, tau, N, K)
+JPSD2F(pop, n, H, tau, K)
 }
 \arguments{
 \item{K}{}

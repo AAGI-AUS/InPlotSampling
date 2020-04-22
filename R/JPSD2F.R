@@ -4,14 +4,13 @@
 #' @param n
 #' @param H
 #' @param tau
-#' @param N
 #' @param K
 #'
 #' @return
 #' @export
 #'
 #' @examples
-JPSD2F <- function(pop, n, H, tau, N, K) {
+JPSD2F <- function(pop, n, H, tau, K) {
     #############################################
     # Ths function generates JPS sample        ##
     #############################################
@@ -20,7 +19,7 @@ JPSD2F <- function(pop, n, H, tau, N, K) {
     # n:sample size
     # H: Set szie
     # pop: population
-    N <- length(pop) # population size
+    pop_size <- length(pop) # population size
     nsets <- matrix(sample(pop, n * H), ncol = H, nrow = n)
     #################################################
     # below  consruct rank for each SRS unit post experimentally
