@@ -1,27 +1,43 @@
 #' Title
 #'
-#' @param data
-#' @param set_size
-#' @param replace Are
-#' @param population_size Population size
-#' @param Model
+#' @param data Data to use to estimate.
+#' @param set_size Number of samples which are ranked in each set.
+#' @param replace Logical. Are samples drawn with replacement?
+#' @param population_size Population size of the population which `data` is taken from.
+#' @param model Whether to use design-based approach or super-population (model based) approach
+#' @param estimator Which type of estimator to return. Default is "SD Weighted". Other options are
 #'
 #' @return
 #' @export
 #'
 #' @examples
-JPSLF <- function(data, set_size, replace, population_size, Model) {
+JPSLF <- function(data, set_size, replace, population_size, model, estimator = "SD Weighted") {
 
     # JPS using List function
     # Set size provided by user, if replace is FALSE, then set_size*samplesize <= pop size
     # If replace = TRUE, no restriction on set size.
     # Check if one ranker - just return JPS estimate
     # multiple rankers: return sd.weighted by default, optionally return all estimates
-    # Model is switch for design-based or model based (super population)
+    # model is switch for design-based or model based (super population)
 
-    nK <- dim(data)
-    n <- nK[1]
-    K <- nK[2] - 1
+    # model <- match.arg(type)
+
+    estimator <- match.arg(estimator, arg = c("SD Weighted",
+                                              "Unweighted",
+                                              "Aggregate Weight",
+                                              "JPS Estimate",
+                                              "SRS estimate",
+                                              "Minimum"),
+                           several.ok = TRUE)
+
+    # Check arguments
+    # if(!replace & set_size*nrow(data) > population_size) {
+    #     stop("population_size must not be less than set_size*nrow(data)")
+    # }
+
+    # nK <- dim(data)
+    n <- dim(data)[1]
+    K <- dim(data)[2] - 1
     Coefn <- CoefF(set_size, n)
     #######################################
     # Compute coefficient to go into JPSED0G
@@ -36,11 +52,11 @@ JPSLF <- function(data, set_size, replace, population_size, Model) {
     } else {
         CoefD <- Coefn
     }
-    if (Model == 1) CoefD <- Coefn
+    if (model == 1) CoefD <- Coefn
     ############################################
     if (K == 1) {
         #  print(K)
-        JPSE.V <- JPSED0F(data[, 2], data[, 1], set_size, CoefD, population_size, replace, Model) # single ranking method estiamte
+        JPSE.V <- JPSED0F(data[, 2], data[, 1], set_size, CoefD, population_size, replace, model) # single ranking method estiamte
         #  print(JPSE.V)
         Estimator <- "JPS"
         Point.Est <- JPSE.V[1]
@@ -50,7 +66,7 @@ JPSLF <- function(data, set_size, replace, population_size, Model) {
         Summary.return <- data.frame(Estimator, Point.Est, Variance.Point, Lower.Limit, Upper.Limit)
         return(Summary.return)
     }
-    JPSE.E <- ListF(data, set_size, replace, population_size, Model, Coefn) # estimate based on combined ranking method
+    JPSE.E <- ListF(data, set_size, replace, population_size, model, Coefn) # estimate based on combined ranking method
     ################
     # create list of data frames by deleting each row
     # this is used for Jackknife variance estimate
@@ -60,21 +76,24 @@ JPSLF <- function(data, set_size, replace, population_size, Model) {
     }
     Coefn1 <- CoefF(set_size, n - 1)
     ###########################################
-    delet1 <- lapply(DataL, ListF, set_size, replace, population_size, Model, Coefn1) # Compute n different combined estimate
+    ### This line is the slow part
+    delet1 <- lapply(DataL, ListF, set_size, replace, population_size, model, Coefn1) # Compute n different combined estimate
     # by deleting one observation at a time
 
 
-    JPSE.V <- JPSED0F(data[, 2], data[, 1], set_size, CoefD, population_size, replace, Model) # single ranking method estiamte
+    JPSE.V <- JPSED0F(data[, 2], data[, 1], set_size, CoefD, population_size, replace, model) # single ranking method estiamte
     # print(JPSE.V)
 
     delet1M <- do.call(rbind, delet1) # Convert list to matrix
     delet1M <- rbind(JPSE.E, delet1M)
     fc <- 1
-    if (replace == 1) fc <- (1 - n / population_size)
+    if (replace == 1) {
+        fc <- (1 - n / population_size)
+    }
     JackV <- fc * apply(delet1M, 2, JACKVF) # Jackknife variance estimate of the combined estimator
     Variance.est <- c(JackV, JPSE.V[2]) # bind the variance of JPS estimator based on single ranking method
     Estimate.est <- c(JPSE.E, JPSE.V[1]) # bind the  JPS estimator based on single ranking method
-    min.ind <- which(Variance.est == min(Variance.est)) # Find the estiamtor having minimum variance
+    min.ind <- which(Variance.est == min(Variance.est)) # Find the estimator having minimum variance
     # among four estimator
     Variance.est <- c(Variance.est, var(data[, 1]) / n, Variance.est[min.ind]) # bind the variance of minimum
     # variance estimator

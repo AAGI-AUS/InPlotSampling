@@ -26,7 +26,7 @@ CoefF <- function(H, n) {
 
     indM <- rep(0, 3)
     for (k in (2:H)) {
-        AA <- expand.grid((1:(k - 1)), 1:(n - k + 1))
+        AA <- expand.grid.alt((1:(k - 1)), 1:(n - k + 1))
         TEm <- cbind(rep(k, dim(AA)[1]), AA)
         indM <- rbind(indM, TEm)
     }
