@@ -4,14 +4,25 @@
 \alias{JPSLF}
 \title{Title}
 \usage{
-JPSLF(data, set_size, replace, population_size, Model)
+JPSLF(
+  data,
+  set_size,
+  replace,
+  population_size,
+  model,
+  estimator = "SD Weighted"
+)
 }
 \arguments{
-\item{replace}{Are}
+\item{data}{Data to use to estimate.}
 
-\item{population_size}{Population size}
+\item{set_size}{Number of samples which are ranked in each set.}
 
-\item{Model}{}
+\item{replace}{Logical. Are samples drawn with replacement?}
+
+\item{population_size}{Population size of the population which \code{data} is taken from.}
+
+\item{model}{}
 }
 \value{
 
