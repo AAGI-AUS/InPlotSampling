@@ -9,19 +9,22 @@ Authors@R:
              email = "omer@stat.osu.edu"),
       person(given = "Sam",
              family = "Rogers",
-             role = "cre",
-             email = "s.rogers@adelaide.edu.au"),
-      person(given = "Peter",
-             family = "Kasprzak",
-             role = "aut"))
+             role = c("cre", "ctb"),
+             email = "s.rogers@adelaide.edu.au"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
+License: file LICENSE
 URL: https://biometryhub.github.io/RSS_package/
 BugReports: https://github.com/biometryhub/RSS_package/issues
-License: file LICENSE
+Depends: 
+    R (>= 3.5.0)
+Imports: 
+    Rcpp
 Suggests: 
     testthat
+LinkingTo: 
+    Rcpp
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1

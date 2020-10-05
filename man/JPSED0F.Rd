@@ -4,14 +4,21 @@
 \alias{JPSED0F}
 \title{Title}
 \usage{
-JPSED0F(RV, Y, H, Coef, N, Replace, Model)
+JPSED0F(RV, Y, set_size, Coef, N, Replace, Model)
 }
 \arguments{
+\item{RV}{Ranking values provided}
+
+\item{Y}{The data values that were ranked}
+
+\item{set_size}{The set}
+
 \item{Model}{}
 }
 \value{
-
+A vector with two elements: the mean and variance estimate from JPS
 }
 \description{
 Title
 }
+\keyword{internal}

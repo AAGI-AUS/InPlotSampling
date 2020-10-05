@@ -4,7 +4,7 @@
 \alias{ListF}
 \title{Title}
 \usage{
-ListF(Data, Setsize, Replace, N, Model, CoefD0)
+ListF(data, set_size, Replace, N, Model, CoefD0)
 }
 \arguments{
 \item{CoefD0}{}

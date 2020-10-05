@@ -3,8 +3,8 @@
 #' @param data
 #' @param set_size
 #' @param method Takes values `JPS` (the default) for Judgement Post Stratification, or `RSS` for Ranked Set Sample.
-#' @param confidence
-#' @param replace
+#' @param confidence The confidence level to use. Defaults to 0.95
+#' @param replace Logical (default `TRUE`). Sample with replacement?
 #' @param model
 #' @param N
 #'
@@ -12,11 +12,14 @@
 #' @export
 #'
 #' @examples
-OneSample <- function(data, set_size, method = "JPS", confidence = 0.95, replace = TRUE, model = 0, N = NULL) {
-    # Check method is JPS or RSS
+OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.95, replace = TRUE, model = 0, N = NULL) {
     # Check valid values of set_size
     # Check replace is T/F
     # Check model is 0 or 1 - Change to text?
+    # stopifnot("method must be one of 'JPS' or 'RSS'." = method %in% toupper(c("JPS", "RSS")))
+
+    method <- match.arg(toupper(method))
+
 
     ## Check if the sample is Judgment-post stratified sample (JPS)
     if (method == "JPS") {

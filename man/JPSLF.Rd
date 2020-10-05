@@ -22,7 +22,9 @@ JPSLF(
 
 \item{population_size}{Population size of the population which \code{data} is taken from.}
 
-\item{model}{}
+\item{model}{Whether to use design-based approach or super-population (model based) approach}
+
+\item{estimator}{Which type of estimator to return. Default is "SD Weighted". Other options are}
 }
 \value{
 
