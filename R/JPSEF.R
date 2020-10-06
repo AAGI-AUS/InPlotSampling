@@ -1,3 +1,15 @@
+#' Judgement Post Stratification EF
+#'
+#' @param Data
+#' @param Setsize
+#' @param Replace
+#' @param Model
+#' @param N
+#' @param alpha
+#'
+#' @return
+#' @keywords internal
+#'
 JPSEF <- function(Data, Setsize, Replace, Model, N, alpha) {
   # print(Model)
   #  print(N)
@@ -5,17 +17,21 @@ JPSEF <- function(Data, Setsize, Replace, Model, N, alpha) {
   # print(K)
   # print(Replace)
   if (is.null(N)) {
-    print("Population size N must be provided for without replacement sampling")
-    return()
+    stop("Population size N must be provided for without replacement sampling")
   }
   if (!Replace && is.null(N)) {
-    print("Population size N must be provided for without replacement sampling")
-    return()
+    stop("Population size N must be provided for without replacement sampling")
   }
   H <- Setsize
   n <- dim(Data)[1]
   Coefn <- CoefF(H, n)
-  if (K != 1) Coef.del1 <- CoefF(H, n - 1) else Coef.del1 <- NULL
+  if (K != 1) {
+    Coef.del1 <- CoefF(H, n - 1)
+  }
+  else {
+    Coef.del1 <- NULL
+  }
+
   if (!Replace) {
     coef1D2 <- Coefn[1]
     coef2D2 <- 1 / (H * (H - 1)) + Coefn[3] + Coefn[2] - (Coefn[2] + 1 / H^2) * H / (H - 1)

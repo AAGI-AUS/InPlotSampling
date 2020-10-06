@@ -6,7 +6,7 @@
 #' @param confidence The confidence level to use. Defaults to 0.95
 #' @param replace Logical (default `TRUE`). Sample with replacement?
 #' @param model
-#' @param N
+#' @param N The population size. Must be provided if sampling without replacement, or if `model` is set to 'superpopulation'.
 #'
 #' @return
 #' @export
@@ -16,7 +16,6 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
     # Check valid values of set_size
     # Check replace is T/F
     # Check model is 0 or 1 - Change to text?
-    # stopifnot("method must be one of 'JPS' or 'RSS'." = method %in% toupper(c("JPS", "RSS")))
 
     method <- match.arg(toupper(method))
 
