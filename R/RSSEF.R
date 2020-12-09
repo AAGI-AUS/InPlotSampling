@@ -2,23 +2,36 @@
 #  This function provides estimator for RSS data
 #  RSSK: n by (K+1) dimensional data matrix, the first column is Y-values,
 #  the next K coulumns are the ranks of K-ranking methods
-#  H: set Size
+#  set_size: set Size
 # N: population size
-# Model: if Modle=0 design based inference, if Model=1, superpopulation model
-# Replace: if Replace=TRUE with replacmenet selection is used.
-# If Replace=FALSE without replacement selection is used
+# model: if Modle=0 design based inference, if model=1, superpopulation model
+# replace: if replace=TRUE with replacmenet selection is used.
+# If replace=FALSE without replacement selection is used
 # B: Bootstrap replication
-RSSEF <- function(Data, H, Replace, Model, N, alpha) {
-  RM <- Data[, -1]
-  RV <- Data[, 2]
-  Y <- Data[, 1]
-  n <- length(Y)
-  K <- dim(Data)[2] - 1
+#' This function provides estimator for RSS data
+#'
+#' @param data An n by (K+1) dimensional data matrix, the first column is Y-values, the next K coulumns are the ranks of K-ranking methods
+#' @param set_size The set size
+#' @param replace Logical. Sample with replacement?
+#' @param model If Modle=0, use design based inference, if model=1, use superpopulation model
+#' @param N The population size
+#' @param alpha The significance level
+#'
+#' @return
+#' @keywords internal
+#'
+#' @examples
+RSSEF <- function(data, set_size, replace, model, N, alpha) {
+  RM <- data[, -1]
+  RV <- data[, 2] # We need to be careful about this.
+  Y <- data[, 1]  # We need to be careful about this. Need to ensure response is in col 1.
+  n <- nrow(data)
+  K <- ncol(data) - 1
   #########################################################################
   ########## Single ranker RSS estimator without replacement design
-  if (!Replace) {
+  if (!replace) {
     RSS.oneE <- mean(aggregate(Y, list(RV), FUN = mean)$x) # Single ranker RSS estimate
-    EST <- RSSED2F(RV, Y, H, N)
+    EST <- RSSED2F(RV, Y, set_size, N)
     ### Confidence interval balanced RSS
     LC <- EST[1] - qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
     UC <- EST[1] + qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
@@ -28,7 +41,7 @@ RSSEF <- function(Data, H, Replace, Model, N, alpha) {
 
   ####################################################################################
   ########### Single ranker RSS estimator with replacement design
-  if (Replace) {
+  if (replace) {
     RSS.oneE <- mean(aggregate(Y, list(RV), FUN = mean)$x) # Single ranker RSS estimate
     RSS.oneCount <- aggregate(RV, list(RV), FUN = length)$x
     RSS.oneVar <- aggregate(Y, list(RV), FUN = var)$x
@@ -43,9 +56,9 @@ RSSEF <- function(Data, H, Replace, Model, N, alpha) {
 
   ##########################################################################################
   ######## Single ranker RSS estimator with under super population model ##################
-  if (Model == 1) {
+  if (model == 1) {
     RSS.oneE <- mean(aggregate(Y, list(RV), FUN = mean)$x) # Single ranker RSS estimate
-    EST <- RSSED2F(RV, Y, H, N)
+    EST <- RSSED2F(RV, Y, set_size, N)
     LC <- EST[1] - qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
     UC <- EST[1] + qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
   }
@@ -65,15 +78,15 @@ RSSEF <- function(Data, H, Replace, Model, N, alpha) {
 
   #################################### 33
   # agreement weight estimator
-  AW <- Data[, -1] # Ranks
-  AW <- t(apply(data.frame(Data[, -1]), 1, WEIGHTF, H)) # agreemeent weights
+  AW <- data[, -1] # Ranks
+  AW <- t(apply(data.frame(data[, -1]), 1, WEIGHTF, set_size)) # agreemeent weights
   eff.SS <- apply(AW, 2, sum)
-  Crosprod <- Data[, 1] %*% AW
+  Crosprod <- data[, 1] %*% AW
   W.est <- mean(Crosprod[eff.SS > 0] / eff.SS[eff.SS > 0]) # RSS agreement weight estiamtor
-  AWY <- cbind(Data[, 1], AW)
+  AWY <- cbind(data[, 1], AW)
   Jack.Repl.AWi <- apply(matrix(1:n, ncol = 1), 1, FWDel1, AWY = AWY) # Aggrement weight estimator
   # when the i-th obseervation is deleted
-  if (Replace) fc <- 1 else fc <- 1 - n / (N - 1)
+  if (replace) fc <- 1 else fc <- 1 - n / (N - 1)
   J.var <- fc * (n - 1) * var(Jack.Repl.AWi) * ((n - 1) / n)^2 # Jackknife variance estiamte  for aggreement weight JPS estimator
   ##############################################################
 

@@ -7,21 +7,25 @@
 OneSample(
   data,
   set_size,
-  method = "JPS",
+  method = c("JPS", "RSS"),
   confidence = 0.95,
   replace = TRUE,
   model = 0,
-  N = NULL
+  pop_size = NULL
 )
 }
 \arguments{
-\item{method}{Takes values \code{JPS} (the default) for Judgement Post Stratification, or \code{RSS} for Ranked Set Sample.}
+\item{data}{The data for \code{JPS} or \code{RSS} sampling}
 
-\item{confidence}{The confidence level to use. Defaults to 0.95}
+\item{set_size}{The set size of the ranks.}
+
+\item{method}{Takes values \code{JPS} (the default) for Judgment Post Stratification, or \code{RSS} for Ranked Set Sample.}
+
+\item{confidence}{The confidence level to use.}
 
 \item{replace}{Logical (default \code{TRUE}). Sample with replacement?}
 
-\item{N}{}
+\item{pop_size}{The population size. Must be provided if sampling without replacement, or if \code{model} is set to 'superpopulation'.}
 }
 \value{
 

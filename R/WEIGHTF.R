@@ -1,3 +1,12 @@
+#' Title
+#'
+#' @param RV
+#' @param H Set size
+#'
+#' @return
+#' @keywords internal
+#'
+#' @examples
 WEIGHTF <- function(RV, H) {
   UniquR <- unique(RV)
   weightV <- rep(0, H)

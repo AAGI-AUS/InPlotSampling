@@ -1,11 +1,13 @@
+#' This function computes the coefficient of variance estimator
+#'
+#' @param H The set size
+#' @param n The sample size
+#'
+#' @return
+#' @keywords internal
 
-#####################################################################
-#####################################################################
-#  THis function computes the coefficient of variance estimator  ####
-#####################################################################
 CoefF <- function(H, n) {
-  # H: set size
-  # n: sample size
+
   kv <- 1:H
   ######################################################
   # Expected value of I_1^2/d_n^2    ###################

@@ -1,3 +1,11 @@
+#' Title
+#'
+#' @param uv
+#' @param H The set size
+#' @param n The sample size
+#'
+#' @return
+#' @keywords internal
 TRIPLEF <- function(uv, H, n) {
   coef1 <- (-1)^(uv[2] - 1) / (uv[1]^2 * uv[3])
   coef2 <- choose((H - 1), (uv[1] - 1))

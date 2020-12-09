@@ -1,11 +1,13 @@
-
-###########################################################
-# This function Computes RSS estimator and its variance without replacement sampling  ##
-###########################################################
-# RV: ranks
-# Y: response
-# H: Set size
-# N: population size
+#' This function Computes RSS estimator and its variance without replacement sampling
+#'
+#' @param RV Rank values
+#' @param Y Response variable
+#' @param H Set size
+#' @param N Population size
+#'
+#' @return
+#' @keywords internal
+#'
 RSSED2F <- function(RV, Y, H, N) {
   n <- length(Y) # Sample size
   # d=n/H
