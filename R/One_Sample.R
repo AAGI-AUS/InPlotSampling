@@ -1,8 +1,8 @@
 #' Title
 #'
-#' @param data
-#' @param set_size
-#' @param method Takes values `JPS` (the default) for Judgement Post Stratification, or `RSS` for Ranked Set Sample.
+#' @param data The data for `JPS` or `RSS` sampling
+#' @param set_size The set size of the ranks.
+#' @param method Takes values `JPS` (the default) for Judgment Post Stratification, or `RSS` for Ranked Set Sample.
 #' @param confidence The confidence level to use. Defaults to 0.95
 #' @param replace Logical (default `TRUE`). Sample with replacement?
 #' @param model
@@ -14,11 +14,13 @@
 #' @examples
 OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.95, replace = TRUE, model = 0, N = NULL) {
     # Check valid values of set_size
-    # Check replace is T/F
     # Check model is 0 or 1 - Change to text?
 
-    method <- match.arg(toupper(method))
+    if(!isTRUE(replace) & !isFALSE(replace)) {
+        stop("replace must take TRUE or FALSE")
+    }
 
+    method <- match.arg(toupper(method), c("JPS", "RSS"))
 
     ## Check if the sample is Judgment-post stratified sample (JPS)
     if (method == "JPS") {
@@ -37,17 +39,16 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
         }
         return(Results)
     }
-    #################################################################
-    #
+
     #################################################################
     ### Ranked set sample ###########################################
+    #################################################################
 
     if (method == "RSS") {
-        if (!replace && is.null(N)) {
-            print("The population size N must be provided with without replacement sampling")
-            return()
+        if (!replace & (missing(N) | is.null(N))) {
+            stop("The population size N must be provided when sampling without replacement")
         }
-        if (model == 1 && is.null(N)) {
+        if (model == 1 && (missing(N) | is.null(N))) {
             stop("The population size N must be provided for superpopulation model")
         }
         RV <- data[, 2]
@@ -58,7 +59,6 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
             print("In Ranked set sampling design,first ranking method should not have less than two observations in any judgment ranking group")
             return()
         }
-        # print("Here")
 
         alpha <- 1 - confidence
         RSS.Return <- RSSEF(data, set_size, replace, model, N, alpha)

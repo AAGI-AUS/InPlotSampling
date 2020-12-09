@@ -10,6 +10,21 @@
 #          when the i-th unit is deleted
 # Replace: Replace =1 if the sampling is with replacement.
 # Model: Model =1 if  super ppopulation modle is used
+#' Title
+#'
+#' @param RV Rank values for Y
+#' @param Y
+#' @param H
+#' @param N
+#' @param Coef
+#' @param CoefDel
+#' @param Replace
+#' @param Model
+#' @param K
+#'
+#' @return
+#' @keywords internal
+#'
 JPSEDF <- function(RV, Y, H, N, Coef, CoefDel, Replace, Model, K) {
   n <- length(Y)
   M.est <- mean(aggregate(Y, data.frame(RV), mean)$x) # JPS estimate

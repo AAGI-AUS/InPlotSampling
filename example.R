@@ -7,8 +7,8 @@ H=Setsize
 Replace=FALSE #( Without replacement salection  )
 #Replace=TRUE  # ( With replacement selection)
 Model=0 #( if Model=0, Design based inference, if Model=1, super population model is used)
-Method="RSS" # (Sampling method is RSS)
-#Method="JPS"  # Sam pling metod is JPS
+# Method="RSS" # (Sampling method is RSS)
+Method="JPS"  # Sam pling metod is JPS
 sig=4  # population standard devistion
 mu=10  # population mean
 K=3   # number of rankers
