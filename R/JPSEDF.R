@@ -5,15 +5,15 @@
 # RV: Ranks for Y
 # H: Set Size
 # N: Finite population size
-# Coef: Coefficients used in vaiance comupation when sample size is n
-# CoefDel: Coefficients used in vaiance comupation
+# Coef: Coefficients used in variance computation when sample size is n
+# CoefDel: Coefficients used in variance computation
 #          when the i-th unit is deleted
 # Replace: Replace =1 if the sampling is with replacement.
-# Model: Model =1 if  super ppopulation modle is used
+# Model: Model =1 if  super population model is used
 #' Title
 #'
 #' @param RV Rank values for Y
-#' @param Y
+#' @param Y Response measurements
 #' @param H
 #' @param N
 #' @param Coef
