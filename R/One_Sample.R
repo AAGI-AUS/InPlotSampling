@@ -12,9 +12,12 @@
 #' @export
 #'
 #' @examples
-OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.95, replace = TRUE, model = 0, pop_size = NULL) {
-    # Check valid values of set_size
+OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.95,
+                      replace = TRUE, model = 0, pop_size = NULL) {
+    # Check valid values of set_size >= 1
     # Check model is 0 or 1 - Change to text? What are the types of model?
+    # If model is 0, it's design based inference, if model = 1, it is model based inference using super population model
+    # pop_size: nrow(data)*set_size <= pop_size, > 0, only relevant if replace = FALSE
 
 
     if(!isTRUE(replace) & !isFALSE(replace)) {

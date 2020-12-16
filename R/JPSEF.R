@@ -1,4 +1,4 @@
-#' Judgement Post Stratification Estimator Function
+#' Computes the estimator for JPS data
 #'
 #' @param data The data to use for estimation
 #' @param setsize The set size
@@ -11,8 +11,6 @@
 #' @keywords internal
 #'
 JPSEF <- function(data, setsize, replace = TRUE, model, N, alpha) {
-  # Two if statements below - which one to use?
-
 
   K <- ncol(data) - 1
 

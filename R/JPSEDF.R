@@ -10,7 +10,7 @@
 #          when the i-th unit is deleted
 # Replace: Replace =1 if the sampling is with replacement.
 # Model: Model =1 if  super population model is used
-#' Title
+#' Computes the estimator and variance for each individual ranker
 #'
 #' @param RV Rank values for Y
 #' @param Y Response measurements
@@ -42,7 +42,7 @@ JPSEDF <- function(RV, Y, H, N, Coef, CoefDel, Replace, Model, K) {
   # to each group
   denT2 <- GS.size[G.sum[, 1] == G.sum[, 2], 1] # determine nh from the judgment group h
   denT1 <- GS.size[G.sum[, 1] != G.sum[, 2], ] # determine sample sizes  n_h and n_h'for judgment groups h and h'
-  den2 <- denT2 * (denT2 - 1) # determien the denumerator nh(nh-1) for T2
+  den2 <- denT2 * (denT2 - 1) # determine the denumerator nh(nh-1) for T2
   numT2 <- G.sum[G.sum[, 1] == G.sum[, 2], 3] # sum_h sum_i sum_j ( Y_i=Y_j)^2I(R_i=h)I(R_j=h)
   TT2 <- sum(numT2[den2 > 0] / den2[den2 > 0]) # sum_h sum_i sum_j ( Y_i=Y_j)^2I(R_i=h)I(R_j=h')/(nh(nh-1))
   # Line below #sum_h sum_h'sum_i sum_j ( Y_i=Y_j)^2I(R_i=h)I(R_j=h')/(nh nh'))
