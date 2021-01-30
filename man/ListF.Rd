@@ -7,7 +7,17 @@
 ListF(data, set_size, Replace, N, Model, CoefD0)
 }
 \arguments{
-\item{CoefD0}{}
+\item{data}{The data}
+
+\item{set_size}{set size}
+
+\item{Replace}{replacement}
+
+\item{N}{Population size}
+
+\item{Model}{Model}
+
+\item{CoefD0}{Coef}
 }
 \value{
 
@@ -15,3 +25,4 @@ ListF(data, set_size, Replace, N, Model, CoefD0)
 \description{
 Title
 }
+\keyword{internal}

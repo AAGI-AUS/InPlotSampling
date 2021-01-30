@@ -7,7 +7,15 @@
 JPSD2F(pop, n, H, tau, K)
 }
 \arguments{
-\item{K}{}
+\item{pop}{Population}
+
+\item{n}{sample size}
+
+\item{H}{Set size}
+
+\item{tau}{controls the ranking quality}
+
+\item{K}{Number of rankers}
 }
 \value{
 

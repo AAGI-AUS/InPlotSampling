@@ -7,6 +7,8 @@
 #' @param N The population size.
 #' @param alpha The significance level.
 #'
+#' @importFrom stats aggregate qt rnorm sd var
+#'
 #' @return
 #' @keywords internal
 #'
@@ -58,7 +60,7 @@ JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
   ########################################### 3333333
   #  if there is only one ranker
   if (K == 1) {
-    EST.EqSd <- JPSEDF(data[, -1], Y = data[, 1], set_size = set_size, N = N, Coef = CoefD, CoefDel = Coef.Del, replace = replace, model = model, K)
+    EST.EqSd <- JPSEDF(data[, -1], Y = data[, 1], set_size = set_size, N = N, coef = CoefD, coef_del = Coef.Del, replace = replace, model = model, K)
     # print(EST.EqSd)
     Estimator <- c("JPS", "SRS")
     Estimate <- round(c(EST.EqSd[1], mean(data[, 1])), digits = 3)

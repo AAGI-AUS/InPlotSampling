@@ -4,10 +4,10 @@
 \alias{WEIGHTF}
 \title{Title}
 \usage{
-WEIGHTF(RV, H)
+WEIGHTF(RV, set_size)
 }
 \arguments{
-\item{H}{Set size}
+\item{set_size}{Set size}
 }
 \value{
 
