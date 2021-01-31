@@ -9,7 +9,7 @@
 #' @examples
 WEIGHTF <- function(RV, set_size) {
   UniquR <- unique(RV)
-  weightV <- rep(0, H)
+  weightV <- rep(0, set_size)
   K <- length(RV)
   for (h in (1:length(UniquR))) {
     UR <- UniquR[h]

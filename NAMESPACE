@@ -3,7 +3,6 @@
 export(JPSD2F)
 export(JPSLF)
 export(OneSample)
-export(expand.grid.alt)
 importFrom(stats,aggregate)
 importFrom(stats,qt)
 importFrom(stats,rnorm)

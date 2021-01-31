@@ -1,5 +1,7 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+test_that("onesample works", {
+    load("../onesample.Rdata")
+    output <- OneSample(Data,Setsize,Method,0.95, Replace,Model,N)
+  expect_equal(output$Estimate, c(9.978, 9.947, 9.867, 10.014, 9.584, 9.947))
 })
 
 

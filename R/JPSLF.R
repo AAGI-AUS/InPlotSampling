@@ -46,8 +46,8 @@ JPSLF <- function(data, set_size, replace, population_size, model, estimator = "
             print("Population size population_size must be provided for without replacement sampling")
         }
         coef1D2 <- Coefn[1]
-        coef2D2 <- 1 / (H * (H - 1)) + Coefn[3] + Coefn[2] - (Coefn[2] + 1 / H^2) * H / (H - 1)
-        coef3D2 <- Coefn[2] - 1 / (population_size - 1) * (1 / H - (Coefn[1] + 1 / H^2))
+        coef2D2 <- 1 / (set_size * (set_size - 1)) + Coefn[3] + Coefn[2] - (Coefn[2] + 1 / set_size^2) * set_size / (set_size - 1)
+        coef3D2 <- Coefn[2] - 1 / (population_size - 1) * (1 / set_size - (Coefn[1] + 1 / set_size^2))
         CoefD <- c(coef1D2, coef2D2, coef3D2)
     } else {
         CoefD <- Coefn
