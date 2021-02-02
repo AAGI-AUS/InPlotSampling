@@ -4,12 +4,12 @@
 \alias{JPSEF}
 \title{Computes the estimator for JPS data}
 \usage{
-JPSEF(data, setsize, replace = TRUE, model, N, alpha)
+JPSEF(data, set_size, replace = TRUE, model, N, alpha)
 }
 \arguments{
 \item{data}{The data to use for estimation}
 
-\item{setsize}{The set size}
+\item{set_size}{The set size}
 
 \item{replace}{Logical (default \code{TRUE}). Sample with replacement?}
 

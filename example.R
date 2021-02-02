@@ -4,12 +4,12 @@
 N=600
 Setsize=3
 H=Setsize
-Replace=FALSE #( Without replacement salection  )
+Replace=FALSE #( Without replacement selection  )
 #Replace=TRUE  # ( With replacement selection)
 Model=0 #( if Model=0, Design based inference, if Model=1, super population model is used)
 # Method="RSS" # (Sampling method is RSS)
-Method="JPS"  # Sam pling metod is JPS
-sig=4  # population standard devistion
+Method="JPS"  # Sampling method is JPS
+sig=4  # population standard deviation
 mu=10  # population mean
 K=3   # number of rankers
 n=30  # sample size
@@ -29,7 +29,7 @@ if( Method=="RSS")pop=cbind(pop,X)
 
 if(Method=="JPS"){
     if(Replace)  Data=JPSD0F(pop,n,Setsize,tauV,N,K) # This function generates JPS data sampling with replacement
-    if(!Replace) Data=JPSD2F(pop,n,Setsize,tauV,N,K) # This function generates JPS data sampling without replacement
+    if(!Replace) Data=JPSD2F(pop,n,Setsize,tauV,K) # This function generates JPS data sampling without replacement
 }
 ##############################################################
 #####  RSS

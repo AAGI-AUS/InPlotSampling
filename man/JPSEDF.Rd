@@ -4,7 +4,7 @@
 \alias{JPSEDF}
 \title{Computes the estimator and variance for each individual ranker}
 \usage{
-JPSEDF(RV, Y, H, N, Coef, CoefDel, Replace, Model, K)
+JPSEDF(RV, Y, set_size, N, coef, coef_del, replace, model, K)
 }
 \arguments{
 \item{RV}{Rank values for Y}

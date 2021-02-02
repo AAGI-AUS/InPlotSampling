@@ -1,4 +1,4 @@
 ## usethis namespace: start
-#' @importFrom Rcpp sourceCpp
+# @importFrom Rcpp sourceCpp
 ## usethis namespace: end
 NULL

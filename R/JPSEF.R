@@ -1,16 +1,18 @@
 #' Computes the estimator for JPS data
 #'
 #' @param data The data to use for estimation
-#' @param setsize The set size
+#' @param set_size The set size
 #' @param replace Logical (default `TRUE`). Sample with replacement?
 #' @param model
 #' @param N The population size.
 #' @param alpha The significance level.
 #'
+#' @importFrom stats aggregate qt rnorm sd var
+#'
 #' @return
 #' @keywords internal
 #'
-JPSEF <- function(data, setsize, replace = TRUE, model, N, alpha) {
+JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
 
   K <- ncol(data) - 1
 
@@ -22,23 +24,23 @@ JPSEF <- function(data, setsize, replace = TRUE, model, N, alpha) {
   }
 
   n <- nrow(data)
-  Coefn <- CoefF(setsize, n)
+  Coefn <- CoefF(set_size, n)
   if (K == 1) {
     Coef.del1 <- NULL
   }
   else {
-    Coef.del1 <- CoefF(setsize, n - 1)
+    Coef.del1 <- CoefF(set_size, n - 1)
   }
 
   if (!replace) {
     coef1D2 <- Coefn[1]
-    coef2D2 <- 1 / (setsize * (setsize - 1)) + Coefn[3] + Coefn[2] - (Coefn[2] + 1 / setsize^2) * setsize / (setsize - 1)
-    coef3D2 <- Coefn[2] - 1 / (N - 1) * (1 / setsize - (Coefn[1] + 1 / setsize^2))
+    coef2D2 <- 1 / (set_size * (set_size - 1)) + Coefn[3] + Coefn[2] - (Coefn[2] + 1 / set_size^2) * set_size / (set_size - 1)
+    coef3D2 <- Coefn[2] - 1 / (N - 1) * (1 / set_size - (Coefn[1] + 1 / set_size^2))
     CoefD <- c(coef1D2, coef2D2, coef3D2)
 
     coef1D2.del <- Coef.del1[1]
-    coef2D2.del <- 1 / (setsize * (setsize - 1)) + Coef.del1[3] + Coef.del1[2] - (Coef.del1[2] + 1 / setsize^2) * setsize / (setsize - 1)
-    coef3D2.del <- Coef.del1[2] - 1 / (N - 1) * (1 / setsize - (Coef.del1[1] + 1 / setsize^2))
+    coef2D2.del <- 1 / (set_size * (set_size - 1)) + Coef.del1[3] + Coef.del1[2] - (Coef.del1[2] + 1 / set_size^2) * set_size / (set_size - 1)
+    coef3D2.del <- Coef.del1[2] - 1 / (N - 1) * (1 / set_size - (Coef.del1[1] + 1 / set_size^2))
     Coef.Del <- c(coef1D2.del, coef2D2.del, coef3D2.del)
 
     fc <- 1 - n / N # finite population correction factor
@@ -58,7 +60,7 @@ JPSEF <- function(data, setsize, replace = TRUE, model, N, alpha) {
   ########################################### 3333333
   #  if there is only one ranker
   if (K == 1) {
-    EST.EqSd <- JPSEDF(data[, -1], Y = data[, 1], setsize = setsize, N = N, Coef = CoefD, CoefDel = Coef.Del, replace = replace, model = model, K)
+    EST.EqSd <- JPSEDF(data[, -1], Y = data[, 1], set_size = set_size, N = N, coef = CoefD, coef_del = Coef.Del, replace = replace, model = model, K)
     # print(EST.EqSd)
     Estimator <- c("JPS", "SRS")
     Estimate <- round(c(EST.EqSd[1], mean(data[, 1])), digits = 3)
@@ -72,7 +74,8 @@ JPSEF <- function(data, setsize, replace = TRUE, model, N, alpha) {
   }
 
 
-  EST.EqSd <- apply(data[, -1], 2, JPSEDF, Y = data[, 1], setsize = setsize, N = N, Coef = CoefD, CoefDel = Coef.Del, replace = replace, model = model, K = K)
+  EST.EqSd <- apply(data[, -1], 2, JPSEDF, Y = data[, 1], set_size = set_size, N = N, coef = CoefD, coef_del = Coef.Del, replace = replace, model = model, K)
+
 
   JPSE.Fulln <- EST.EqSd[1, ] #  JPS mean estimate for each ranker using all n data
   JPSV.Fulln <- EST.EqSd[2, ] # Variance estiamte of JPS mean  for each ranker using all n data
@@ -101,7 +104,7 @@ JPSEF <- function(data, setsize, replace = TRUE, model, N, alpha) {
   #################################### 33
   # agreement weight estimator
   AW <- data[, -1] # Ranks
-  AW <- t(apply(data.frame(data[, -1]), 1, WEIGHTF, setsize = setsize)) # agreemeent weights
+  AW <- t(apply(data.frame(data[, -1]), 1, WEIGHTF, set_size = set_size)) # agreemeent weights
   eff.SS <- apply(AW, 2, sum)
   Crosprod <- data[, 1] %*% AW
   EST.Agree.Weight <- mean(Crosprod[eff.SS > 0] / eff.SS[eff.SS > 0]) # JPS agreement weight estiamtor

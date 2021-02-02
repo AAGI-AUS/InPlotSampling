@@ -1,10 +1,10 @@
 #' Title
 #'
-#' @param pop
-#' @param n
-#' @param H
-#' @param tau
-#' @param K
+#' @param pop Population
+#' @param n sample size
+#' @param H Set size
+#' @param tau controls the ranking quality
+#' @param K Number of rankers
 #'
 #' @return
 #' @export

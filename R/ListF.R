@@ -1,14 +1,14 @@
 #' Title
 #'
-#' @param data
-#' @param set_size
-#' @param Replace
-#' @param N
-#' @param Model
-#' @param CoefD0
+#' @param data The data
+#' @param set_size set size
+#' @param Replace replacement
+#' @param N Population size
+#' @param Model Model
+#' @param CoefD0 Coef
 #'
 #' @return
-#' @export
+#' @keywords internal
 #'
 #' @examples
 ListF <- function(data, set_size, Replace, N, Model, CoefD0) {

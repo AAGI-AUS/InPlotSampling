@@ -5,10 +5,10 @@
 #' @param method Takes values `JPS` (the default) for Judgment Post Stratification, or `RSS` for Ranked Set Sample.
 #' @param confidence The confidence level to use.
 #' @param replace Logical (default `TRUE`). Sample with replacement?
-#' @param model
+#' @param model If model is 0, it's design based inference, if model = 1, it is model based inference using super population model
 #' @param pop_size The population size. Must be provided if sampling without replacement, or if `model` is set to 'superpopulation'.
 #'
-#' @return
+#' @return A `data.frame` with the rankings
 #' @export
 #'
 #' @examples
@@ -37,7 +37,7 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
             stop("The population size pop_size must be provided for superpopulation model")
         }
 
-        results <- JPSEF(data, set_size, replace, pop_size, alpha)
+        results <- JPSEF(data, set_size, replace, model, pop_size, alpha)
 
         if (model == 1) {
             colnames(results) <- c("Predictor", "Prediction", "Pred. Error", paste0(confidence * 100, "% Prediction intervals"))

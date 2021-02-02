@@ -13,8 +13,8 @@ A data frame with 352 rows and 11 variables:
 \item{panel}{The panel of the vines. A pair of vines is grouped into a panel (1-16)}
 \item{trunk_circ_18}{The trunk circumference of the vine in 2018, measured in cm at watering height (\~20 cm above the ground).}
 \item{trunk_circ_19}{The trunk circumference of the vine in 2019, measured in cm at watering height (\~20 cm above the ground).}
-\item{count_shoot}{Check this?}
-\item{non_count_shoot}{Check this?}
+\item{count_shoots}{Check this?}
+\item{non_count_shoots}{Check this?}
 \item{total_shoots}{Sum of \code{count_shoot} and \code{non_count_shoot}.}
 \item{pruning_weight}{Weight of the material removed during pruning in Kg. Check this?}
 \item{cordon_length}{The length of the cordon in cm}

@@ -8,54 +8,11 @@
 #' @param Replace
 #' @param Model
 #'
-#' @importFrom dplyr group_by summarise
-#'
 #' @return A vector with two elements: the mean and variance estimate from JPS
 #'
 #' @keywords internal
 #'
 JPSED0F <- function(RV, Y, set_size, Coef, N, Replace, Model) {
-
-  ###########################################################
-  # This function Computes JPS estimator and its variance  ##
-  ###########################################################
-  # JPSD0:
-  # First column: Response
-  # Second column: Ranks
-  # print(Coef)
-  RVD <- data.frame(RV, Y)
-  M.est <- mean(dplyr::summarise(dplyr::group_by(RVD, RV), x = mean(Y))$x) # JPS estimate
-  YIYJ <- expand.grid(Y, Y)
-  GSample.Size <- dplyr::summarise(dplyr::group_by(RVD, RV), x = n())$x
-  # dn <- length(GSample.Size)
-  # print(dn)
-  GSample.Size1 <- GSample.Size[GSample.Size > 1]
-  # dn.star <- length(GSample.Size1)
-  RhRhp <- expand.grid(RV, RV)
-  YIYJ2 <- (YIYJ[, 1] - YIYJ[, 2])^2
-  # group.mean <- aggregate(YIYJ2, RhRhp, mean)
-  data <- cbind(RhRhp, YIYJ2)
-  group.mean <- dplyr::summarise(dplyr::group_by(data, Var1, Var2), x = mean(YIYJ2))
-  Y2hhT2 <- group.mean[group.mean[, 1] - group.mean[, 2] == 0, ]$x
-  Y2hhT2 <- Y2hhT2[GSample.Size > 1]
-  T2s <- set_size * sum(Y2hhT2 * GSample.Size1^2 / (GSample.Size1 * (GSample.Size1 - 1))) / (2 * length(GSample.Size1))
-  Y2hhT1 <- group.mean[group.mean[, 1] - group.mean[, 2] != 0, ]$x
-  T1s <- sum(Y2hhT1) / (2 * Coef[1] * length(GSample.Size)^2)
-  VestD0 <- Coef[2] * T1s / (set_size - 1) + Coef[3] * T2s
-  if (Replace == 1) {
-    VEST <- Coef[2] * T2s + Coef[3] * (N - 1) * (T1s + T2s) / (N * (set_size - 1))
-    if (VEST <= 0) VEST <- Coef[2] * T2s / 2
-  } else {
-    VEST <- Coef[2] * T1s / (set_size - 1) + Coef[3] * T2s
-  }
-  if (Model == 1) {
-    VEST <- (T1s + T2s) / set_size^2 * ((-1 / N) + Coef[2] * set_size / (set_size - 1)) + T2s * ((Coef[3] + Coef[2]) + Coef[2] * set_size / (set_size - 1))
-    if (VEST <= 0) VEST <- T2s * ((Coef[3] + Coef[2]) + Coef[2] * set_size / (set_size - 1))
-  }
-  return(c(M.est, VEST))
-}
-
-JPSED0F_orig <- function(RV, Y, set_size, Coef, N, Replace, Model) {
   ###########################################################
   # This function Computes JPS estimator and its variance  ##
   ###########################################################
@@ -92,6 +49,47 @@ JPSED0F_orig <- function(RV, Y, set_size, Coef, N, Replace, Model) {
   }
   return(c(M.est, VEST))
 }
+
+# JPSED0F_tidyverse <- function(RV, Y, set_size, Coef, N, Replace, Model) {
+#
+#   ###########################################################
+#   # This function Computes JPS estimator and its variance  ##
+#   ###########################################################
+#   # JPSD0:
+#   # First column: Response
+#   # Second column: Ranks
+#   # print(Coef)
+#   RVD <- data.frame(RV, Y)
+#   M.est <- mean(dplyr::summarise(dplyr::group_by(RVD, RV), x = mean(Y))$x) # JPS estimate
+#   YIYJ <- expand.grid(Y, Y)
+#   GSample.Size <- dplyr::summarise(dplyr::group_by(RVD, RV), x = n())$x
+#   # dn <- length(GSample.Size)
+#   # print(dn)
+#   GSample.Size1 <- GSample.Size[GSample.Size > 1]
+#   # dn.star <- length(GSample.Size1)
+#   RhRhp <- expand.grid(RV, RV)
+#   YIYJ2 <- (YIYJ[, 1] - YIYJ[, 2])^2
+#   # group.mean <- aggregate(YIYJ2, RhRhp, mean)
+#   data <- cbind(RhRhp, YIYJ2)
+#   group.mean <- dplyr::summarise(dplyr::group_by(data, Var1, Var2), x = mean(YIYJ2))
+#   Y2hhT2 <- group.mean[group.mean[, 1] - group.mean[, 2] == 0, ]$x
+#   Y2hhT2 <- Y2hhT2[GSample.Size > 1]
+#   T2s <- set_size * sum(Y2hhT2 * GSample.Size1^2 / (GSample.Size1 * (GSample.Size1 - 1))) / (2 * length(GSample.Size1))
+#   Y2hhT1 <- group.mean[group.mean[, 1] - group.mean[, 2] != 0, ]$x
+#   T1s <- sum(Y2hhT1) / (2 * Coef[1] * length(GSample.Size)^2)
+#   VestD0 <- Coef[2] * T1s / (set_size - 1) + Coef[3] * T2s
+#   if (Replace == 1) {
+#     VEST <- Coef[2] * T2s + Coef[3] * (N - 1) * (T1s + T2s) / (N * (set_size - 1))
+#     if (VEST <= 0) VEST <- Coef[2] * T2s / 2
+#   } else {
+#     VEST <- Coef[2] * T1s / (set_size - 1) + Coef[3] * T2s
+#   }
+#   if (Model == 1) {
+#     VEST <- (T1s + T2s) / set_size^2 * ((-1 / N) + Coef[2] * set_size / (set_size - 1)) + T2s * ((Coef[3] + Coef[2]) + Coef[2] * set_size / (set_size - 1))
+#     if (VEST <= 0) VEST <- T2s * ((Coef[3] + Coef[2]) + Coef[2] * set_size / (set_size - 1))
+#   }
+#   return(c(M.est, VEST))
+# }
 
 JPSD0F_new <- function(pop, n, H, tau, N, K) {
   # tau: controls the ranking quality
