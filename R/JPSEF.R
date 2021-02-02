@@ -72,7 +72,7 @@ JPSEF <- function(data, setsize, replace = TRUE, model, N, alpha) {
   }
 
 
-  EST.EqSd <- apply(data[, -1], 2, JPSEDF, Y = data[, 1], setsize = setsize, N = N, Coef = CoefD, CoefDel = Coef.Del, replace = replace, model = model, K)
+  EST.EqSd <- apply(data[, -1], 2, JPSEDF, Y = data[, 1], setsize = setsize, N = N, Coef = CoefD, CoefDel = Coef.Del, replace = replace, model = model, K = K)
 
   JPSE.Fulln <- EST.EqSd[1, ] #  JPS mean estimate for each ranker using all n data
   JPSV.Fulln <- EST.EqSd[2, ] # Variance estiamte of JPS mean  for each ranker using all n data

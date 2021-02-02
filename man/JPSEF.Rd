@@ -2,7 +2,7 @@
 % Please edit documentation in R/JPSEF.R
 \name{JPSEF}
 \alias{JPSEF}
-\title{Judgement Post Stratification Estimator Function}
+\title{Computes the estimator for JPS data}
 \usage{
 JPSEF(data, setsize, replace = TRUE, model, N, alpha)
 }
@@ -21,6 +21,6 @@ JPSEF(data, setsize, replace = TRUE, model, N, alpha)
 
 }
 \description{
-Judgement Post Stratification Estimator Function
+Computes the estimator for JPS data
 }
 \keyword{internal}

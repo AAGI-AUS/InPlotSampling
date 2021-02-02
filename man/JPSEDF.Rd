@@ -2,12 +2,14 @@
 % Please edit documentation in R/JPSEDF.R
 \name{JPSEDF}
 \alias{JPSEDF}
-\title{Title}
+\title{Computes the estimator and variance for each individual ranker}
 \usage{
 JPSEDF(RV, Y, H, N, Coef, CoefDel, Replace, Model, K)
 }
 \arguments{
 \item{RV}{Rank values for Y}
+
+\item{Y}{Response measurements}
 
 \item{K}{}
 }
@@ -15,6 +17,6 @@ JPSEDF(RV, Y, H, N, Coef, CoefDel, Replace, Model, K)
 
 }
 \description{
-Title
+Computes the estimator and variance for each individual ranker
 }
 \keyword{internal}
