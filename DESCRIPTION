@@ -1,25 +1,27 @@
 Type: Package
-Package: RSS
+Package: RankedSetSampling
 Title: A Package to Ease the Application of Ranked Set Sampling
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Omer",
              family = "Ozturk",
              role = "aut",
-             email = "omer@stat.osu.edu"),
+             email = "omer@stat.osu.edu",
+             comment = c(ORCID = "0000-0002-0235-4772")),
       person(given = "Sam",
              family = "Rogers",
              role = c("cre", "ctb"),
-             email = "s.rogers@adelaide.edu.au"))
+             email = "sam.rogers@adelaide.edu.au"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: file LICENSE
-URL: https://biometryhub.github.io/RSS_package/
-BugReports: https://github.com/biometryhub/RSS_package/issues
+URL: https://biometryhub.github.io/RankedSetSampling/
+BugReports: https://github.com/biometryhub/RankedSetSampling/issues
 Depends: 
-    R (>= 3.5.0)
+    R (>= 3.3.0)
 Suggests: 
-    testthat
+    testthat,
+    covr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
