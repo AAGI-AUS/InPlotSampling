@@ -1,1 +1,7 @@
+url: https://pkgdown.r-lib.org
+
 destination: docs
+
+template:
+  params:
+    ganalytics: G-K4JQ08EC5Q
