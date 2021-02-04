@@ -7,7 +7,7 @@ Authors@R:
              family = "Ozturk",
              role = "aut",
              email = "omer@stat.osu.edu",
-             comment = c(ORCID = "0000-0002-0235-4772"))),
+             comment = c(ORCID = "0000-0002-0235-4772")),
       person(given = "Sam",
              family = "Rogers",
              role = c("cre", "ctb"),
