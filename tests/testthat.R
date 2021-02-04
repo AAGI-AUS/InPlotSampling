@@ -1,4 +1,4 @@
 library(testthat)
-library(RSS)
+library(RankedSetSampling)
 
-test_check("RSS")
+test_check("RankedSetSampling")
