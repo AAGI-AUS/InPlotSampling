@@ -43,3 +43,24 @@ Use the following code to install this package:
 if(!require("remotes")) install.packages("remotes") 
 remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 ```
+
+
+
+# Example of use
+
+This package includes some example data files, which can be seen at [population]("/reference/population.html") and [emergence_ranks]("/reference/emergence_ranks.html"). After installing the package as above, the package can be used as in the following example:
+
+```{r}
+# load the package
+library(RankedSetSampling)
+
+# Compute the JPS estimators
+
+JPS.Estimates <- OneSample(data = emergence_ranks, set_size = 4,
+                           method = "JPS", confidence = 0.95, 
+                           replace = TRUE, model = 0, 
+                           pop_size = nrow(population))
+
+print(JPS.Estimates)
+```
+

@@ -3,7 +3,7 @@
 \docType{data}
 \name{Coombe2019}
 \alias{Coombe2019}
-\title{Coombe Vineyard data from 2019 season}
+\title{Coombe Vineyard Data from 2019 Season.}
 \format{
 A data frame with 352 rows and 11 variables:
 \describe{

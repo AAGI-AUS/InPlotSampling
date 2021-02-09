@@ -1,4 +1,4 @@
-#' Coombe Vineyard data from 2019 season
+#' Coombe Vineyard Data from 2019 Season.
 #'
 #' Measurements taken on the Coombe Research Vineyard,
 #' University of Adelaide Waite Campus after the 2019 season.
@@ -18,3 +18,22 @@
 #'   \item{cordon_length}{The length of the cordon in cm}
 #' }
 "Coombe2019"
+
+
+#' Seed Emergence Population.
+#'
+#' The entire population of actual and estimated seed emergence.
+#'
+#' @format A data frame with 2640 rows of 2 variables: \code{actual_seed_emergence} and
+#' \code{estimated_seed_emergence} giving the actual and estimated number of seeds emerged.
+"population"
+
+#' Ranks for Seed Emergence.
+#'
+#' Contains the ranks given by 5 rankers of the number of seeds emerged in a sample of 15 plots.
+#'
+#' @format A data frame with 6 variables: \code{seed_emergence}, \code{ranker1}, \code{ranker2},
+#' \code{ranker3}, \code{ranker4} and \code{ranker5}.
+"emergence_ranks"
+
+
