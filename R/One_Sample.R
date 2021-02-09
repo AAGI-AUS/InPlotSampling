@@ -12,6 +12,14 @@
 #' @export
 #'
 #' @examples
+#'
+#' # Compute the JPS estimators
+#'
+#' JPS.Estimates <- OneSample(data = emergence_ranks, set_size = 4,
+#'                            method = "JPS", confidence = 0.95,
+#'                            replace = TRUE, model = 0,
+#'                            pop_size = nrow(population))
+#'
 OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.95,
                       replace = TRUE, model = 0, pop_size = NULL) {
     # Check valid values of set_size >= 1
