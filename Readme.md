@@ -35,10 +35,9 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 # Example of use
 
 This package includes some example data files, which can be seen at
-[population](%22/reference/population.html%22) and
-[emergence\_ranks](%22/reference/emergence_ranks.html%22). After
-installing the package as above, the package can be used as in the
-following example:
+[population](reference/population.html) and
+[emergence\_ranks](reference/emergence_ranks.html). After installing the
+package as above, the package can be used as in the following example:
 
 ``` r
 # load the package
