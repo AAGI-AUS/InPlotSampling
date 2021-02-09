@@ -59,3 +59,26 @@ print(JPS.Estimates)
 #> 5     SRS estimate    1.200          0.262              0.638,1.762
 #> 6          Minimum    1.108          0.210              0.657,1.559
 ```
+
+# Citing this package
+
+This package can be cited using `citation("RankedSetSampling")` which
+generates
+
+
+    To cite package 'RankedSetSampling' in publications use:
+
+      Peter Kasprsak, Olena Kravchuk, Omer Ozturk and Sam Rogers (2021).
+      RankedSetSampling: Easing the Application of Ranked Set Sampling in
+      Practice. R package version 0.0.1.
+      https://biometryhub.github.io/RankedSetSampling/
+
+    A BibTeX entry for LaTeX users is
+
+      @Manual{,
+        title = {RankedSetSampling: Easing the Application of Ranked Set Sampling in Practice},
+        author = {Peter Kasprsak and Olena Kravchuk and Omer Ozturk and Sam Rogers},
+        year = {2021},
+        note = {R package version 0.0.1},
+        url = {https://biometryhub.github.io/RankedSetSampling/},
+      }

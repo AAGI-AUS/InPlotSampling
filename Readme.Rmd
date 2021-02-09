@@ -64,3 +64,10 @@ JPS.Estimates <- OneSample(data = emergence_ranks, set_size = 4,
 print(JPS.Estimates)
 ```
 
+# Citing this package
+
+This package can be cited using `citation("RankedSetSampling")` which generates
+
+```{r echo=F, comment = NA}
+citation("RankedSetSampling")
+```
