@@ -22,9 +22,9 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Peter Kasprsak \email{peter.kasprzak@adelaide.edu.au} (\href{https://orcid.org/0000-0002-0235-4772}{ORCID})
-  \item Olena Kravchuk \email{olena.kravchuk@adelaide.edu.au} (\href{https://orcid.org/0000-0001-5291-3600}{ORCID}) [data contributor]
   \item Omer Ozturk \email{omer@stat.osu.edu} (\href{https://orcid.org/0000-0002-0235-4772}{ORCID})
+  \item Olena Kravchuk \email{olena.kravchuk@adelaide.edu.au} (\href{https://orcid.org/0000-0001-5291-3600}{ORCID}) [data contributor]
+  \item Peter Kasprsak \email{peter.kasprzak@adelaide.edu.au}
 }
 
 }
