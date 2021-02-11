@@ -18,7 +18,7 @@ Authors@R:
              email = "olena.kravchuk@adelaide.edu.au",
              comment = c(ORCID = "0000-0001-5291-3600")),
       person(given = "Peter",
-             family = "Kasprsak",
+             family = "Kasprzak",
              role = "aut",
              email = "peter.kasprzak@adelaide.edu.au"))
 Description: The RankedSetSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice.
