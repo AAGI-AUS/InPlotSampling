@@ -5,3 +5,7 @@
 ^pkgdown$
 ^\.github$
 ^codecov\.yml$
+^Readme.Rmd
+^Readme.md
+JPS_multiranker_Min.pdf
+example.R
