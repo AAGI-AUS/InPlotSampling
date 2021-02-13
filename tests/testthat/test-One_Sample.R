@@ -41,5 +41,17 @@ test_that("method is JPS or RSS", {
     expect_error(OneSample(emergence_ranks, 4, method = 1, replace = T),
                  "'arg' should be one of \"JPS\", \"RSS\"")
 })
-# Test data, conf = 0.95, model = 0, N = NULL
+
+test_that("confidence is between 0 and 1", {
+    expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, confidence = 0), NA, )
+    expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, confidence = 5),
+                 "confidence must take a numeric value between 0 and 1, indicating the confidence level")
+    expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, confidence = "A"),
+                 "confidence must take a numeric value between 0 and 1, indicating the confidence level")
+    expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, confidence = NA),
+                 "confidence must take a numeric value between 0 and 1, indicating the confidence level")
+})
+
+
+# Test data, model = 0, N = NULL
 

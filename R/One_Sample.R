@@ -1,4 +1,4 @@
-#' Title
+#' Calculate the estimate of the rankings
 #'
 #' @param data A data frame of `JPS` or `RSS` rankings
 #' @param set_size The set size of the ranks.
@@ -8,7 +8,7 @@
 #' @param model If model is 0, it's design based inference, if model = 1, it is model based inference using super population model
 #' @param pop_size The population size. Must be provided if sampling without replacement, or if `model` is set to 'super-population'.
 #'
-#' @return A `data.frame` with the rankings
+#' @return A `data.frame` with the estimates provided by different types of estimators.
 #' @export
 #'
 #' @examples
@@ -22,8 +22,10 @@
 #'
 OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.95,
                       replace = TRUE, model = 0, pop_size = NULL) {
-    # Check valid values of set_size >= 1
-    # Check model is 0 or 1 - Change to text? What are the types of model?
+
+    # Choose the type of estimators to output?
+    # Rename to estimate? Or something else?
+    # Break confidence interval into two columns?
     # If model is 0, it's design based inference, if model = 1, it is model based inference using super population model
     # pop_size: nrow(data)*set_size <= pop_size, > 0, only relevant if replace = FALSE
 
@@ -36,6 +38,10 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
     }
 
     method <- match.arg(toupper(method), c("JPS", "RSS"))
+
+    if(confidence > 1 | confidence < 0 | !is.numeric(confidence)) {
+        stop("confidence must take a numeric value between 0 and 1, indicating the confidence level")
+    }
 
     alpha <- 1 - confidence
 

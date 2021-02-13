@@ -7,9 +7,8 @@
 #' @param K Number of rankers
 #'
 #' @return
-#' @export
+#' @keywords internal
 #'
-#' @examples
 JPSD2F <- function(pop, n, H, tau, K) {
   #############################################
   # Ths function generates JPS sample        ##

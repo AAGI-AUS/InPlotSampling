@@ -27,7 +27,7 @@ License: MIT + file LICENSE
 URL: https://biometryhub.github.io/RankedSetSampling/
 BugReports: https://github.com/biometryhub/RankedSetSampling/issues
 Depends: 
-    R (>= 3.3.0)
+    R (>= 3.5.0)
 Suggests: 
     testthat,
     covr
