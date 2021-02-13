@@ -37,9 +37,9 @@ test_that("pop_size is supplied when needed", {
 
 test_that("method is JPS or RSS", {
     expect_error(OneSample(emergence_ranks, 4, method = "ABC", replace = T),
-                 "'arg' should be one of \"JPS\", \"RSS\"")
+                 NULL)
     expect_error(OneSample(emergence_ranks, 4, method = 1, replace = T),
-                 "'arg' should be one of \"JPS\", \"RSS\"")
+                 NULL)
 })
 
 test_that("confidence is between 0 and 1", {
