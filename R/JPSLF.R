@@ -1,16 +1,15 @@
-#' Title
+#' Judgement Post Stratification List Function
 #'
 #' @param data Data to use to estimate.
 #' @param set_size Number of samples which are ranked in each set.
 #' @param replace Logical. Are samples drawn with replacement?
 #' @param population_size Population size of the population which `data` is taken from.
 #' @param model Whether to use design-based approach or super-population (model based) approach
-#' @param estimator Which type of estimator to return. Default is "SD Weighted". Other options are
+#' @param estimator Which type of estimator to return. Default is "SD Weighted". Other options are "Unweighted", "Aggregate Weight", "JPS Estimate", "SRS estimate", "Minimum"
 #'
 #' @return
-#' @export
+#' @keywords internal
 #'
-#' @examples
 JPSLF <- function(data, set_size, replace, population_size, model, estimator = "SD Weighted") {
 
     # JPS using List function

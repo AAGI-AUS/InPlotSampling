@@ -2,7 +2,7 @@
 % Please edit documentation in R/JPSLF.R
 \name{JPSLF}
 \alias{JPSLF}
-\title{Title}
+\title{Judgement Post Stratification List Function}
 \usage{
 JPSLF(
   data,
@@ -24,11 +24,12 @@ JPSLF(
 
 \item{model}{Whether to use design-based approach or super-population (model based) approach}
 
-\item{estimator}{Which type of estimator to return. Default is "SD Weighted". Other options are}
+\item{estimator}{Which type of estimator to return. Default is "SD Weighted". Other options are "Unweighted", "Aggregate Weight", "JPS Estimate", "SRS estimate", "Minimum"}
 }
 \value{
 
 }
 \description{
-Title
+Judgement Post Stratification List Function
 }
+\keyword{internal}

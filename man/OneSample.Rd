@@ -2,7 +2,7 @@
 % Please edit documentation in R/One_Sample.R
 \name{OneSample}
 \alias{OneSample}
-\title{Title}
+\title{Calculate the estimate of the rankings}
 \usage{
 OneSample(
   data,
@@ -15,11 +15,11 @@ OneSample(
 )
 }
 \arguments{
-\item{data}{The data for \code{JPS} or \code{RSS} sampling}
+\item{data}{A data frame of \code{JPS} or \code{RSS} rankings}
 
 \item{set_size}{The set size of the ranks.}
 
-\item{method}{Takes values \code{JPS} (the default) for Judgment Post Stratification, or \code{RSS} for Ranked Set Sample.}
+\item{method}{Takes values \code{JPS} (the default) for Judgment Post Stratification, or \code{RSS} for Ranked Set Sample. Partial matching is performed, so \code{J} or \code{R} could be used.}
 
 \item{confidence}{The confidence level to use.}
 
@@ -27,11 +27,21 @@ OneSample(
 
 \item{model}{If model is 0, it's design based inference, if model = 1, it is model based inference using super population model}
 
-\item{pop_size}{The population size. Must be provided if sampling without replacement, or if \code{model} is set to 'superpopulation'.}
+\item{pop_size}{The population size. Must be provided if sampling without replacement, or if \code{model} is set to 'super-population'.}
 }
 \value{
-A \code{data.frame} with the rankings
+A \code{data.frame} with the estimates provided by different types of estimators.
 }
 \description{
-Title
+Calculate the estimate of the rankings
+}
+\examples{
+
+# Compute the JPS estimators
+
+JPS.Estimates <- OneSample(data = emergence_ranks, set_size = 4,
+                           method = "JPS", confidence = 0.95,
+                           replace = TRUE, model = 0,
+                           pop_size = nrow(population))
+
 }
