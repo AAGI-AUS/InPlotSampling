@@ -70,7 +70,7 @@ RSSEF <- function(data, set_size, replace, model, N, alpha) {
   if (K == 1) {
     Confinterval <- paste(Lower.limit, Upper.limit, sep = ",")
     Estimator <- c("RSS-1")
-    summary.table <- data.frame(Estimator, round(Point.est, digits = 3), round(ST.error, digits = 3), Confinterval)
+    summary.table <- data.frame(Estimator, round(Point.est, digits = 3), round(ST.error, digits = 3), Confinterval, stringsAsFactors = F)
     colnames(summary.table) <- c("Estimator", "point.est", "St.error", paste((1 - alpha) * 100, "% Confidence Interval", sep = ""))
     return(summary.table)
   }
@@ -105,7 +105,7 @@ RSSEF <- function(data, set_size, replace, model, N, alpha) {
   Point.est <- c(EST[1], W.est)
   Confinterval <- paste(Lower.limit, Upper.limit, sep = ",")
   Estimator <- c("RSS-1", " Aggregate Weighted")
-  summary.table <- data.frame(Estimator, round(Point.est, digits = 3), round(ST.error, digits = 3), Confinterval)
+  summary.table <- data.frame(Estimator, round(Point.est, digits = 3), round(ST.error, digits = 3), Confinterval, stringsAsFactors = F)
   colnames(summary.table) <- c("Estimator", "point.est", "St.error", paste((1 - alpha) * 100, "% Confidence Interval", sep = ""))
   return(summary.table)
 }

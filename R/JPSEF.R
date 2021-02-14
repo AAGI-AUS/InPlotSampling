@@ -68,7 +68,7 @@ JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
     Lower.Limit <- round(Estimate - qt(1 - alpha / 2, n - 1) * St.error, digits = 3)
     Upper.Limit <- round(Estimate + qt(1 - alpha / 2, n - 1) * St.error, digits = 3)
     CI <- paste(Lower.Limit, Upper.Limit, sep = ",")
-    Summary.return <- data.frame(Estimator, Estimate, St.error, CI)
+    Summary.return <- data.frame(Estimator, Estimate, St.error, CI, stringsAsFactors = F)
     colnames(Summary.return) <- c("Estimator", "Estimate", "Standard Error", paste((1 - alpha) * 100, "% Confidence intervals", sep = ""))
     return(Summary.return)
   }
@@ -134,7 +134,7 @@ JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
   CI <- paste(Lower.Limit, Upper.Limit, sep = ",")
   Estimator <- c("UnWeighted", "Sd.Weighted", "Aggregate Weight", "JPS Estimate", "SRS estimate", "Minimum")
   # Summary.ret=data.frame(Estimator,Estimate.est,Variance.est,Lower.Limit,Upper.Limit)
-  Summary.ret <- data.frame(Estimator, round(Estimate.est, digits = 3), round(St.error, digits = 3), CI)
+  Summary.ret <- data.frame(Estimator, round(Estimate.est, digits = 3), round(St.error, digits = 3), CI, stringsAsFactors = F)
   colnames(Summary.ret) <- c("Estimator", "Estimate", "Standard Error", paste((1 - alpha) * 100, "% Confidence intervals", sep = ""))
   #  Summary.ret=round(Summary.ret,digits=3)
   # print(Summary.ret)
