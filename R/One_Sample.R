@@ -50,11 +50,11 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
     alpha <- 1 - confidence
 
     if (!replace) {
-        if(missing(pop_size)) {
-            stop("The population size pop_size must be provided when sampling without replacement")
+        if(missing(pop_size) | is.null(pop_size) | !is.numeric(pop_size)) {
+            stop("A numeric population size pop_size must be provided when sampling without replacement")
         }
         else if(pop_size <= nrow(data)*set_size | pop_size <= 0) {
-            stop("pop_size must be positive and can't be bigger than data*set_size")
+            stop("pop_size must be positive and less than data x set_size")
         }
     }
     if (model == 1 & missing(pop_size)) {

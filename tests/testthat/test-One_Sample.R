@@ -36,7 +36,7 @@ test_that("replace is TRUE or FALSE", {
 
 test_that("pop_size is supplied when needed", {
     expect_error(OneSample(emergence_ranks, 4, "JPS", replace = F, 0),
-                 "The population size pop_size must be provided when sampling without replacement")
+                 "A numeric population size pop_size must be provided when sampling without replacement")
     expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, model = 1),
                  "The population size pop_size must be provided for super-population model")
 })
@@ -70,10 +70,16 @@ test_that("model is 0 or 1", {
 test_that("pop_size is >0, <= set_size*nrow(data)", {
     expect_error(OneSample(emergence_ranks, 4, method = "JPS", replace = F, pop_size = 2640),
                  NA)
-    # expect_error(OneSample(emergence_ranks, 4, method = "JPS", model = "A"),
-                 # "model must be 0 for design based inference or 1 for super-population model")
-    # expect_error(OneSample(emergence_ranks, 4, method = "JPS", model = NA),
-                 # "model must be 0 for design based inference or 1 for super-population model")
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", replace = F, model = 1, pop_size = 2640),
+                 NA)
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", replace = F, pop_size = -5),
+                 "pop_size must be positive and less than data x set_size")
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", replace = F, pop_size = 1),
+                 "pop_size must be positive and less than data x set_size")
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", replace = F, pop_size = NA),
+                 "A numeric population size pop_size must be provided when sampling without replacement")
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", replace = F, pop_size = "A"),
+                 "A numeric population size pop_size must be provided when sampling without replacement")
 })
 
 
