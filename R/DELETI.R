@@ -1,3 +1,11 @@
+#' Title
+#'
+#' @param i The index
+#' @param PASS Values passed in
+#'
+#' @return
+#' @keywords internal
+#'
 DELETi <- function(i, PASS) {
   #  PASS=list(Y,RV,Ind.ij,GSV,Y.ij2N,R.hhpN,G.sum,TT2,TT1)
   Y <- PASS[[1]]
