@@ -2,7 +2,7 @@
 % Please edit documentation in R/TRIPLEF.R
 \name{TRIPLEF}
 \alias{TRIPLEF}
-\title{Title}
+\title{Calculate the triple sum}
 \usage{
 TRIPLEF(uv, H, n)
 }
@@ -15,6 +15,6 @@ TRIPLEF(uv, H, n)
 
 }
 \description{
-Title
+Calculate the triple sum
 }
 \keyword{internal}

@@ -10,7 +10,6 @@
 #' @return
 #' @keywords internal
 #'
-#' @examples
 ListF <- function(data, set_size, Replace, N, Model, CoefD0) {
     Y <- data[, 1]
     Ranks <- data[, -1]

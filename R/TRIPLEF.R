@@ -1,4 +1,4 @@
-#' Title
+#' Calculate the triple sum
 #'
 #' @param uv
 #' @param H The set size

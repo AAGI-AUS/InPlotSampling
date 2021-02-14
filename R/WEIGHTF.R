@@ -1,12 +1,11 @@
-#' Title
+#' Calculate Agreement Weights
 #'
-#' @param RV
+#' @param RV Ranking values
 #' @param set_size Set size
 #'
-#' @return
+#' @return A vector of agreement weights
 #' @keywords internal
 #'
-#' @examples
 WEIGHTF <- function(RV, set_size) {
   UniquR <- unique(RV)
   weightV <- rep(0, set_size)

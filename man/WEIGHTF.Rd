@@ -2,17 +2,19 @@
 % Please edit documentation in R/WEIGHTF.R
 \name{WEIGHTF}
 \alias{WEIGHTF}
-\title{Title}
+\title{Calculate Agreement Weights}
 \usage{
 WEIGHTF(RV, set_size)
 }
 \arguments{
+\item{RV}{Ranking values}
+
 \item{set_size}{Set size}
 }
 \value{
-
+A vector of agreement weights
 }
 \description{
-Title
+Calculate Agreement Weights
 }
 \keyword{internal}

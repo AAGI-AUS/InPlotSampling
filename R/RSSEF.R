@@ -20,7 +20,6 @@
 #' @return
 #' @keywords internal
 #'
-#' @examples
 RSSEF <- function(data, set_size, replace, model, N, alpha) {
   RM <- data[, -1]
   RV <- data[, 2] # We need to be careful about this.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/JPSED0F.R
 \name{JPSED0F}
 \alias{JPSED0F}
-\title{Title}
+\title{This function Computes JPS estimator and its variance}
 \usage{
 JPSED0F(RV, Y, set_size, Coef, N, Replace, Model)
 }
@@ -11,14 +11,20 @@ JPSED0F(RV, Y, set_size, Coef, N, Replace, Model)
 
 \item{Y}{The data values that were ranked}
 
-\item{set_size}{The set}
+\item{set_size}{The set size}
 
-\item{Model}{}
+\item{Coef}{Coefficients}
+
+\item{N}{Population size}
+
+\item{Replace}{Logical. Sample with replacement?}
+
+\item{Model}{If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.}
 }
 \value{
 A vector with two elements: the mean and variance estimate from JPS
 }
 \description{
-Title
+This function Computes JPS estimator and its variance
 }
 \keyword{internal}
