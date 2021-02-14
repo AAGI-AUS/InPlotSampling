@@ -7,9 +7,21 @@
 JPSEDF(RV, Y, set_size, N, coef, coef_del, replace, model, K)
 }
 \arguments{
-\item{RV}{Rank values for Y}
+\item{RV}{Rank values for Y.}
 
-\item{Y}{Response measurements}
+\item{Y}{Response measurements.}
+
+\item{set_size}{Set Size.}
+
+\item{N}{Finite population size.}
+
+\item{coef}{Coefficients used in variance computation when sample size is n.}
+
+\item{coef_del}{Coefficients used in variance computation when the i-th unit is deleted.}
+
+\item{replace}{Logical. Sample with replacement?}
+
+\item{model}{If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.}
 
 \item{K}{}
 }

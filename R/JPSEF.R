@@ -1,9 +1,9 @@
 #' Computes the estimator for JPS data
 #'
-#' @param data The data to use for estimation
-#' @param set_size The set size
+#' @param data The data to use for estimation.
+#' @param set_size The set size.
 #' @param replace Logical (default `TRUE`). Sample with replacement?
-#' @param model
+#' @param model If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.
 #' @param N The population size.
 #' @param alpha The significance level.
 #'

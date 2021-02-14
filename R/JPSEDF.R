@@ -1,25 +1,13 @@
-###########################################################
-# This function Computes JPS estimator and its variance for each ranker  ##
-###########################################################
-# Y:  Response measurements
-# RV: Ranks for Y
-# set_size: Set Size
-# N: Finite population size
-# coef: Coefficients used in variance computation when sample size is n
-# coef_del: Coefficients used in variance computation
-#          when the i-th unit is deleted
-# replace: replace =1 if the sampling is with replacement.
-# model: model =1 if  super population model is used
 #' Computes the estimator and variance for each individual ranker
 #'
-#' @param RV Rank values for Y
-#' @param Y Response measurements
-#' @param set_size
-#' @param N
-#' @param coef
-#' @param coef_del
-#' @param replace
-#' @param model
+#' @param RV Rank values for Y.
+#' @param Y Response measurements.
+#' @param set_size Set Size.
+#' @param N Finite population size.
+#' @param coef Coefficients used in variance computation when sample size is n.
+#' @param coef_del Coefficients used in variance computation when the i-th unit is deleted.
+#' @param replace Logical. Sample with replacement?
+#' @param model If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.
 #' @param K
 #'
 #' @return

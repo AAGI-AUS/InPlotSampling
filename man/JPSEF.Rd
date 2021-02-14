@@ -7,11 +7,13 @@
 JPSEF(data, set_size, replace = TRUE, model, N, alpha)
 }
 \arguments{
-\item{data}{The data to use for estimation}
+\item{data}{The data to use for estimation.}
 
-\item{set_size}{The set size}
+\item{set_size}{The set size.}
 
 \item{replace}{Logical (default \code{TRUE}). Sample with replacement?}
+
+\item{model}{If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.}
 
 \item{N}{The population size.}
 

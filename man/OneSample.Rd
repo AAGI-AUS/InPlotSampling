@@ -15,7 +15,7 @@ OneSample(
 )
 }
 \arguments{
-\item{data}{A data frame of \code{JPS} or \code{RSS} rankings}
+\item{data}{A data frame of \code{JPS} or \code{RSS} rankings.}
 
 \item{set_size}{The set size of the ranks.}
 
@@ -25,7 +25,7 @@ OneSample(
 
 \item{replace}{Logical (default \code{TRUE}). Sample with replacement?}
 
-\item{model}{If model is 0, it's design based inference, if model = 1, it is model based inference using super population model}
+\item{model}{If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.}
 
 \item{pop_size}{The population size. Must be provided if sampling without replacement, or if \code{model} is set to 'super-population'.}
 }

@@ -1,11 +1,11 @@
 #' Calculate the estimate of the rankings
 #'
-#' @param data A data frame of `JPS` or `RSS` rankings
+#' @param data A data frame of `JPS` or `RSS` rankings.
 #' @param set_size The set size of the ranks.
 #' @param method Takes values `JPS` (the default) for Judgment Post Stratification, or `RSS` for Ranked Set Sample. Partial matching is performed, so `J` or `R` could be used.
 #' @param confidence The confidence level to use.
 #' @param replace Logical (default `TRUE`). Sample with replacement?
-#' @param model If model is 0, it's design based inference, if model = 1, it is model based inference using super population model
+#' @param model If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.
 #' @param pop_size The population size. Must be provided if sampling without replacement, or if `model` is set to 'super-population'.
 #'
 #' @return A `data.frame` with the estimates provided by different types of estimators.
