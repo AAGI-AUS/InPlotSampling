@@ -1,16 +1,12 @@
 test_that("onesample works with JPS", {
     skip_if(getRversion() < 3.4)
     load("../jps_data.Rdata")
-    str(saved_jps_output)
-    str(OneSample(Data, 3, "JPS", 0.95, FALSE, 0, 600))
     expect_identical(OneSample(Data, 3, "JPS", 0.95, FALSE, 0, 600), saved_jps_output)
 })
 
 test_that("onesample works with RSS", {
     skip_if(getRversion() < 3.4)
     load("../rss_data.Rdata")
-    str(saved_rss_output)
-    str(OneSample(Data, 3, "RSS", 0.95, FALSE, 0, 600))
     expect_identical(OneSample(Data, 3, "RSS", 0.95, FALSE, 0, 600), saved_rss_output)
 })
 
@@ -26,9 +22,15 @@ test_that("set_size is positive", {
 test_that("replace is TRUE or FALSE", {
     expect_error(OneSample(emergence_ranks, 4, "JPS", replace = NA, pop_size = 2640),
                  "replace must be TRUE or FALSE")
+    expect_error(OneSample(emergence_ranks, 4, "RSS", replace = NA, pop_size = 2640),
+                 "replace must be TRUE or FALSE")
     expect_error(OneSample(emergence_ranks, 4, "JPS", replace = "NA", pop_size = 2640),
                  "replace must be TRUE or FALSE")
+    expect_error(OneSample(emergence_ranks, 4, "RSS", replace = "NA", pop_size = 2640),
+                 "replace must be TRUE or FALSE")
     expect_error(OneSample(emergence_ranks, 4, "JPS", replace = 0, pop_size = 2640),
+                 "replace must be TRUE or FALSE")
+    expect_error(OneSample(emergence_ranks, 4, "RSS", replace = 0, pop_size = 2640),
                  "replace must be TRUE or FALSE")
 })
 
@@ -56,6 +58,23 @@ test_that("confidence is between 0 and 1", {
                  "confidence must take a numeric value between 0 and 1, indicating the confidence level")
 })
 
+test_that("model is 0 or 1", {
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", model = 0),
+                 NA)
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", model = "A"),
+                 "model must be 0 for design based inference or 1 for super-population model")
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", model = NA),
+                 "model must be 0 for design based inference or 1 for super-population model")
+})
 
-# Test data, model = 0, N = NULL
+test_that("pop_size is >0, <= set_size*nrow(data)", {
+    expect_error(OneSample(emergence_ranks, 4, method = "JPS", replace = F, pop_size = 2640),
+                 NA)
+    # expect_error(OneSample(emergence_ranks, 4, method = "JPS", model = "A"),
+                 # "model must be 0 for design based inference or 1 for super-population model")
+    # expect_error(OneSample(emergence_ranks, 4, method = "JPS", model = NA),
+                 # "model must be 0 for design based inference or 1 for super-population model")
+})
+
+
 

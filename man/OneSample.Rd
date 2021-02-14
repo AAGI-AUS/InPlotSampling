@@ -30,7 +30,7 @@ OneSample(
 \item{pop_size}{The population size. Must be provided if sampling without replacement, or if \code{model} is set to 'super-population'.}
 }
 \value{
-A \code{data.frame} with the estimates provided by different types of estimators.
+A \code{data.frame} with the point estimates provided by different types of estimators along with standard error and confidence intervals.
 }
 \description{
 Calculate the estimate of the rankings

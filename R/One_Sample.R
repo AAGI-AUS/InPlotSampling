@@ -8,7 +8,7 @@
 #' @param model If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.
 #' @param pop_size The population size. Must be provided if sampling without replacement, or if `model` is set to 'super-population'.
 #'
-#' @return A `data.frame` with the estimates provided by different types of estimators.
+#' @return A `data.frame` with the point estimates provided by different types of estimators along with standard error and confidence intervals.
 #' @export
 #'
 #' @examples
@@ -43,22 +43,31 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
         stop("confidence must take a numeric value between 0 and 1, indicating the confidence level")
     }
 
+    if(!model %in% c(1, 0)) {
+        stop("model must be 0 for design based inference or 1 for super-population model")
+    }
+
     alpha <- 1 - confidence
 
-    ## Check if the sample is Judgment-post stratified sample (JPS)
-    if (method == "JPS") {
-        if (!replace & missing(pop_size)) {
+    if (!replace) {
+        if(missing(pop_size)) {
             stop("The population size pop_size must be provided when sampling without replacement")
         }
-        if (model == 1 & missing(pop_size)) {
-            stop("The population size pop_size must be provided for super-population model")
+        else if(pop_size <= nrow(data)*set_size | pop_size <= 0) {
+            stop("pop_size must be positive and can't be bigger than data*set_size")
         }
+    }
+    if (model == 1 & missing(pop_size)) {
+        stop("The population size pop_size must be provided for super-population model")
+    }
 
+
+    #################################################################
+    ### Judgment-post stratified sample #############################
+    #################################################################
+
+    if (method == "JPS") {
         results <- JPSEF(data, set_size, replace, model, pop_size, alpha)
-
-        if (model == 1) {
-            colnames(results) <- c("Predictor", "Prediction", "Pred. Error", paste0(confidence * 100, "% Prediction intervals"))
-        }
     }
 
     #################################################################
@@ -66,12 +75,6 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
     #################################################################
 
     else if(method == "RSS") {
-        if (!replace & missing(pop_size)) {
-            stop("The population size pop_size must be provided when sampling without replacement")
-        }
-        if (model == 1 & missing(pop_size)) {
-            stop("The population size pop_size must be provided for super-population model")
-        }
         RV <- data[, 2]
         GSV <- aggregate(RV, list(RV), length)$x
 
@@ -80,10 +83,11 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
         }
 
         results <- RSSEF(data, set_size, replace, model, pop_size, alpha)
-
-        if (model == 1) {
-            colnames(results) <- c("Predictor", "Prediction", "Pred. Error", paste0(confidence * 100, "% Prediction intervals"))
-        }
     }
+
+    if (model == 1) {
+        colnames(results) <- c("Predictor", "Prediction", "Pred. Error", paste0(confidence * 100, "% Prediction intervals"))
+    }
+
     return(results)
 }
