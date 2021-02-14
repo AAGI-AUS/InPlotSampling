@@ -1,12 +1,14 @@
 test_that("onesample works with JPS", {
     skip_if(getRversion() < 3.4)
     load("../jps_data.Rdata")
+    str(saved_jps_output)
     expect_identical(OneSample(Data, 3, "JPS", 0.95, FALSE, 0, 600), saved_jps_output)
 })
 
 test_that("onesample works with RSS", {
     skip_if(getRversion() < 3.4)
     load("../rss_data.Rdata")
+    str(saved_rss_output)
     expect_identical(OneSample(Data, 3, "RSS", 0.95, FALSE, 0, 600), saved_rss_output)
 })
 
@@ -43,7 +45,7 @@ test_that("method is JPS or RSS", {
 })
 
 test_that("confidence is between 0 and 1", {
-    expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, confidence = 0), NA, )
+    expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, confidence = 0), NA)
     expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, confidence = 5),
                  "confidence must take a numeric value between 0 and 1, indicating the confidence level")
     expect_error(OneSample(emergence_ranks, 4, "JPS", replace = T, confidence = "A"),
