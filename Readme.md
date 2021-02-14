@@ -68,7 +68,7 @@ generates
 
     To cite package 'RankedSetSampling' in publications use:
 
-      Omer Ozturk, Sam Rogers, Olena Kravchuk and Peter Kasprsak (2021).
+      Omer Ozturk, Sam Rogers, Olena Kravchuk and Peter Kasprzak (2021).
       RankedSetSampling: Easing the Application of Ranked Set Sampling in
       Practice. R package version 0.0.1.
       https://biometryhub.github.io/RankedSetSampling/
@@ -77,7 +77,7 @@ generates
 
       @Manual{,
         title = {RankedSetSampling: Easing the Application of Ranked Set Sampling in Practice},
-        author = {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprsak},
+        author = {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprzak},
         year = {2021},
         note = {R package version 0.0.1},
         url = {https://biometryhub.github.io/RankedSetSampling/},
