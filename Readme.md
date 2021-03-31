@@ -16,7 +16,7 @@ status](https://github.com/biometryhub/RankedSetSampling/workflows/R-CMD-check/b
 <br> [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.0.1-orange.svg?style=flat-square)](/commits/master)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2021--02--14-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2021--03--18-yellowgreen.svg)](/commits/master)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 <!-- badges: end -->
 
@@ -82,3 +82,18 @@ generates
         note = {R package version 0.0.1},
         url = {https://biometryhub.github.io/RankedSetSampling/},
       }
+
+# Related Reference
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-Ozturk2021" class="csl-entry">
+
+Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified
+Assessment Combining Ranking Information from Multiple Sources, with a
+Field Phenotyping Example.” *Journal of Agricultural, Biological and
+Environmental Statistics*. <https://doi.org/10.1007/s13253-021-00439-1>.
+
+</div>
+
+</div>

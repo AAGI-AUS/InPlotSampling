@@ -1,5 +1,8 @@
 ---
 output: github_document
+bibliography: Reference.bib
+nocite: | 
+  @Ozturk2021
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -71,3 +74,5 @@ This package can be cited using `citation("RankedSetSampling")` which generates
 ```{r echo=F, comment = NA}
 citation("RankedSetSampling")
 ```
+
+# Related Reference
