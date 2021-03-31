@@ -7,9 +7,6 @@
     <loc>https://biometryhub.github.io/RankedSetSampling//reference/CoefF.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/Coombe2019.html</loc>
-  </url>
-  <url>
     <loc>https://biometryhub.github.io/RankedSetSampling//reference/DELETi.html</loc>
   </url>
   <url>
@@ -47,6 +44,9 @@
   </url>
   <url>
     <loc>https://biometryhub.github.io/RankedSetSampling//reference/WEIGHTF.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling//reference/coombe2019.html</loc>
   </url>
   <url>
     <loc>https://biometryhub.github.io/RankedSetSampling//reference/emergence_ranks.html</loc>
