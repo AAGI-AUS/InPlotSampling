@@ -7,7 +7,8 @@
 \title{RankedSetSampling: Easing the Application of Ranked Set Sampling in Practice}
 \description{
 The RankedSetSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice.
-    Ranked Set Sampling was originally described by McIntyre (1952) (reprinted in 2005) <doi:10.1198/000313005X54180>.
+    Ranked Set Sampling was originally described by McIntyre (1952) (reprinted in 2005) <doi:10.1198/000313005X54180>. This package takes
+    work by Omer and Kravchuk (2021) <https://doi.org/10.1007/s13253-021-00439-1> and enables easy use of the methods.
 }
 \seealso{
 Useful links:

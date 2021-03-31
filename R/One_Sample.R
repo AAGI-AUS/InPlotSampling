@@ -91,3 +91,6 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
 
     return(results)
 }
+
+#' @rdname OneSample
+one_sample <- OneSample

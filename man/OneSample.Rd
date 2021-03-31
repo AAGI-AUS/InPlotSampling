@@ -2,9 +2,20 @@
 % Please edit documentation in R/One_Sample.R
 \name{OneSample}
 \alias{OneSample}
+\alias{one_sample}
 \title{Calculate the estimate of the rankings}
 \usage{
 OneSample(
+  data,
+  set_size,
+  method = c("JPS", "RSS"),
+  confidence = 0.95,
+  replace = TRUE,
+  model = 0,
+  pop_size = NULL
+)
+
+one_sample(
   data,
   set_size,
   method = c("JPS", "RSS"),

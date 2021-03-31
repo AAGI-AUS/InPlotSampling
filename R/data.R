@@ -17,7 +17,7 @@
 #'   \item{pruning_weight}{Weight of the material removed during pruning in Kg. Check this?}
 #'   \item{cordon_length}{The length of the cordon in cm}
 #' }
-"Coombe2019"
+"coombe2019"
 
 
 #' Seed Emergence Population.
