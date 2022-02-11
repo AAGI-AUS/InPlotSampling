@@ -3,6 +3,7 @@ url: https://biometryhub.github.io/RankedSetSampling/
 destination: docs
 
 template:
+  bootstrap: 5
   params:
     ganalytics: G-K4JQ08EC5Q
 
