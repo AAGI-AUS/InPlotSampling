@@ -1,7 +1,8 @@
 on:
   push:
     branches:
-      - master
+      - main
+      - dev
   #pull_request:
   #  branches:
   #    - master
