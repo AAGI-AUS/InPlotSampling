@@ -29,35 +29,35 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
     # If model is 0, it's design based inference, if model = 1, it is model based inference using super population model
     # pop_size: nrow(data)*set_size <= pop_size, > 0, only relevant if replace = FALSE
 
-    if(set_size < 1 | is.na(set_size) | is.null(set_size) | !is.numeric(set_size)) {
+    if (set_size < 1 || is.na(set_size) || is.null(set_size) || !is.numeric(set_size)) {
         stop("set_size must be a positive numeric value")
     }
 
-    if(!isTRUE(replace) & !isFALSE(replace)) {
+    if (!isTRUE(replace) && !isFALSE(replace)) {
         stop("replace must be TRUE or FALSE")
     }
 
     method <- match.arg(toupper(method), c("JPS", "RSS"))
 
-    if(confidence > 1 | confidence < 0 | !is.numeric(confidence)) {
+    if (confidence > 1 || confidence < 0 || !is.numeric(confidence)) {
         stop("confidence must take a numeric value between 0 and 1, indicating the confidence level")
     }
 
-    if(!model %in% c(1, 0)) {
+    if (!model %in% c(1, 0)) {
         stop("model must be 0 for design based inference or 1 for super-population model")
     }
 
     alpha <- 1 - confidence
 
     if (!replace) {
-        if(missing(pop_size) | is.null(pop_size) | !is.numeric(pop_size)) {
+        if (missing(pop_size) || is.null(pop_size) || !is.numeric(pop_size)) {
             stop("A numeric population size pop_size must be provided when sampling without replacement")
         }
-        else if(pop_size <= nrow(data)*set_size | pop_size <= 0) {
+        else if(pop_size <= nrow(data)*set_size || pop_size <= 0) {
             stop("pop_size must be positive and less than data x set_size")
         }
     }
-    if (model == 1 & missing(pop_size)) {
+    if (model == 1 && missing(pop_size)) {
         stop("The population size pop_size must be provided for super-population model")
     }
 
@@ -74,11 +74,11 @@ OneSample <- function(data, set_size, method = c("JPS", "RSS"), confidence = 0.9
     ### Ranked set sample ###########################################
     #################################################################
 
-    else if(method == "RSS") {
+    else if (method == "RSS") {
         RV <- data[, 2]
         GSV <- aggregate(RV, list(RV), length)$x
 
-        if (length(GSV) != set_size | min(GSV) <= 1) {
+        if (length(GSV) != set_size || min(GSV) <= 1) {
             stop("In ranked set sample, first ranking method should have at least two observations in any judgment ranking group")
         }
 
