@@ -1,5 +1,6 @@
 test_that("RSSDF has a correct output.", {
   skip_if(getRversion() < 3.4)
+  # TODO: create a matrix to not rely on `population.rda`
   load("../population.rda")
 
   rss_matrix <- RSSDF(population, 100, 10, 2)
