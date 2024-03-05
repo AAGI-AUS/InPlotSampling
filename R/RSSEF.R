@@ -1,7 +1,7 @@
 ###########################################
 #  This function provides estimator for RSS data
 #  RSSK: n by (K+1) dimensional data matrix, the first column is Y-values,
-#  the next K coulumns are the ranks of K-ranking methods
+#  the next K columns are the ranks of K-ranking methods
 #  set_size: set Size
 # N: population size
 # model: if Modle=0 design based inference, if model=1, superpopulation model
@@ -21,7 +21,8 @@
 #' @keywords internal
 #'
 RSSEF <- function(data, set_size, replace, model, N, alpha) {
-  RM <- data[, -1]
+  # unused variable
+  # RM <- data[, -1]
   RV <- data[, 2] # We need to be careful about this.
   Y <- data[, 1]  # We need to be careful about this. Need to ensure response is in col 1.
   n <- nrow(data)
@@ -86,7 +87,7 @@ RSSEF <- function(data, set_size, replace, model, N, alpha) {
   Jack.Repl.AWi <- apply(matrix(1:n, ncol = 1), 1, FWDel1, AWY = AWY) # Aggrement weight estimator
   # when the i-th obseervation is deleted
   if (replace) fc <- 1 else fc <- 1 - n / (N - 1)
-  J.var <- fc * (n - 1) * var(Jack.Repl.AWi) * ((n - 1) / n)^2 # Jackknife variance estiamte  for aggreement weight JPS estimator
+  J.var <- fc * (n - 1) * var(Jack.Repl.AWi) * ((n - 1) / n)^2 # Jackknife variance estimate  for aggreement weight JPS estimator
   ##############################################################
 
 
