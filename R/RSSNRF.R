@@ -5,15 +5,18 @@
 # We assume pop and popAux are correlated
 # n: sample size n=Hd, H: set size, d: cycle size
 RSSNRF <- function(pop, n, H, K) {
-  d <- n / H
+  verify_rss_params(pop, n, H, K)
+
+  n_cycles <- n / H
   K1 <- K + 1
-  rseq <- rep((1:H), times = d)
+  rseq <- rep((1:H), times = n_cycles)
   popY <- pop[, 1]
   N <- length(popY)
   popAux <- pop[, 2]
   popind <- 1:N
   RSSM <- matrix(0, ncol = (K1), nrow = n)
-  ic <- 1
+  # unused variable
+  # ic <- 1
   ind <- sample(popind, n * H)
   setY <- matrix(popY[ind], ncol = H, nrow = n)
   setX <- matrix(popAux[ind], ncol = H, nrow = n)

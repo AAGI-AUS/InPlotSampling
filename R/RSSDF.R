@@ -5,9 +5,7 @@
 # We assume pop and popAux are correlated
 # n: sample size n=Hd, H: set size, d: cycle size
 RSSDF <- function(pop, n, H, K) {
-  if (n < H) {
-    stop("`n` must >= `H`.")
-  }
+  verify_rss_params(pop, n, H, K)
 
   n_cycles <- n / H
   popY <- pop[, 1]
