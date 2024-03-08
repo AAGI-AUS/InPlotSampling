@@ -1,19 +1,22 @@
-############################## 3
-# This function generates RSS sample with K ranking methods with replacement
-# Pop: has two variables popY, variable of interest
-#  popAux: Auxiliary variable
-# We assume pop and popAux are correlated
-# n: sample size n=Hd, H: set size, d: cycle size
+#' Generate ranked set sampling (RSS) with replacement on the population provided.
+#'
+#' @param pop Population that will be sampled with an auxiliary parameter in the second column.
+#' @param n Sample size to be sampled.
+#' @param H Set size for each raking group.
+#' @param K Number of rankers.
+#'
+#' @return A matrix with ranks from each ranker.
+#'
 RSSDF <- function(pop, n, H, K) {
   verify_rss_params(pop, n, H, K)
 
-  n_cycles <- n / H
+  n_sets <- n / H
   popY <- pop[, 1]
   popAux <- pop[, 2]
   N <- length(popY)
   RSSM <- matrix(0, ncol = (K + 1), nrow = n)
   ic <- 1
-  for (j in (1:n_cycles)) {
+  for (j in (1:n_sets)) {
     for (h in (1:H)) {
       sampled_id <- sample(1:N, H)
       setY <- popY[sampled_id]
@@ -22,7 +25,6 @@ RSSDF <- function(pop, n, H, K) {
       ordered_setY <- setY[auxiliary_order]
       ordered_setX <- setX[auxiliary_order]
       ordered_sample_id <- sampled_id[auxiliary_order]
-      # oset=DELLF(set,tauV[1])
       RSSM[ic, c(1, 2)] <- c(ordered_setY[h], h)
       k1obs <- ordered_setX[h]
       redAux <- popAux[-ordered_sample_id[h]]
