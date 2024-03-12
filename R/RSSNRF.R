@@ -5,7 +5,7 @@
 #' @return A matrix with ranks from each ranker.
 #'
 RSSNRF <- function(pop, n, H, K) {
-  verify_rss_params(pop, n, H, K)
+  verify_rssnrf_params(pop, n, H, K)
 
   n_sets <- n / H
   K1 <- K + 1

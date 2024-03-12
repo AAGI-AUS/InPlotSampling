@@ -5,8 +5,8 @@
 #'
 #' @return A matrix with ranks from each ranker.
 #'
-RSS <- function(pop, n, H, K, with_replacement) {
-  verify_rss_params(pop, n, H, K)
+RSS <- function(pop, n, H, K, with_replacement = FALSE) {
+  verify_boolean(with_replacement)
 
   if (with_replacement) {
     return(RSSDF(pop, n, H, K))

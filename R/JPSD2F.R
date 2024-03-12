@@ -3,10 +3,11 @@
 #' @inheritParams RSS
 #' @param tau A parameter which controls ranking quality.
 #'
-#' @return
-#' @keywords internal
+#' @return A matrix with ranks from each ranker.
 #'
-JPSD2F <- function(pop, n, H, tau, K, with_replacement) {
+JPSD2F <- function(pop, n, H, tau, K, with_replacement = FALSE) {
+  verify_jps_params(pop, n, H, tau, K, with_replacement)
+
   sampling_matrix <- matrix(sample(pop, n * H, replace = with_replacement), ncol = H, nrow = n)
 
   # construct rank for each SRS unit post experimentally
