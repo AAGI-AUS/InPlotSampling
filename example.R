@@ -1,50 +1,53 @@
-###########################################################################################
-#TEST the Functions
-###########################################################################################
-N=600
-Setsize=3
-H=Setsize
-Replace=FALSE #( Without replacement selection  )
-#Replace=TRUE  # ( With replacement selection)
-Model=0 #( if Model=0, Design based inference, if Model=1, super population model is used)
-# Method="RSS" # (Sampling method is RSS)
-Method="JPS"  # Sampling method is JPS
-sig=4  # population standard deviation
-mu=10  # population mean
-K=3   # number of rankers
-n=30  # sample size
-#sim=5000
-#sim=2
-alpha=0.05
-rhoV=rep(0.75,K)
-tauV=sig*sqrt(1/rhoV^2-1)
+N <- 600 # population size
+Setsize <- 3
+H <- Setsize # the number of samples to be ranked in each set
+with_replacement <- FALSE
 
-pop=qnorm((1:N)/(N+1),mu,sig)
-popmean=mean(pop)
-#Y =qnorm( (1:N)/(N+1), mu, sig)
-rho=0.75
-tau=sig*sqrt(1/rho^2-1)
-X=pop+tau*rnorm(N,0,1)
-if( Method=="RSS")pop=cbind(pop,X)
+Model <- 0 # ( if Model=0, Design based inference, if Model=1, super population model is used)
+sampling_method <- "JPS" # JPS, RSS
 
-if(Method=="JPS"){
-    if(Replace)  Data=JPSD0F(pop,n,Setsize,tauV,N,K) # This function generates JPS data sampling with replacement
-    if(!Replace) Data=JPSD2F(pop,n,Setsize,tauV,K) # This function generates JPS data sampling without replacement
-}
-##############################################################
-#####  RSS
-if(Method=="RSS"){
-    if(Replace)  Data=RSSDF(pop,n,H,K) # This function generates RSS data sampling  with replacement
-    if(!Replace) Data= RSSNRF(pop,n,H,K) # This function generates RSS data sampling without replacement
-    Data=Data[order(Data[,2]),]
+sigma <- 4 # population standard deviation
+mu <- 10 # population mean
+K <- 3 # number of rankers
+n <- 30 # sample size
+
+alpha <- 0.05
+rhoV <- rep(0.75, K)
+tauV <- sigma * sqrt(1 / rhoV^2 - 1)
+
+pop <- qnorm((1:N) / (N + 1), mu, sigma)
+rho <- 0.75
+tau <- sigma * sqrt(1 / rho^2 - 1)
+X <- pop + tau * rnorm(N, 0, 1)
+if (sampling_method == "RSS") {
+  pop <- cbind(pop, X)
 }
 
-ONE=OneSample(Data,Setsize,Method,0.80, Replace,Model,N)
-if(Replace) print(paste(Method, "Sample with number of rankers K=", K, "Sampling with replacement")) else
-    print(paste(Method, "Sample with number of rankers K=", K, "Sampling without replacement"))
-if(Model==0) print("Design based inference is developed") else print("Super-population  model is used")
+# JPS sampling
+if (sampling_method == "JPS") {
+  data <- JPSD2F(pop, n, H, tauV, K, with_replacement)
+}
+
+#  Ranked set sampling
+if (sampling_method == "RSS") {
+  data <- RSS(pop, n, H, K, with_replacement)
+  data <- data[order(data[, 2]), ]
+}
+
+ONE <- OneSample(data, Setsize, sampling_method, 0.80, with_replacement, Model, N)
+
+w_or_wo <- " without "
+if (with_replacement) {
+  w_or_wo <- " with "
+}
+print(paste0(sampling_method, " sample with number of rankers K=", K, w_or_wo, "replacement"))
+
+if (Model == 0) {
+  print("Design based inference is developed")
+} else {
+  print("Super-population  model is used")
+}
 print(ONE)
-
 
 
 # # Example case
