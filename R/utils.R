@@ -75,21 +75,14 @@ verify_jps_params <- function(pop, n, H, tau, K, with_replacement) {
 }
 
 verify_boolean <- function(..., var_names = NULL) {
-  verify_data_type(
-    ...,
-    verify_func = is_boolean, data_type = "boolean-like object", var_names = var_names
-  )
+  verify_data_type(is_boolean, "boolean-like object", var_names, ...)
 }
 
 verify_positive_whole_number <- function(..., var_names = NULL) {
-  verify_data_type(
-    ...,
-    verify_func = is_positive_wholenumber, data_type = "positive whole number", var_names = var_names
-  )
+  verify_data_type(is_positive_wholenumber, "positive whole number", var_names, ...)
 }
 
-
-verify_data_type <- function(..., verify_func, data_type, var_names = NULL) {
+verify_data_type <- function(verify_func, data_type, var_names = NULL, ...) {
   if (is.null(var_names)) {
     var_names <- get_var_names(...)
   }
@@ -99,7 +92,7 @@ verify_data_type <- function(..., verify_func, data_type, var_names = NULL) {
     v <- args[[i]]
 
     if (!verify_func(v)) {
-      stop(wrong_data_type_error_msg(var_names[[i]], data_type))
+      data_type_error(var_names[[i]], data_type)
     }
   }
 }
@@ -110,7 +103,6 @@ get_var_names <- function(...) {
   return(strsplit(names, ", ")[[1]])
 }
 
-
-wrong_data_type_error_msg <- function(var_name, expected_data_type) {
-  return(paste0("`", var_name, "` must be a ", expected_data_type, "."))
+data_type_error <- function(var_name, expected_data_type) {
+  stop(paste0("`", var_name, "` must be a ", expected_data_type, "."))
 }
