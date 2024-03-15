@@ -9,8 +9,8 @@ is_wholenumber <- function(x, tol = .Machine$double.eps^0.5) {
   abs(x - round(x)) < tol
 }
 
-verify_sample_params <- function(pop, n) {
-  verify_positive_whole_number(n)
+verify_rss_params <- function(pop, n, H, K) {
+  verify_positive_whole_number(n, H, K)
   pop_dimension <- dim(pop)
 
   if (length(pop_dimension) != 2) {
@@ -20,12 +20,6 @@ verify_sample_params <- function(pop, n) {
   if (pop_dimension[[1]] < n) {
     stop("`pop` must have at least `n` rows.")
   }
-}
-
-verify_rss_params <- function(pop, n, H, K) {
-  verify_sample_params(pop, n)
-
-  verify_positive_whole_number(H, K)
 
   pop_dimension <- dim(pop)
 
@@ -52,10 +46,8 @@ verify_rssnrf_params <- function(pop, n, H, K) {
 }
 
 verify_jps_params <- function(pop, n, H, tau, K, with_replacement) {
-  verify_sample_params(pop, n)
-
+  verify_positive_whole_number(n, H, K)
   verify_boolean(with_replacement)
-  verify_positive_whole_number(H, K)
 
   if (n < H) {
     stop("`n` must >= `H`.")
@@ -66,7 +58,7 @@ verify_jps_params <- function(pop, n, H, tau, K, with_replacement) {
     stop("The length of `tau` must equal to `K`.")
   }
 
-  n_population <- dim(pop)[[1]]
+  n_population <- length(pop)
   if (!with_replacement) {
     if (n_population < n * H) {
       stop("The number of population must be at least `nH`.")
