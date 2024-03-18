@@ -11,35 +11,38 @@ RSSDF <- function(pop, n, H, K) {
   verify_rss_params(pop, n, H, K)
 
   n_sets <- n / H
-  popY <- pop[, 1]
-  popAux <- pop[, 2]
-  N <- length(popY)
-  RSSM <- matrix(0, ncol = (K + 1), nrow = n)
-  ic <- 1
+  y <- pop[, 1]
+  auxiliary_param <- pop[, 2]
+  n_population <- length(y)
+  rss_matrix <- matrix(0, ncol = (K + 1), nrow = n)
+  sample_index <- 1
   for (j in (1:n_sets)) {
     for (h in (1:H)) {
-      sampled_id <- sample(1:N, H)
-      setY <- popY[sampled_id]
-      setX <- popAux[sampled_id]
-      auxiliary_order <- order(setX)
-      ordered_setY <- setY[auxiliary_order]
-      ordered_setX <- setX[auxiliary_order]
-      ordered_sample_id <- sampled_id[auxiliary_order]
-      RSSM[ic, c(1, 2)] <- c(ordered_setY[h], h)
-      k1obs <- ordered_setX[h]
-      redAux <- popAux[-ordered_sample_id[h]]
+      sampled_ids <- sample(1:n_population, H)
+      sampled_y <- y[sampled_ids]
+      sampled_auxiliary <- auxiliary_param[sampled_ids]
+
+      auxiliary_order <- order(sampled_auxiliary)
+      ordered_sampled_y <- sampled_y[auxiliary_order]
+      ordered_sampled_auxiliary <- sampled_auxiliary[auxiliary_order]
+      ordered_sample_ids <- sampled_ids[auxiliary_order]
+
+      rss_matrix[sample_index, c(1, 2)] <- c(ordered_sampled_y[h], h)
+      base_auxiliary <- ordered_sampled_auxiliary[h]
+      auxiliary_wo_base <- auxiliary_param[-ordered_sample_ids[h]]
       if (K > 1) {
         for (k in (2:K)) {
-          kset <- c(k1obs, sample(redAux, (H - 1)))
-          OKS <- order(kset)
-          koset <- kset[OKS]
-          kR <- which(koset == k1obs)
-          if (length(kR) > 1) kR <- sample(kR, 1)
-          RSSM[ic, (k + 1)] <- kR
+          comparison_set <- c(base_auxiliary, sample(auxiliary_wo_base, (H - 1)))
+          ordered_set <- comparison_set[order(comparison_set)]
+          rank_k <- which(ordered_set == base_auxiliary)
+          if (length(rank_k) > 1) {
+            rank_k <- sample(rank_k, 1)
+          }
+          rss_matrix[sample_index, (k + 1)] <- rank_k
         }
       }
-      ic <- ic + 1
+      sample_index <- sample_index + 1
     }
   }
-  return(RSSM)
+  return(rss_matrix)
 }
