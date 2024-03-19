@@ -10,11 +10,11 @@ JPSD2F <- function(pop, n, H, tau, K, with_replacement = FALSE) {
 
   sampling_matrix <- matrix(sample(pop, n * H, replace = with_replacement), ncol = H, nrow = n)
 
-  # construct rank for each SRS unit post experimentally
-  jps_matrix <- matrix(0, ncol = K + 1, nrow = n) # store JPS sample
+  # rank each SRS unit post experimentally
+  jps_matrix <- matrix(0, ncol = K + 1, nrow = n)
   for (i in (1:n)) {
-    comparison_set <- sampling_matrix[i, ] # select comparison set i
-    ranks <- rep(0, K) # initialize to store ranks of the rankers for comparison set i
+    comparison_set <- sampling_matrix[i, ]
+    ranks <- rep(0, K)
     for (k in (1:K)) {
       # adjust for ranking, Dell and Clutter
       adjusted_set <- comparison_set + tau[k] * rnorm(H, 0, 1)
