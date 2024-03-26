@@ -20,5 +20,5 @@ test_that("RSS has a correct output.", {
 })
 
 test_that("Inputs are valid.", {
-  expect_error(RSS(1:10, -100, 10, 1, "T"), "`with_replacement` must be a boolean-like object.")
+  expect_error(RSS(1:10, -100, 10, 1, "T"), "`with_replacement` must be a boolean.")
 })
