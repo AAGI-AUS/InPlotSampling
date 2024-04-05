@@ -19,9 +19,6 @@ pop <- qnorm((1:N) / (N + 1), mu, sigma)
 rho <- 0.75
 tau <- sigma * sqrt(1 / rho^2 - 1)
 X <- pop + tau * rnorm(N, 0, 1)
-if (sampling_method == "RSS") {
-  pop <- cbind(pop, X)
-}
 
 # JPS sampling
 if (sampling_method == "JPS") {
@@ -30,6 +27,7 @@ if (sampling_method == "JPS") {
 
 #  Ranked set sampling
 if (sampling_method == "RSS") {
+  pop <- cbind(pop, X)
   data <- RSS(pop, n, H, K, with_replacement)
   data <- data[order(data[, 2]), ]
 }

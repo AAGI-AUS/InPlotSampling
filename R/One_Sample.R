@@ -31,7 +31,6 @@ OneSample <- function(data, set_size, method, confidence = 0.95, replace = TRUE,
   # Choose the type of estimators to output?
   # Rename to estimate? Or something else?
   # Break confidence interval into two columns?
-  # If model is 0, it's design based inference, if model = 1, it is model based inference using super population model
   # pop_size: nrow(data)*set_size <= pop_size, > 0, only relevant if replace = FALSE
   # method <- match.arg(toupper(method), c("JPS", "RSS"))
   verify_one_sample_params(data, set_size, method, confidence, replace, model, pop_size)

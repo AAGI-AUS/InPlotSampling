@@ -1,3 +1,4 @@
+# TODO: find out what this does
 FWDel1 <- function(u, AWY) {
   AWY1 <- AWY[-u, ]
   eff.SamSiz <- apply(AWY1[, -1], 2, sum)

@@ -33,7 +33,7 @@ ListF <- function(data, set_size, Replace, N, Model, CoefD0) {
     if (Model == 1) CoefD <- CoefD0
     ##################################################################
     # print(Ranks)
-    WEIGHT <- t(apply(data.frame(Ranks), 1, WEIGHTF, H = set_size))
+    WEIGHT <- t(apply(data.frame(Ranks), 1, calculate_agreement_weights, H = set_size))
     # print(WEIGHT)
     WY <- Y %*% WEIGHT
     Eff.Ssize <- colSums(WEIGHT)
