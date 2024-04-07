@@ -1,7 +1,7 @@
 #' Generate ranked set sampling (RSS) with replacement on the population provided.
 #'
 #' @param pop Population that will be sampled with an auxiliary parameter in the second column.
-#' @param n Sample size to be sampled.
+#' @param n Sample size.
 #' @param H Set size for each raking group.
 #' @param K Number of rankers.
 #'

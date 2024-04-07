@@ -20,5 +20,5 @@ test_that("Inputs are valid.", {
   expect_error(JPSD2F(population, 30, 2, tau, 4), "The length of `tau` must equal to `K`.")
   expect_error(JPSD2F(population, 50, 4, tau, k), "The number of population must be at least `nH`.")
   expect_error(JPSD2F(population, 10, 20, tau, k), "`n` must >= `H`.")
-  expect_error(JPSD2F(population, 30, 2, tau, k, "T"), "`with_replacement` must be a boolean-like object.")
+  expect_error(JPSD2F(population, 30, 2, tau, k, "T"), "`with_replacement` must be a boolean.")
 })

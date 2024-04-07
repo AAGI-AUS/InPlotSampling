@@ -24,7 +24,7 @@ RSSEF <- function(data, set_size, replace, model, N, alpha) {
   # unused variable
   # RM <- data[, -1]
   RV <- data[, 2] # We need to be careful about this.
-  Y <- data[, 1]  # We need to be careful about this. Need to ensure response is in col 1.
+  Y <- data[, 1] # We need to be careful about this. Need to ensure response is in col 1.
   n <- nrow(data)
   K <- ncol(data) - 1
   #########################################################################
@@ -79,7 +79,7 @@ RSSEF <- function(data, set_size, replace, model, N, alpha) {
   #################################### 33
   # agreement weight estimator
   AW <- data[, -1] # Ranks
-  AW <- t(apply(data.frame(data[, -1]), 1, WEIGHTF, set_size)) # agreemeent weights
+  AW <- t(apply(data.frame(data[, -1]), 1, calculate_agreement_weights, set_size)) # agreemeent weights
   eff.SS <- apply(AW, 2, sum)
   Crosprod <- data[, 1] %*% AW
   W.est <- mean(Crosprod[eff.SS > 0] / eff.SS[eff.SS > 0]) # RSS agreement weight estiamtor
