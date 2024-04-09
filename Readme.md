@@ -42,7 +42,7 @@ implement Ranked Set Sampling in practice.
 
 Sampling is made following the diagram below.
 
-[!][jps-diagram]
+![JPS sampling diagram][jps-diagram]
 
 ## Installation
 
