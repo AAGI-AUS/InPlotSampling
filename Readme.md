@@ -29,6 +29,7 @@ implement Ranked Set Sampling in practice.
 
 * [Sampling Methods](#sampling-methods)
   * [JPS Sampling](#jps-sampling)
+  * [RSS Sampling](#rss-sampling)
 * [Installation](#installation)
 * [Example of use](#example-of-use)
 * [Citing this package](#citing-this-package)
@@ -43,6 +44,12 @@ implement Ranked Set Sampling in practice.
 Sampling is made following the diagram below.
 
 ![JPS sampling diagram][jps-diagram]
+
+### RSS Sampling
+
+Sampling is made following the diagram below.
+
+![RSS sampling diagram][rss-diagram]
 
 ## Installation
 
@@ -126,3 +133,4 @@ Environmental Statistics*. <https://doi.org/10.1007/s13253-021-00439-1>.
 <!-- images -->
 
 [jps-diagram]: ./assets/img/jps-diagram.drawio.png
+[rss-diagram]: ./assets/img/rss-diagram.drawio.png
