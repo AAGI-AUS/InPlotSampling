@@ -55,6 +55,8 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 
 ## Example of use
 
+<!-- TODO: fix references -->
+
 This package includes some example data files, which can be seen at
 [population](reference/population.html) and
 [emergence\_ranks](reference/emergence_ranks.html). After installing the
