@@ -5,7 +5,7 @@ load("data/POP_Peak.RData")
 load("data/POP_Bird.RData")
 
 source("R/BOOTSTRAP_SAMPLEF.R")
-source("R/EMPIRICAL_POPF.R")
+source("R/get_empirical_population.R")
 source("R/HEADMAP_F.R")
 source("R/inclusion_probability.R")
 source("R/sbs_pps_sample.R")
@@ -36,10 +36,6 @@ print(estimated)
 
 # pps only
 sample_sizes <- c(0, 20)
-
-population <- POP_Corrugated
-y <- population[, 4]
-population <- population[, -4]
 
 sample_result <- sbs_pps_sample(population, sample_sizes)
 print(sample_result)

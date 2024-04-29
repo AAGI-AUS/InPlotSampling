@@ -40,7 +40,7 @@ sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstrap_sample = 100,
 
     estimated_mean <- round(sum(y / sample_matrix[, 6]) / n_population, digit = 3)
 
-    empirical_population <- EmpirPop_partitionF(sample_matrix[, 1], pop, y)
+    empirical_population <- get_empirical_population(sample_matrix[, 1], pop, y)
     empirical_inclusion_prob <- calculate_inclusion_prob(empirical_population[, 3], n)
     empirical_population <- data.frame(empirical_population, empirical_inclusion_prob)
 
