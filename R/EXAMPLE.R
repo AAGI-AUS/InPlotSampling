@@ -1,4 +1,4 @@
-pacman::p_load(SDaA, FNN, ggplot2, tidyverse)
+pacman::p_load(SDaA, FNN, tidyverse)
 
 load("data/POP_Corrugated.RData")
 load("data/POP_Peak.RData")
@@ -6,7 +6,7 @@ load("data/POP_Bird.RData")
 
 source("R/bootstrap_sample.R")
 source("R/get_empirical_population.R")
-source("R/HEADMAP_F.R")
+source("R/sbs_pps_heatmap.R")
 source("R/inclusion_probability.R")
 source("R/sbs_pps_sample.R")
 source("R/SBS_PPSF.R")

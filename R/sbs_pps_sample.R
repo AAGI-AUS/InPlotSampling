@@ -1,4 +1,3 @@
-# TODO: update docstring
 #' Generate probability proportional to size (PPS) and spatially balanced sampling on the population provided.
 #'
 #' @param pop Population data frame to be sampled with 5 columns.
@@ -9,11 +8,14 @@
 #' 5. Inclusion probabilities
 #' @param n Sample sizes (SBS sample size, PPS sample size).
 #'
-#' @return A matrix with ranks from each ranker.
+#' @return A named list of:
+#' - heatmap: heat map of the sample
+#' - sbs_pps_sample: SBS PPS sample of the population
 #'
 sbs_pps_sample <- function(pop, n) {
   sampled <- get_sbs_pps_sample_indices(pop[, c(1, 4)], n)
   sbs_pps_indices <- sampled$sbs_pps_indices
+  sbs_indices <- sampled$sbs_indices
   pps_indices <- sampled$pps_indices
   sizes_wo_sbs <- sampled$sizes_wo_sbs
 
@@ -30,9 +32,9 @@ sbs_pps_sample <- function(pop, n) {
     inclusion_probability = inclusion_probabilities[sbs_pps_indices]
   )
 
-  heat_map <- GGplotF(pop, df_sample)
+  heatmap_ <- sbs_pps_heatmap(pop, sbs_indices, pps_indices)
 
-  return(list(heat_map = heat_map, sbs_pps_sample = df_sample))
+  return(list(heatmap = heatmap_, sbs_pps_sample = df_sample))
 }
 
 #' Generate SBS PPS sample indices.
@@ -42,7 +44,11 @@ sbs_pps_sample <- function(pop, n) {
 #' 2. Size measurements of population units
 #' @param n Sample sizes (SBS sample size, PPS sample size).
 #'
-#' @return A matrix with ranks from each ranker.
+#' @return A named list of:
+#' - sbs_pps_indices: sample indices
+#' - sbs_indices: sbs sample indices
+#' - pps_indices: pps sample indices
+#' - sizes_wo_sbs: measured sizes without sbs sample
 #'
 get_sbs_pps_sample_indices <- function(pop, n, with_unique_pps = FALSE) {
   n_population <- dim(pop)[1]
@@ -74,8 +80,8 @@ get_sbs_pps_sample_indices <- function(pop, n, with_unique_pps = FALSE) {
   }
 
   sbs_pps_indices <- c(sbs_indices, pps_indices)
-  return_values <- list(sbs_pps_indices, pps_indices, sizes_wo_sbs)
-  names(return_values) <- c("sbs_pps_indices", "pps_indices", "sizes_wo_sbs")
+  return_values <- list(sbs_pps_indices, sbs_indices, pps_indices, sizes_wo_sbs)
+  names(return_values) <- c("sbs_pps_indices", "sbs_indices", "pps_indices", "sizes_wo_sbs")
 
   return(return_values)
 }
