@@ -4,7 +4,7 @@ load("data/POP_Corrugated.RData")
 load("data/POP_Peak.RData")
 load("data/POP_Bird.RData")
 
-source("R/BOOTSTRAP_SAMPLEF.R")
+source("R/bootstrap_sample.R")
 source("R/get_empirical_population.R")
 source("R/HEADMAP_F.R")
 source("R/inclusion_probability.R")
@@ -30,7 +30,7 @@ sample_id <- df_sample[, 1]
 y_sample <- y[sample_id]
 estimated <- sbs_pps_estimate(
   population, sample_sizes, y_sample,
-  sample_matrix = df_sample, n_bootstrap_sample = 100, alpha = 0.05
+  sample_matrix = df_sample, n_bootstrap = 100, alpha = 0.05
 )
 print(estimated)
 
@@ -46,6 +46,6 @@ sample_id <- df_sample[, 1]
 y_sample <- y[sample_id]
 estimated <- sbs_pps_estimate(
   population, sample_sizes, y_sample, df_sample,
-  n_bootstrap_sample = 100, alpha = 0.05
+  n_bootstrap = 100, alpha = 0.05
 )
 print(estimated)

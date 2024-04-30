@@ -14,12 +14,12 @@
 #' 4. Size measurement of population unit
 #' 5. Weight
 #' 6. Inclusion probability
-#' @param n_bootstrap_sample Bootstrap sample size.
+#' @param n_bootstraps Number of bootstrap samples.
 #' @param alpha The significance level.
 #'
 #' @return A summary data frame of the estimator.
 #'
-sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstrap_sample = 100, alpha = 0.05) {
+sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstraps = 100, alpha = 0.05) {
   n_population <- dim(pop)[1]
   minimum_size <- min(pop[, 4])
 
@@ -44,7 +44,7 @@ sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstrap_sample = 100,
     empirical_inclusion_prob <- calculate_inclusion_prob(empirical_population[, 3], n)
     empirical_population <- data.frame(empirical_population, empirical_inclusion_prob)
 
-    estimated_variance <- BootF(empirical_population, n, n_bootstrap_sample) %>%
+    estimated_variance <- bootstrap_sample(empirical_population, n, n_bootstraps) %>%
       round(digits = 3)
   } else {
     # pps only
