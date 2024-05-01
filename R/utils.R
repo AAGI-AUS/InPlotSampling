@@ -1,16 +1,4 @@
-pacman::p_load(doParallel)
-
 default_tolerance <- .Machine$double.eps^0.5
-
-parallelize <- function(block) {
-  n_cores <- detectCores() - 1
-  clusters <- parallel::makeCluster(n_cores)
-  registerDoParallel(clusters)
-
-  block
-
-  stopCluster(clusters)
-}
 
 is_between <- function(x, lower, upper) {
   return(is_between_(lower, upper)(x))
