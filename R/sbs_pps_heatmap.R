@@ -1,5 +1,3 @@
-pacman::p_load(ggplot2)
-
 #' Generate a heat map of SBS PPS sample of the provided population.
 #'
 #' @param pop Population data frame to be sampled with 5 columns.
@@ -26,15 +24,16 @@ sbs_pps_heatmap <- function(pop, sbs_indices, pps_indices) {
 
   heatmap_data <- data.frame(measured_sizes, x1, x2, sbs_or_pps)
   sbs_pps_data <- filter(heatmap_data, sbs_or_pps != 0)
-  heatmap_ <- ggplot(heatmap_data, aes(x2, x1, fill = measured_sizes)) +
-    geom_tile() +
-    scale_fill_distiller(palette = "RdPu") +
-    geom_point(
+  heatmap_ <- ggplot2::ggplot(heatmap_data, ggplot2::aes(x2, x1, fill = measured_sizes)) +
+    ggplot2::geom_tile() +
+    ggplot2::scale_fill_distiller(palette = "RdPu") +
+    ggplot2::geom_point(
       sbs_pps_data,
-      mapping = aes(shape = factor(sbs_or_pps)),
+      mapping = ggplot2::aes(shape = factor(sbs_or_pps)),
       size = 2
     ) +
-    labs(
+    ggplot2::geom_jitter() +
+    ggplot2::labs(
       x = "X coordinate",
       y = "Y coordinate",
       shape = "Sample type",

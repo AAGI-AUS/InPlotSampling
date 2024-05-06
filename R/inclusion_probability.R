@@ -1,5 +1,3 @@
-pacman::p_load(parallel)
-
 #' Calculate first order inclusion probability.
 #'
 #' @param i Index of the probability being calculated.
@@ -54,16 +52,17 @@ calculate_inclusion_prob <- function(size_measurement, n) {
   total_size <- sum(size_measurement)
 
   # switch between a single core and multiple cores
+  # TODO: check if parallel exists and make it as a suggested package, optional
   if (n_population > 250) {
-    n_cores <- detectCores() - 1
-    clusters <- makeCluster(n_cores)
-    clusterExport(clusters, varlist = c("calculate_first_order_prob"))
+    n_cores <- parallel::detectCores() - 1
+    clusters <- parallel::makeCluster(n_cores)
+    parallel::clusterExport(clusters, varlist = c("calculate_first_order_prob"))
 
-    first_order_probability <- parSapply(clusters, (1:n_population), function(i) {
+    first_order_probability <- parallel::parSapply(clusters, (1:n_population), function(i) {
       calculate_first_order_prob(i, size_measurement, n, total_size)
     })
 
-    stopCluster(clusters)
+    parallel::stopCluster(clusters)
   } else {
     first_order_probability <- sapply((1:n_population), function(i) {
       calculate_first_order_prob(i, size_measurement, n, total_size)

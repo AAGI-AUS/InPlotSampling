@@ -18,6 +18,7 @@ set.seed(112)
 sample_sizes <- c(20, 20)
 
 population <- POP_Corrugated
+# population <- rbind(POP_Corrugated, POP_Corrugated, POP_Corrugated)
 y <- population[, 4]
 population <- population[, -4]
 
