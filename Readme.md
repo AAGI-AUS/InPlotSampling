@@ -132,5 +132,6 @@ Environmental Statistics*. <https://doi.org/10.1007/s13253-021-00439-1>.
 
 <!-- images -->
 
-[jps-diagram]: ./assets/img/jps-diagram.drawio.png
+<!-- [jps-diagram]: ./assets/img/jps-diagram.drawio.png -->
+[jps-diagram]: ./assets/img/jps-diagram.drawio.svg
 [rss-diagram]: ./assets/img/rss-diagram.drawio.png
