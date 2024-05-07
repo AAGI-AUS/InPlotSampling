@@ -20,18 +20,9 @@
 #' @return A summary data frame of the estimator.
 #'
 sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstraps = 100, alpha = 0.05) {
-  n_population <- dim(pop)[1]
-  minimum_size <- min(pop[, 4])
+  verify_sbs_pps_estimate_params(pop, n, y, sample_matrix, n_bootstraps, alpha)
 
-  # TODO: verify parameters
-  if (minimum_size == 0) {
-    print("Some size measurement are zero")
-    stop()
-  }
-  if (minimum_size < 0) {
-    ("Some size measurements are negative")
-    stop()
-  }
+  n_population <- dim(pop)[1]
 
   if (n[1] != 0) {
     is_duplicated <- duplicated(sample_matrix[, 1])
@@ -70,4 +61,22 @@ sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstraps = 100, alpha
   rownames(df_summary) <- NULL
 
   return(df_summary)
+}
+
+verify_sbs_pps_estimate_params <- function(pop, n, y, sample_matrix, n_bootstraps, alpha) {
+  # TODO: verify parameters
+  verify_non_negative_whole(n[1], n[2], var_names = c("SBS sample size", "PPS sample size"))
+  verify_positive_whole_number(n_bootstraps)
+  verify_between(alpha, lower = 0, upper = 1)
+
+  sample_size <- sum(n)
+  verify_matrix_like(pop, n_dimensions = 2, n_rows = sample_size, n_cols = 4)
+  verify_matrix_like(sample_matrix, n_dimensions = 2, n_rows = sample_size, n_cols = 6)
+
+  if (dim(sample_matrix)[[1]] != length(y)) {
+    stop("The number of `y` must be equal to the number of sample.")
+  }
+
+  minimum_size <- min(pop[, 4])
+  verify_between(minimum_size, lower = 0, lower_exclude = TRUE)
 }

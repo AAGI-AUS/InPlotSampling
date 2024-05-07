@@ -5,7 +5,6 @@
 #' 2. X1-coordinate of population unit
 #' 3. X2-coordinate of population unit
 #' 4. Size measurements of population units
-#' 5. Inclusion probabilities
 #' @param n Sample sizes (SBS sample size, PPS sample size).
 #'
 #' @return A named list of:
@@ -13,6 +12,9 @@
 #' - sbs_pps_sample: SBS PPS sample of the population
 #'
 sbs_pps_sample <- function(pop, n) {
+  verify_non_negative_whole(n[1], n[2], var_names = c("SBS sample size", "PPS sample size"))
+  verify_matrix_like(pop, n_dimensions = 2, n_rows = sum(n), n_cols = 4)
+
   sampled <- get_sbs_pps_sample_indices(pop[, c(1, 4)], n)
   sbs_pps_indices <- sampled$sbs_pps_indices
   sbs_indices <- sampled$sbs_indices
