@@ -33,7 +33,6 @@ sbs_pps_sample <- function(pop, n) {
   )
 
   heatmap_ <- sbs_pps_heatmap(pop, sbs_indices, pps_indices)
-
   return(list(heatmap = heatmap_, sbs_pps_sample = df_sample))
 }
 
@@ -71,7 +70,7 @@ get_sbs_pps_sample_indices <- function(pop, n, with_unique_pps = FALSE) {
 
   # pps
   if (n2 > 0) {
-    pps_indices <- indices_wo_sbs[lahiri.design(sizes_wo_sbs, n2)] + 1
+    pps_indices <- indices_wo_sbs[SDaA::lahiri.design(sizes_wo_sbs, n2)] + 1
     if (with_unique_pps) {
       pps_indices <- unique(pps_indices)
     }
@@ -80,8 +79,10 @@ get_sbs_pps_sample_indices <- function(pop, n, with_unique_pps = FALSE) {
   }
 
   sbs_pps_indices <- c(sbs_indices, pps_indices)
-  return_values <- list(sbs_pps_indices, sbs_indices, pps_indices, sizes_wo_sbs)
-  names(return_values) <- c("sbs_pps_indices", "sbs_indices", "pps_indices", "sizes_wo_sbs")
-
-  return(return_values)
+  return(list(
+    sbs_pps_indices = sbs_pps_indices,
+    sbs_indices = sbs_indices,
+    pps_indices = pps_indices,
+    sizes_wo_sbs = sizes_wo_sbs
+  ))
 }

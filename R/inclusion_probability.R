@@ -44,16 +44,16 @@ calculate_first_order_prob <- function(i, size_measurement, n, total_size) {
 #'
 #' @param size_measurement Size measurements of population units.
 #' @param n Sample sizes (SBS sample size, PPS sample size).
+#' @param parallelize A flag whether to parallelize the computational task.
 #'
 #' @return A vector of inclusion probabilities.
 #'
-calculate_inclusion_prob <- function(size_measurement, n) {
+calculate_inclusion_prob <- function(size_measurement, n, parallelize = TRUE) {
   n_population <- length(size_measurement)
   total_size <- sum(size_measurement)
 
   # switch between a single core and multiple cores
-  # TODO: check if parallel exists and make it as a suggested package, optional
-  if (n_population > 250) {
+  if (n_population > 250 && require(parallel) && parallelize) {
     n_cores <- parallel::detectCores() - 1
     clusters <- parallel::makeCluster(n_cores)
     parallel::clusterExport(clusters, varlist = c("calculate_first_order_prob"))

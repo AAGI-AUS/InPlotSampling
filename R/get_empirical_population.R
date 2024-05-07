@@ -19,7 +19,7 @@ get_empirical_population <- function(sample_indices, pop, y) {
   sample_coordinates <- sample_rows[, -4]
   sample_measured_size <- sample_rows[, 4]
 
-  sample_knn <- get.knnx(sample_coordinates[, -1], non_sample_coordinates[, -1], 4)
+  sample_knn <- FNN::get.knnx(sample_coordinates[, -1], non_sample_coordinates[, -1], 4)
   knn_matrix <- cbind(sample_knn$nn.index, sample_knn$nn.dist)
   imputed_response <- apply(knn_matrix, 1, impute_w_knn, y)
   imputed_measured_size <- apply(knn_matrix, 1, impute_w_knn, sample_measured_size)

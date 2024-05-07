@@ -44,8 +44,7 @@ sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstraps = 100, alpha
     empirical_inclusion_prob <- calculate_inclusion_prob(empirical_population[, 3], n)
     empirical_population <- data.frame(empirical_population, empirical_inclusion_prob)
 
-    estimated_variance <- bootstrap_sample(empirical_population, n, n_bootstraps) %>%
-      round(digits = 3)
+    estimated_variance <- round(bootstrap_sample(empirical_population, n, n_bootstraps), digits = 3)
   } else {
     # pps only
     y_hat <- y / sample_matrix[, 5]
