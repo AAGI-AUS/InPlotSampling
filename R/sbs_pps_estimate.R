@@ -1,6 +1,6 @@
 #' Compute an estimator for SBS PPS sampled data.
 #'
-#' @param pop Population data frame to be sampled with 4 columns.
+#' @param population Population data frame to be sampled with 4 columns.
 #' 1. Halton numbers
 #' 2. X1-coordinate of population unit
 #' 3. X2-coordinate of population unit
@@ -19,10 +19,10 @@
 #'
 #' @return A summary data frame of the estimator.
 #'
-sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstraps = 100, alpha = 0.05) {
-  verify_sbs_pps_estimate_params(pop, n, y, sample_matrix, n_bootstraps, alpha)
+sbs_pps_estimate <- function(population, n, y, sample_matrix, n_bootstraps = 100, alpha = 0.05) {
+  verify_sbs_pps_estimate_params(population, n, y, sample_matrix, n_bootstraps, alpha)
 
-  n_population <- dim(pop)[1]
+  n_population <- dim(population)[1]
 
   if (n[1] != 0) {
     is_duplicated <- duplicated(sample_matrix[, 1])
@@ -31,7 +31,7 @@ sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstraps = 100, alpha
 
     estimated_mean <- round(sum(y / sample_matrix[, 6]) / n_population, digit = 3)
 
-    empirical_population <- get_empirical_population(sample_matrix[, 1], pop, y)
+    empirical_population <- get_empirical_population(sample_matrix[, 1], population, y)
     empirical_inclusion_prob <- calculate_inclusion_prob(empirical_population[, 3], n)
     empirical_population <- data.frame(empirical_population, empirical_inclusion_prob)
 
@@ -63,20 +63,19 @@ sbs_pps_estimate <- function(pop, n, y, sample_matrix, n_bootstraps = 100, alpha
   return(df_summary)
 }
 
-verify_sbs_pps_estimate_params <- function(pop, n, y, sample_matrix, n_bootstraps, alpha) {
-  # TODO: verify parameters
+verify_sbs_pps_estimate_params <- function(population, n, y, sample_matrix, n_bootstraps, alpha) {
   verify_non_negative_whole(n[1], n[2], var_names = c("SBS sample size", "PPS sample size"))
   verify_positive_whole_number(n_bootstraps)
   verify_between(alpha, lower = 0, upper = 1)
 
   sample_size <- sum(n)
-  verify_matrix_like(pop, n_dimensions = 2, n_rows = sample_size, n_cols = 4)
+  verify_matrix_like(population, n_dimensions = 2, n_rows = sample_size, n_cols = 4)
   verify_matrix_like(sample_matrix, n_dimensions = 2, n_rows = sample_size, n_cols = 6)
 
-  if (dim(sample_matrix)[[1]] != length(y)) {
+  if (sample_size != length(y)) {
     stop("The number of `y` must be equal to the number of sample.")
   }
 
-  minimum_size <- min(pop[, 4])
+  minimum_size <- min(population[, 4])
   verify_between(minimum_size, lower = 0, lower_exclude = TRUE)
 }

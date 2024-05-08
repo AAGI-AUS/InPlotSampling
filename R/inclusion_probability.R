@@ -56,7 +56,7 @@ calculate_inclusion_prob <- function(size_measurement, n, parallelize = TRUE) {
   if (n_population > 250 && require(parallel) && parallelize) {
     n_cores <- parallel::detectCores() - 1
     clusters <- parallel::makeCluster(n_cores)
-    parallel::clusterExport(clusters, varlist = c("calculate_first_order_prob"))
+    parallel::clusterExport(clusters, varlist = c("calculate_first_order_prob"), envir = environment())
 
     first_order_probability <- parallel::parSapply(clusters, (1:n_population), function(i) {
       calculate_first_order_prob(i, size_measurement, n, total_size)
