@@ -23,6 +23,34 @@ version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-
 The RankedSetSampling package provides a way for researchers to easily
 implement Ranked Set Sampling in practice.
 
+## Table of Contents
+
+<!-- vim-markdown-toc GFM -->
+
+* [Sampling Methods](#sampling-methods)
+  * [JPS Sampling](#jps-sampling)
+  * [RSS Sampling](#rss-sampling)
+* [Installation](#installation)
+* [Example of use](#example-of-use)
+* [Citing this package](#citing-this-package)
+* [Related Reference](#related-reference)
+
+<!-- vim-markdown-toc -->
+
+## Sampling Methods
+
+### JPS Sampling
+
+Sampling is made following the diagram below.
+
+![JPS sampling diagram][jps-diagram]
+
+### RSS Sampling
+
+Sampling is made following the diagram below.
+
+![RSS sampling diagram][rss-diagram]
+
 ## Installation
 
 Use the following code to install this package:
@@ -32,7 +60,9 @@ if(!require("remotes")) install.packages("remotes")
 remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 ```
 
-# Example of use
+## Example of use
+
+<!-- TODO: fix references -->
 
 This package includes some example data files, which can be seen at
 [population](reference/population.html) and
@@ -60,7 +90,7 @@ print(JPS.Estimates)
 #> 6          Minimum    1.108          0.210              0.657,1.559
 ```
 
-# Citing this package
+## Citing this package
 
 This package can be cited using `citation("RankedSetSampling")` which
 generates
@@ -83,7 +113,7 @@ generates
         url = {https://biometryhub.github.io/RankedSetSampling/},
       }
 
-# Related Reference
+## Related Reference
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
@@ -97,3 +127,11 @@ Environmental Statistics*. <https://doi.org/10.1007/s13253-021-00439-1>.
 </div>
 
 </div>
+
+<!-- links -->
+
+<!-- images -->
+
+<!-- [jps-diagram]: ./assets/img/jps-diagram.drawio.png -->
+[jps-diagram]: ./assets/img/jps-diagram.drawio.svg
+[rss-diagram]: ./assets/img/rss-diagram.drawio.svg
