@@ -1,12 +1,26 @@
 default_tolerance <- .Machine$double.eps^0.5
 
-is_between <- function(x, lower, upper) {
-  return(is_between_(lower, upper)(x))
-}
+# is_between <- function(x, lower, upper) {
+#   return(is_between_(lower, upper)(x))
+# }
 
-is_between_ <- function(lower, upper) {
+is_between_ <- function(lower, upper, lower_exclude = FALSE, upper_exclude = FALSE) {
   return(function(x) {
-    return(is.numeric(x) && x >= lower && x <= upper)
+    is_between <- is.numeric(x)
+
+    if (lower_exclude) {
+      is_between <- is_between && x > lower
+    } else {
+      is_between <- is_between && x >= lower
+    }
+
+    if (upper_exclude) {
+      is_between <- is_between && x < upper
+    } else {
+      is_between <- is_between && x <= upper
+    }
+
+    return(is_between)
   })
 }
 
@@ -14,11 +28,30 @@ is_boolean <- function(v) {
   return(must_be(v, c(TRUE, FALSE)))
 }
 
-is_positive_wholenumber <- function(x, tol = default_tolerance) {
-  return(is_wholenumber(x, tol) && x > 0)
+is_matrix_like <- function(n_dimensions, n_rows, n_cols) {
+  return(function(v) {
+    dimension <- dim(v)
+    is_valid <- length(dimension) == n_dimensions
+    if (!is.null(n_rows)) {
+      is_valid <- is_valid && dimension[[1]] >= n_rows
+    }
+    if (!is.null(n_cols)) {
+      is_valid <- is_valid && dimension[[2]] >= n_cols
+    }
+
+    return(is_valid)
+  })
 }
 
-is_wholenumber <- function(x, tol = default_tolerance) {
+is_non_negative_whole_number <- function(x, tol = default_tolerance) {
+  return(is_whole_number(x, tol) && x >= 0)
+}
+
+is_positive_whole_number <- function(x, tol = default_tolerance) {
+  return(is_whole_number(x, tol) && x > 0)
+}
+
+is_whole_number <- function(x, tol = default_tolerance) {
   if (!is.numeric(x)) {
     return(FALSE)
   }
@@ -78,8 +111,6 @@ verify_rss_params <- function(pop, n, H, K) {
     stop("`pop` must have at least `n` rows.")
   }
 
-  pop_dimension <- dim(pop)
-
   if (pop_dimension[[2]] < 2) {
     stop("`pop` must have at least 2 columns.")
   }
@@ -123,8 +154,37 @@ verify_jps_params <- function(pop, n, H, tau, K, with_replacement) {
   }
 }
 
-verify_between <- function(..., lower, upper, var_names = NULL) {
-  object_type <- paste0("inclusively between ", lower, " and ", upper)
+verify_between <- function(
+    ..., lower = -Inf, upper = Inf, lower_exclude = FALSE, upper_exclude = FALSE, var_names = NULL) {
+  if (lower != -Inf && upper != Inf) {
+    object_type <- paste0("between ", lower)
+    if (lower_exclude) {
+      object_type <- paste0(object_type, " (exclusive)")
+    }
+
+    object_type <- paste0(object_type, " and ", upper)
+    if (upper_exclude) {
+      object_type <- paste0(object_type, " (exclusive)")
+    }
+
+    if (!lower_exclude && !upper_exclude) {
+      object_type <- paste0("inclusively ", object_type)
+    }
+  } else if (upper == Inf) {
+    if (lower_exclude) {
+      object_type <- paste0("greater than ", lower)
+    } else {
+      object_type <- paste0("at least ", lower)
+    }
+  } else if (lower == -Inf) {
+    if (upper_exclude) {
+      object_type <- paste0("less than ", upper)
+    } else {
+      object_type <- paste0("at most ", upper)
+    }
+  }
+  object_type <- paste0(object_type, ".")
+
   verify_data_type(is_between_(lower, upper), object_type, var_names, ...)
 }
 
@@ -132,8 +192,30 @@ verify_boolean <- function(..., var_names = NULL) {
   verify_data_type(is_boolean, "a boolean", var_names, ...)
 }
 
+verify_matrix_like <- function(..., n_dimensions, n_rows = NULL, n_cols = NULL, var_names = NULL) {
+  matrix_like <- paste0("a ", n_dimensions, "-dimension matrix-like object")
+  if (!is.null(n_rows)) {
+    matrix_like <- paste0(matrix_like, " with at least ", n_rows, " rows")
+  }
+  if (!is.null(n_cols)) {
+    if (!is.null(n_rows)) {
+      matrix_like <- paste0(matrix_like, " and ")
+    } else {
+      matrix_like <- paste0(matrix_like, " with at least ")
+    }
+    matrix_like <- paste0(matrix_like, n_cols, " columns")
+  }
+  matrix_like <- paste0(matrix_like, ".")
+
+  verify_data_type(is_matrix_like(n_dimensions, n_rows, n_cols), matrix_like, var_names, ...)
+}
+
+verify_non_negative_whole <- function(..., var_names = NULL) {
+  verify_data_type(is_non_negative_whole_number, "a non-negative whole number", var_names, ...)
+}
+
 verify_positive_whole_number <- function(..., var_names = NULL) {
-  verify_data_type(is_positive_wholenumber, "a positive whole number", var_names, ...)
+  verify_data_type(is_positive_whole_number, "a positive whole number", var_names, ...)
 }
 
 verify_must_be <- function(..., valid_values, var_names = NULL) {
