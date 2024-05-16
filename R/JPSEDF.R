@@ -7,15 +7,15 @@
 #' @param coef Coefficients used in variance computation when sample size is n.
 #' @param coef_del Coefficients used in variance computation when the i-th unit is deleted.
 #' @param replace Logical. Sample with replacement?
-#' @param model An inference mode:
-#' - `0`: design based inference
-#' - `1`: model based inference using super population model
+#' @param model_based An inference mode:
+#' - `FALSE`: design based inference
+#' - `TRUE`: model based inference using super population model
 #' @param K Number of rankers.
 #'
 #' @return
 #' @keywords internal
 #'
-JPSEDF <- function(ranks, Y, set_size, N, coef, coef_del, replace, model, K) {
+JPSEDF <- function(ranks, Y, set_size, N, coef, coef_del, replace, model_based, K) {
   y_ij <- expand.grid(Y, Y)
 
   # count ranks including zeros
@@ -61,7 +61,7 @@ JPSEDF <- function(ranks, Y, set_size, N, coef, coef_del, replace, model, K) {
     estimated_variance <- coef[2] * t1s / (set_size - 1) + coef[3] * t2s
   }
 
-  if (model == 1) {
+  if (model_based) {
     estimated_variance <- ((t1s + t2s) / set_size^2 * ((-1 / N) + coef[2] * set_size^2 / (set_size - 1))
       + t2s * ((coef[3] + coef[2]) - coef[2] * set_size / (set_size - 1)))
 
@@ -117,7 +117,7 @@ JPSEDF <- function(ranks, Y, set_size, N, coef, coef_del, replace, model, K) {
   } else {
     VEST.Del <- coef_del[2] * T1v.Del / (set_size - 1) + coef_del[3] * T2v.Del
   }
-  if (model == 1) {
+  if (model_based) {
     VEST.Del <- (T1v.Del + T2v.Del) / set_size^2 * ((-1 / N) + coef_del[2] * set_size^2 / (set_size - 1)) + T2v.Del * ((coef_del[3] + coef_del[2]) - coef_del[2] * set_size / (set_size - 1))
     #    if(VEST.Del <= 0 ) VEST.Del=T2v.del*((coef_del[3]+coef_del[2])+coef_del[2]*set_size/(set_size-1))
     VEST.Del[VEST.Del <= 0] <- T2v.Del[VEST.Del <= 0] * ((coef_del[3] + coef_del[2]) - coef_del[2] * set_size / (set_size - 1))
