@@ -1,23 +1,21 @@
 #' This function computes the coefficient of variance estimator
 #'
-#' @param H The set size
-#' @param n The sample size
+#' @param H Set size for each raking group.
+#' @param n Sample size.
 #'
 #' @return
 #' @keywords internal
 
-CoefF <- function(H, n) {
-
+calculate_coefficients <- function(H, n) {
   kv <- 1:H
   ######################################################
   # Expected value of I_1^2/d_n^2    ###################
-  E.I2.dn2 <- sum((kv / H)^(n - 1)) / H^2 # E{(I_1/d_n)^2}    ##
+  E.I2.dn2 <- sum((kv / H)^(n - 1)) / H^2
   ######################################################
 
   ######################################################
   # Compute the expected value I_1^2/(n_1 d_n^2)      ##
   ######################################################
-
   indM <- rep(0, 3)
   for (k in (2:H)) {
     AA <- expand.grid((1:(k - 1)), 1:(n - k + 1))

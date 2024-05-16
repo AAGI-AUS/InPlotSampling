@@ -1,9 +1,11 @@
 #' Computes the estimator for JPS data
 #'
 #' @param data The data to use for estimation.
-#' @param set_size The set size.
+#' @param set_size Set size for each raking group.
 #' @param replace Logical (default `TRUE`). Sample with replacement?
-#' @param model If model is 0, it's design based inference, if model = 1, it is model based inference using super population model.
+#' @param model An inference mode:
+#' - `0`: design based inference
+#' - `1`: model based inference using super population model
 #' @param N The population size.
 #' @param alpha The significance level.
 #'
@@ -13,8 +15,7 @@
 #' @keywords internal
 #'
 JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
-
-  K <- ncol(data) - 1
+  n_rankers <- ncol(data) - 1
 
   # if (is.null(N)) {
   #   stop("Population size N must be provided for sampling without replacement")
@@ -24,119 +25,132 @@ JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
   }
 
   n <- nrow(data)
-  Coefn <- CoefF(set_size, n)
-  if (K == 1) {
-    Coef.del1 <- NULL
+  coefn <- calculate_coefficients(set_size, n)
+  if (n_rankers == 1) {
+    coef_del1 <- NULL
+  } else {
+    coef_del1 <- calculate_coefficients(set_size, n - 1)
   }
-  else {
-    Coef.del1 <- CoefF(set_size, n - 1)
-  }
-
   if (!replace) {
-    coef1D2 <- Coefn[1]
-    coef2D2 <- 1 / (set_size * (set_size - 1)) + Coefn[3] + Coefn[2] - (Coefn[2] + 1 / set_size^2) * set_size / (set_size - 1)
-    coef3D2 <- Coefn[2] - 1 / (N - 1) * (1 / set_size - (Coefn[1] + 1 / set_size^2))
-    CoefD <- c(coef1D2, coef2D2, coef3D2)
-
-    coef1D2.del <- Coef.del1[1]
-    coef2D2.del <- 1 / (set_size * (set_size - 1)) + Coef.del1[3] + Coef.del1[2] - (Coef.del1[2] + 1 / set_size^2) * set_size / (set_size - 1)
-    coef3D2.del <- Coef.del1[2] - 1 / (N - 1) * (1 / set_size - (Coef.del1[1] + 1 / set_size^2))
-    Coef.Del <- c(coef1D2.del, coef2D2.del, coef3D2.del)
+    coef1d2 <- coefn[1]
+    coef2d2 <- (1 / (set_size * (set_size - 1)) + coefn[3] + coefn[2]
+      - (coefn[2] + 1 / set_size^2) * set_size / (set_size - 1))
+    coef3d2 <- coefn[2] - 1 / (N - 1) * (1 / set_size - (coefn[1] + 1 / set_size^2))
+    coefd <- c(coef1d2, coef2d2, coef3d2)
+    coef1d2_del <- coef_del1[1]
+    coef2d2_del <- (1 / (set_size * (set_size - 1)) + coef_del1[3] + coef_del1[2]
+      - (coef_del1[2] + 1 / set_size^2) * set_size / (set_size - 1))
+    coef3d2_del <- coef_del1[2] - 1 / (N - 1) * (1 / set_size - (coef_del1[1] + 1 / set_size^2))
+    coef_del <- c(coef1d2_del, coef2d2_del, coef3d2_del)
 
     fc <- 1 - n / N # finite population correction factor
-  }
-  else {
-    CoefD <- Coefn
-    Coef.Del <- Coef.del1
+  } else {
+    coefd <- coefn
+    coef_del <- coef_del1
 
     fc <- 1 # finite population correction factor
   }
 
   if (model == 1) {
-    CoefD <- Coefn
-    Coef.Del <- Coef.del1
+    coefd <- coefn
+    coef_del <- coef_del1
   }
 
-  ########################################### 3333333
-  #  if there is only one ranker
-  if (K == 1) {
-    EST.EqSd <- JPSEDF(data[, -1], Y = data[, 1], set_size = set_size, N = N, coef = CoefD, coef_del = Coef.Del, replace = replace, model = model, K)
-    # print(EST.EqSd)
-    Estimator <- c("JPS", "SRS")
-    Estimate <- round(c(EST.EqSd[1], mean(data[, 1])), digits = 3)
-    St.error <- round(c(sqrt(EST.EqSd[2]), sd(data[, 1]) / sqrt(n)), digits = 3)
-    Lower.Limit <- round(Estimate - qt(1 - alpha / 2, n - 1) * St.error, digits = 3)
-    Upper.Limit <- round(Estimate + qt(1 - alpha / 2, n - 1) * St.error, digits = 3)
-    CI <- paste(Lower.Limit, Upper.Limit, sep = ",")
-    Summary.return <- data.frame(Estimator, Estimate, St.error, CI, stringsAsFactors = F)
-    colnames(Summary.return) <- c("Estimator", "Estimate", "Standard Error", paste((1 - alpha) * 100, "% Confidence intervals", sep = ""))
-    return(Summary.return)
+  if (n_rankers == 1) {
+    jps_estimates <- JPSEDF(data[, -1], data[, 1], set_size, N, coefd, coef_del, replace, model, n_rankers)
+    estimators <- c("JPS", "SRS")
+    means <- round(c(jps_estimates[1], mean(data[, 1])), digits = 3)
+    # TODO: check std error calculation of jps variance
+    std_errors <- round(c(sqrt(jps_estimates[2]), sd(data[, 1]) / sqrt(n)), digits = 3)
+
+    lower_bound <- round(means - qt(1 - alpha / 2, n - 1) * std_errors, digits = 3)
+    upper_bound <- round(means + qt(1 - alpha / 2, n - 1) * std_errors, digits = 3)
+    confidence_interval <- paste(lower_bound, upper_bound, sep = ",")
+    jps_summary <- data.frame(estimators, means, std_errors, confidence_interval, stringsAsFactors = FALSE)
+
+    ci_col <- paste0((1 - alpha) * 100, "% Confidence intervals")
+    colnames(jps_summary) <- c("Estimator", "Estimate", "Standard Error", ci_col)
+
+    return(jps_summary)
   }
 
+  # more than one ranker
+  jps_estimates <- apply(
+    data[, -1],
+    2,
+    JPSEDF,
+    Y = data[, 1],
+    set_size = set_size,
+    N = N,
+    coef = coefd,
+    coef_del = coef_del,
+    replace = replace,
+    model = model,
+    n_rankers
+  )
 
-  EST.EqSd <- apply(data[, -1], 2, JPSEDF, Y = data[, 1], set_size = set_size, N = N, coef = CoefD, coef_del = Coef.Del, replace = replace, model = model, K)
+  # estimates using all data
+  jps_mean_n <- jps_estimates[1, ]
+  jps_variance_n <- jps_estimates[2, ]
 
-
-  JPSE.Fulln <- EST.EqSd[1, ] #  JPS mean estimate for each ranker using all n data
-  JPSV.Fulln <- EST.EqSd[2, ] # Variance estiamte of JPS mean  for each ranker using all n data
-  V.Sd <- EST.EqSd[c(3:(n + 2)), ] #  Variance of JPS mean estiamte for each ranker when the i-th observation is deleted
-  # the i-th row corresponds to variance estimate when the i-th observation
-  # is deleted
-  EST.Equal <- EST.EqSd[-c(1:(n + 2)), ] #  JPS mean estiamte for each ranker when the i-th observation is deleted
-  # the i-th row corresponds to JPS estimate when the i-th observation
-  # is deleted
+  # estimates with i-th observation deleted where the i-th row corresponds to the estimates when the i-th
+  # observation is deleted
+  jps_var_ith_deleted <- jps_estimates[c(3:(n + 2)), ]
+  jps_mean_ith_deleted <- jps_estimates[-c(1:(n + 2)), ]
   # if (replace) fc <- 1 else fc <- 1 - n / N # finite population correction factor
-  JPSE.Kn <- sum((1 / JPSV.Fulln) * JPSE.Fulln) / sum(1 / JPSV.Fulln) #  varince weighted JPS estimate
 
-  Prec.Weight <- t(apply(V.Sd, 1, function(u) {
+  # variance weighted
+  jps_var_weighted_mean <- sum((1 / jps_variance_n) * jps_mean_n) / sum(1 / jps_variance_n)
+  variance_weights <- t(apply(jps_var_ith_deleted, 1, function(u) {
     (1 / u) / sum(1 / u)
-  })) # variance  weights
-  JACk.Repl.Sd <- diag(Prec.Weight %*% t(EST.Equal)) # Jackknife feplicate of variance weighted  estimator
-  Jack.VEST.Sd <- fc * (n - 1) * var(JACk.Repl.Sd) * ((n - 1) / n)^2 # Jackknife varince estiamte of variabce weighted JPS estimator
-  JPS1 <- JPSE.Fulln[1] # JPS estimator based on best ranker
-  JPS1.VEST <- JPSV.Fulln[1] # Variance estimate of JPS estimator of best ranker
-  EqWeight.Est <- mean(JPSE.Fulln) # Equal weight estimator
-  Jack.Repl.EqWeight <- apply(EST.Equal, 1, mean) # Jackknife replicates for equalk weight JPS estimator
-  Jack.EST.EqWeight <- fc * (n - 1) * var(Jack.Repl.EqWeight) * ((n - 1) / n)^2 # Jackknife variance estiamte  for equal weight JPS estimator
+  }))
+  jackknife_var_weighted_mean <- diag(variance_weights %*% t(jps_mean_ith_deleted))
+  jackknife_var_weighted_var <- fc * (n - 1) * var(jackknife_var_weighted_mean) * ((n - 1) / n)^2
 
+  mean_best_ranker <- jps_mean_n[1]
+  variance_best_ranker <- jps_variance_n[1]
 
+  # equally weighted
+  jps_mean <- mean(jps_mean_n)
+  jackknife_mean <- apply(jps_mean_ith_deleted, 1, mean)
+  jackknife_variance <- fc * (n - 1) * var(jackknife_mean) * ((n - 1) / n)^2
 
-  #################################### 33
-  # agreement weight estimator
-  AW <- data[, -1] # Ranks
-  AW <- t(apply(data.frame(data[, -1]), 1, WEIGHTF, set_size = set_size)) # agreemeent weights
-  eff.SS <- apply(AW, 2, sum)
-  Crosprod <- data[, 1] %*% AW
-  EST.Agree.Weight <- mean(Crosprod[eff.SS > 0] / eff.SS[eff.SS > 0]) # JPS agreement weight estiamtor
-  AWY <- cbind(data[, 1], AW)
-  Jack.Repl.AWi <- apply(matrix(1:n, ncol = 1), 1, FWDel1, AWY = AWY) # Aggrement weight estimator
-  # when the i-th observation is deleted
-  Jack.Est.AW <- fc * (n - 1) * var(Jack.Repl.AWi) * ((n - 1) / n)^2 # Jackknife variance estiamte  for aggreement weight JPS estimator
-  ##############################################################
-  # print(cbind(Jack.Repl.EqWeight,JACk.Repl.Sd,Jack.Repl.AWi))
+  # agreement weighted
+  agreement_weights <- t(apply(data.frame(data[, -1]), 1, calculate_agreement_weights, set_size = set_size))
+  aw_sum <- apply(agreement_weights, 2, sum)
+  cross_product <- data[, 1] %*% agreement_weights
+  agreement_mean <- mean(cross_product[aw_sum > 0] / aw_sum[aw_sum > 0])
+  awy <- cbind(data[, 1], agreement_weights)
+  jackknife_agreement_mean <- apply(matrix(1:n, ncol = 1), 1, FWDel1, AWY = awy)
+  jackknife_agreement_var <- fc * (n - 1) * var(jackknife_agreement_mean) * ((n - 1) / n)^2
 
+  estimated_means <- c(jps_mean, jps_var_weighted_mean, agreement_mean, mean_best_ranker, mean(data[, 1]))
+  estimated_variances <- c(
+    jackknife_variance,
+    jackknife_var_weighted_var,
+    jackknife_agreement_var,
+    variance_best_ranker,
+    var(data[, 1]) / n
+  )
 
-  Estimate.est <- c(EqWeight.Est, JPSE.Kn, EST.Agree.Weight, JPS1, mean(data[, 1]))
-  Variance.est <- c(Jack.EST.EqWeight, Jack.VEST.Sd, Jack.Est.AW, JPS1.VEST, var(data[, 1]) / n)
+  min_variance_index <- which(estimated_variances == min(estimated_variances))
+  estimated_variances <- c(estimated_variances, estimated_variances[min_variance_index])
+  std_errors <- sqrt(estimated_variances)
 
-  min.ind <- which(Variance.est == min(Variance.est)) # Find the estimator having minimum variance
-  # among four estimator
-  Variance.est <- c(Variance.est, Variance.est[min.ind]) # bind the variance of minimum
-  # variance estimator
-  St.error <- sqrt(Variance.est)
-  Estimate.est <- c(Estimate.est, Estimate.est[min.ind]) # bind the minimum variance estimator
-  Lower.Limit <- Estimate.est - qt(1 - alpha / 2, n - 1) * sqrt(Variance.est)
-  Upper.Limit <- Estimate.est + qt(1 - alpha / 2, n - 1) * sqrt(Variance.est)
-  Lower.Limit <- round(Lower.Limit, digits = 3)
-  Upper.Limit <- round(Upper.Limit, digits = 3)
-  # test=(LL-popmean)*(UL-popmean)
-  # coef=1*(test <0)
-  CI <- paste(Lower.Limit, Upper.Limit, sep = ",")
-  Estimator <- c("UnWeighted", "Sd.Weighted", "Aggregate Weight", "JPS Estimate", "SRS estimate", "Minimum")
-  # Summary.ret=data.frame(Estimator,Estimate.est,Variance.est,Lower.Limit,Upper.Limit)
-  Summary.ret <- data.frame(Estimator, round(Estimate.est, digits = 3), round(St.error, digits = 3), CI, stringsAsFactors = F)
-  colnames(Summary.ret) <- c("Estimator", "Estimate", "Standard Error", paste((1 - alpha) * 100, "% Confidence intervals", sep = ""))
-  #  Summary.ret=round(Summary.ret,digits=3)
-  # print(Summary.ret)
-  return(Summary.ret)
+  estimated_means <- c(estimated_means, estimated_means[min_variance_index])
+  lower_bounds <- round(estimated_means - qt(1 - alpha / 2, n - 1) * sqrt(estimated_variances), digits = 3)
+  upper_bounds <- round(estimated_means + qt(1 - alpha / 2, n - 1) * sqrt(estimated_variances), digits = 3)
+  confidence_intervals <- paste(lower_bounds, upper_bounds, sep = ",")
+
+  estimators <- c("UnWeighted", "Sd.Weighted", "Aggregate Weight", "JPS Estimate", "SRS estimate", "Minimum")
+  ci_col <- paste0((1 - alpha) * 100, "% Confidence intervals")
+  estimator_summary <- data.frame(estimators,
+    round(estimated_means, digits = 3),
+    round(std_errors, digits = 3),
+    confidence_intervals,
+    stringsAsFactors = FALSE
+  )
+  colnames(estimator_summary) <- c("Estimator", "Estimate", "Standard Error", ci_col)
+
+  return(estimator_summary)
 }
