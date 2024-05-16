@@ -1,4 +1,4 @@
-#' Calculate the estimate of the rankings
+#' Estimate means from RSS or JPS sample.
 #'
 #' @param data A data frame of `JPS` or `RSS` rankings.
 #' @param set_size The set size of the ranks.
