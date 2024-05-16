@@ -14,12 +14,9 @@
 #' @return
 #' @keywords internal
 #'
-JPSEF <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
+jps_estimator <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
   n_rankers <- ncol(data) - 1
 
-  # if (is.null(N)) {
-  #   stop("Population size N must be provided for sampling without replacement")
-  # }
   if (!replace && is.null(N)) {
     stop("Population size N must be provided for sampling without replacement")
   }
@@ -56,9 +53,12 @@ JPSEF <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
     coef_del <- coef_del1
   }
 
+  ranks <- data[, -1]
   y <- data[, 1]
   if (n_rankers == 1) {
-    jps_estimates <- JPSEDF(data[, -1], y, set_size, N, coefd, coef_del, replace, model_based, n_rankers)
+    jps_estimates <- jps_estimator_single(
+      ranks, y, set_size, N, coefd, coef_del, replace, model_based, n_rankers
+    )
     estimators <- c("JPS", "SRS")
     means <- round(c(jps_estimates[1], mean(y)), digits = 3)
     # TODO: check std error calculation of jps variance
@@ -77,10 +77,10 @@ JPSEF <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
 
   # more than one ranker
   jps_estimates <- apply(
-    data[, -1],
+    ranks,
     2,
-    JPSEDF,
-    Y = y,
+    jps_estimator_single,
+    y = y,
     set_size = set_size,
     N = N,
     coef = coefd,
@@ -117,7 +117,7 @@ JPSEF <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
   jackknife_variance <- fc * (n - 1) * var(jackknife_mean) * ((n - 1) / n)^2
 
   # agreement weighted
-  agreement_weights <- t(apply(data.frame(data[, -1]), 1, calculate_agreement_weights, set_size = set_size))
+  agreement_weights <- t(apply(data.frame(ranks), 1, calculate_agreement_weights, set_size = set_size))
   aw_sum <- apply(agreement_weights, 2, sum)
   cross_product <- y %*% agreement_weights
   agreement_mean <- mean(cross_product[aw_sum > 0] / aw_sum[aw_sum > 0])

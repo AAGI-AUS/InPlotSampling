@@ -75,16 +75,13 @@ must_be_ <- function(valid_values) {
   })
 }
 
-verify_one_sample_params <- function(data, set_size, method, confidence, replace, model, pop_size) {
+verify_rss_jps_estimate_params <- function(data, set_size, method, confidence, replace, model_based, pop_size) {
   verify_positive_whole_number(set_size)
-  verify_boolean(replace)
+  verify_boolean(replace, model_based)
   verify_between(confidence, lower = 0, upper = 1)
 
   valid_methods <- c("JPS", "RSS")
   verify_must_be(method, valid_values = valid_methods)
-
-  valid_models <- c(0, 1)
-  verify_must_be(model, valid_values = valid_models)
 
   if (!replace) {
     if (!is.numeric(pop_size)) {
@@ -94,7 +91,7 @@ verify_one_sample_params <- function(data, set_size, method, confidence, replace
     }
   }
 
-  if (model == 1 && !is.numeric(pop_size)) {
+  if (model_based && !is.numeric(pop_size)) {
     stop("The population size `pop_size` must be provided for super-population model")
   }
 }

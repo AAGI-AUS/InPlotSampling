@@ -1,7 +1,7 @@
 #' Computes the estimator and variance for each individual ranker
 #'
 #' @param ranks Ranks of Y.
-#' @param Y Response measurements.
+#' @param y Response measurements.
 #' @param set_size Set size for each raking group.
 #' @param N Finite population size.
 #' @param coef Coefficients used in variance computation when sample size is n.
@@ -15,8 +15,8 @@
 #' @return
 #' @keywords internal
 #'
-JPSEDF <- function(ranks, Y, set_size, N, coef, coef_del, replace, model_based, K) {
-  y_ij <- expand.grid(Y, Y)
+jps_estimator_single <- function(ranks, y, set_size, N, coef, coef_del, replace, model_based, K) {
+  y_ij <- expand.grid(y, y)
 
   # count ranks including zeros
   rank_count <- rep(0, set_size)
@@ -48,7 +48,7 @@ JPSEDF <- function(ranks, Y, set_size, N, coef, coef_del, replace, model_based, 
   }
 
   ############################################################################
-  estimated_mean <- mean(aggregate(Y, list(ranks), mean)$x)
+  estimated_mean <- mean(aggregate(y, list(ranks), mean)$x)
   t2s <- set_size * tt2 / (2 * n_two_plus_ranks)
   t1s <- tt1 / (2 * coef[1] * n_non_empty_ranks^2)
   # VestD0=coef[2]*T1s/(set_size-1)+coef[3]*T2s
@@ -76,7 +76,7 @@ JPSEDF <- function(ranks, Y, set_size, N, coef, coef_del, replace, model_based, 
   ################################################################
   ######### This part is new for Jackknife replication, delete one observations
   ########  reduces the computation time
-  n <- length(Y)
+  n <- length(y)
   # index to determine which observation is to be deleted
   ID <- 1:n
   # Index of observations to be deleted
@@ -94,7 +94,7 @@ JPSEDF <- function(ranks, Y, set_size, N, coef, coef_del, replace, model_based, 
   # This is used in apply function  below
   INDM <- matrix(1:n, ncol = 1)
   # compile additional variables in list
-  PASS <- list(Y, ranks, Ind.ij, rank_count, Y.ij2N, R.hhpN, agg_ss, tt2, tt1)
+  PASS <- list(y, ranks, Ind.ij, rank_count, Y.ij2N, R.hhpN, agg_ss, tt2, tt1)
   # This computes TT2, TT1, dn, dn-star for each  deleted unit "i".deltM=DeltM
   DeltM <- t(apply(INDM, 1, DELETi, PASS = PASS))
   ##################################################

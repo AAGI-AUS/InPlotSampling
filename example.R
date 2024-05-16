@@ -1,19 +1,19 @@
 N <- 600 # population size
-Setsize <- 3
-H <- Setsize # the number of samples to be ranked in each set
+set_size <- 3
+H <- set_size # the number of samples to be ranked in each set
 with_replacement <- FALSE
 
-Model <- 0 # ( if Model=0, Design based inference, if Model=1, super population model is used)
+model_based <- FALSE
 sampling_method <- "JPS" # JPS, RSS
 
 sigma <- 4 # population standard deviation
 mu <- 10 # population mean
-K <- 3 # number of rankers
+n_rankers <- 3 # number of rankers
 n <- 30 # sample size
 
 alpha <- 0.05
-rhoV <- rep(0.75, K)
-tauV <- sigma * sqrt(1 / rhoV^2 - 1)
+rhos <- rep(0.75, n_rankers)
+taus <- sigma * sqrt(1 / rhos^2 - 1)
 
 pop <- qnorm((1:N) / (N + 1), mu, sigma)
 rho <- 0.75
@@ -22,25 +22,25 @@ X <- pop + tau * rnorm(N, 0, 1)
 
 # JPS sampling
 if (sampling_method == "JPS") {
-  data <- JPSD2F(pop, n, H, tauV, K, with_replacement)
+  data <- JPSD2F(pop, n, H, taus, n_rankers, with_replacement)
 }
 
 #  Ranked set sampling
 if (sampling_method == "RSS") {
   pop <- cbind(pop, X)
-  data <- RSS(pop, n, H, K, with_replacement)
+  data <- RSS(pop, n, H, n_rankers, with_replacement)
   data <- data[order(data[, 2]), ]
 }
 
-ONE <- OneSample(data, Setsize, sampling_method, 0.80, with_replacement, Model, N)
+ONE <- rss_jps_estimate(data, set_size, sampling_method, 0.80, with_replacement, model_based, N)
 
 w_or_wo <- " without "
 if (with_replacement) {
   w_or_wo <- " with "
 }
-print(paste0(sampling_method, " sample with number of rankers K=", K, w_or_wo, "replacement"))
+print(paste0(sampling_method, " sample with number of rankers K=", n_rankers, w_or_wo, "replacement"))
 
-if (Model == 0) {
+if (model_based == 0) {
   print("Design based inference is developed")
 } else {
   print("Super-population  model is used")
