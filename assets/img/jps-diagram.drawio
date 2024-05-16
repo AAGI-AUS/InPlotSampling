@@ -1,0 +1,62 @@
+<mxfile host="app.diagrams.net" modified="2024-04-09T11:02:57.892Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="8NG5hAB1QbLMRqZ8KOWq" version="24.0.7" type="device">
+  <diagram name="Page-1" id="zY6HWMc1L9AKhwpROAVy">
+    <mxGraphModel dx="1188" dy="693" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-189" value="Apply to all rows" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;align=left;verticalAlign=top;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="100" width="400" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-188" value="gather&lt;div&gt;\( r_1 \)&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;" edge="1" parent="1" source="5Bi1S1yQfeQVDs5kRssP-182" target="5Bi1S1yQfeQVDs5kRssP-186">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-182" value="Repeat K times" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;align=left;verticalAlign=top;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="140" width="150" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="i-vc3Yp6EKgG5CWD2vzd-1" value="y: target variable&lt;div&gt;n: number of samples to be sampled and ranked&lt;/div&gt;&lt;div&gt;H: number of samples in each ranking group&lt;/div&gt;&lt;div&gt;K: number of rankers&lt;/div&gt;&lt;div&gt;tau: a set of K real numbers to adjust ranking quality&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-96" value="sample n*H&lt;div&gt;samples&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=none;" edge="1" parent="1" source="5Bi1S1yQfeQVDs5kRssP-169" target="5Bi1S1yQfeQVDs5kRssP-167">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="398.98" as="sourcePoint" />
+            <mxPoint x="160" y="399.48" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-178" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="5Bi1S1yQfeQVDs5kRssP-167" target="5Bi1S1yQfeQVDs5kRssP-176">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-167" value="$$\begin{pmatrix}&#xa;Y_{11} &amp; Y_{12} &amp; \cdots &amp; Y_{1H} \\&#xa;Y_{21} &amp; Y_{22} &amp; \cdots &amp; Y_{2H} \\&#xa;\vdots &amp; \vdots &amp;        &amp; \vdots \\&#xa;Y_{n1} &amp; Y_{n2} &amp; \cdots &amp; Y_{nH}&#xa;\end{pmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="160" y="380" width="150" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-169" value="$$\begin{pmatrix}&#xa;y_1 \\&#xa;y_2 \\&#xa;\vdots \\&#xa;y_N&#xa;\end{pmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="40" y="380" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-170" value="&lt;div&gt;for each row, adjust \(Y\) with \(\tau_k\), i.e.,&lt;/div&gt;&lt;div&gt;\(\hat{Y}_i = Y_i + \tau_kX_i\) where \(k \in \{1, 2, ..., K\},\)&lt;/div&gt;&lt;div&gt;\( i \in \{1, 2, ..., H\}, X\sim N(0, 1) \)&amp;nbsp;&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;labelBackgroundColor=none;align=right;" edge="1" parent="1" source="5Bi1S1yQfeQVDs5kRssP-167" target="5Bi1S1yQfeQVDs5kRssP-176">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="314" as="sourcePoint" />
+            <mxPoint x="235" y="300" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-180" value="rank" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;align=right;labelBackgroundColor=none;" edge="1" parent="1" source="5Bi1S1yQfeQVDs5kRssP-176" target="5Bi1S1yQfeQVDs5kRssP-179">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-176" value="$$\begin{pmatrix}&#xa;\hat{Y}_{1} &amp; \hat{Y}_{2} &amp; \cdots &amp; \hat{Y}_{H}&#xa;\end{pmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="175" y="230" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-179" value="$$\begin{pmatrix}&#xa;r_{1} &amp; r_{2} &amp; \cdots &amp; r_{H}&#xa;\end{pmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="175" y="155" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-186" value="$$\begin{pmatrix}&#xa;r_{11} &amp; r_{12} &amp; \cdots &amp; r_{1K}&#xa;\end{pmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="360" y="157.5" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-192" value="$$\begin{pmatrix}&#xa;Y_{11} &amp; r_{11} &amp; r_{12} &amp; \cdots &amp; r_{1K} \\&#xa;Y_{21} &amp; r_{21} &amp; r_{22} &amp; \cdots &amp; r_{2K} \\&#xa;\vdots &amp; \vdots &amp; \vdots &amp;        &amp; \vdots \\&#xa;Y_{n1} &amp; r_{n1} &amp; r_{n2} &amp; \cdots &amp; r_{nK} \\&#xa;\end{pmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="340" y="380" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="5Bi1S1yQfeQVDs5kRssP-193" value="combine ranks with the&lt;div&gt;first sample in each row&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.443;entryY=0.007;entryDx=0;entryDy=0;entryPerimeter=0;align=right;" edge="1" parent="1" source="5Bi1S1yQfeQVDs5kRssP-189" target="5Bi1S1yQfeQVDs5kRssP-192">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

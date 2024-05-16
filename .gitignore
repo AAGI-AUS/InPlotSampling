@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 docs
+
+Rplots.pdf
+coverage.html
+lib/
