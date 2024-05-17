@@ -20,10 +20,10 @@
 #'
 #' # Compute the JPS estimators
 #'
-#' JPS.Estimates <- OneSample(
+#' jps_estimates <- rss_jps_estimate(
 #'   data = emergence_ranks, set_size = 4,
 #'   method = "JPS", confidence = 0.95,
-#'   replace = TRUE, model = 0,
+#'   replace = TRUE, model_based = FALSE,
 #'   pop_size = nrow(population)
 #' )
 #'
@@ -59,6 +59,3 @@ rss_jps_estimate <- function(
 
   return(results)
 }
-
-#' @rdname OneSample
-one_sample <- rss_jps_estimate

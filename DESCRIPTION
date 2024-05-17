@@ -20,16 +20,20 @@ Description: The RankedSetSampling package provides a way for researchers
 License: MIT + file LICENSE
 URL: https://biometryhub.github.io/RankedSetSampling/
 BugReports: https://github.com/biometryhub/RankedSetSampling/issues
-Depends: 
+Depends:
     R (>= 3.5.0)
-Imports: 
-    Rcpp
-Suggests: 
+Imports:
+    Rcpp,
+    ggplot2,
+    SDaA,
+    FNN
+Suggests:
     covr,
-    testthat
-LinkingTo: 
+    testthat,
+    parallel
+LinkingTo:
     Rcpp
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.1

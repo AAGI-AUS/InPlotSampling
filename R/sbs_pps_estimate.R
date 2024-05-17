@@ -29,7 +29,7 @@ sbs_pps_estimate <- function(population, n, y, sample_matrix, n_bootstraps = 100
     sample_matrix <- sample_matrix[!is_duplicated, ]
     y <- y[!is_duplicated]
 
-    estimated_mean <- round(sum(y / sample_matrix[, 6]) / n_population, digit = 3)
+    estimated_mean <- round(sum(y / sample_matrix[, 6]) / n_population, digits = 3)
 
     empirical_population <- get_empirical_population(sample_matrix[, 1], population, y)
     empirical_inclusion_prob <- calculate_inclusion_prob(empirical_population[, 3], n)

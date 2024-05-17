@@ -12,7 +12,8 @@
 #' - `TRUE`: model based inference using super population model
 #' @param K Number of rankers.
 #'
-#' @return
+#' @return A `data.frame` with the point estimates provided by JPS estimators along with standard error and
+#'   confidence intervals.
 #' @keywords internal
 #'
 jps_estimator_single <- function(ranks, y, set_size, N, coef, coef_del, replace, model_based, K) {

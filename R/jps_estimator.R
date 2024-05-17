@@ -11,8 +11,9 @@
 #'
 #' @importFrom stats aggregate qt rnorm sd var
 #'
-#' @return
-#' @keywords internal
+#' @return A `data.frame` with the point estimates provided by JPS estimators along with standard error and
+#'   confidence intervals.
+#' @export
 #'
 jps_estimator <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
   n_rankers <- ncol(data) - 1

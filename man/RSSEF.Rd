@@ -19,9 +19,6 @@ RSSEF(data, set_size, replace, model, N, alpha)
 
 \item{alpha}{The significance level}
 }
-\value{
-
-}
 \description{
 This function provides estimator for RSS data
 }

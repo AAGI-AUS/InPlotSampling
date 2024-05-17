@@ -19,9 +19,6 @@ ListF(data, set_size, Replace, N, Model, CoefD0)
 
 \item{CoefD0}{Coef}
 }
-\value{
-
-}
 \description{
 Title
 }

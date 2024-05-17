@@ -15,9 +15,6 @@ RSSED2F(RV, Y, H, N)
 
 \item{N}{Population size}
 }
-\value{
-
-}
 \description{
 This function Computes RSS estimator and its variance without replacement sampling
 }

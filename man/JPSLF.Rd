@@ -26,9 +26,6 @@ JPSLF(
 
 \item{estimator}{Which type of estimator to return. Default is "SD Weighted". Other options are "Unweighted", "Aggregate Weight", "JPS Estimate", "SRS estimate", "Minimum"}
 }
-\value{
-
-}
 \description{
 Judgement Post Stratification List Function
 }
