@@ -1,11 +1,11 @@
 test_that("onesample works with JPS", {
-  skip_if(getRversion() < 3.4)
+  # skip_if(getRversion() < 3.4)
   load("../jps_data.Rdata")
   expect_identical(OneSample(Data, 3, "JPS", 0.95, FALSE, 0, 600), saved_jps_output)
 })
 
 test_that("onesample works with RSS", {
-  skip_if(getRversion() < 3.4)
+  # skip_if(getRversion() < 3.4)
   load("../rss_data.Rdata")
   expect_identical(OneSample(Data, 3, "RSS", 0.95, FALSE, 0, 600), saved_rss_output)
 })

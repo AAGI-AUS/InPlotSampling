@@ -1,5 +1,5 @@
 test_that("JPSD2F has a correct output.", {
-  skip_if(getRversion() < 3.4)
+  # skip_if(R.version.string < 3.4)
   population <- 1:100
   k <- 3
   tau <- rep(1.2, 3)

@@ -1,5 +1,5 @@
 test_that("RSSDF has a correct output.", {
-  skip_if(getRversion() < 3.4)
+  # skip_if(getRversion() < 3.4)
   matrix_ <- matrix(1:200, ncol = 2)
 
   rss_matrix <- RSSNRF(matrix_, 50, 2, 2)

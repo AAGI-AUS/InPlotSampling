@@ -1,5 +1,5 @@
 test_that("An SBS PPS sample works.", {
-  skip_if(getRversion() < 3.4)
+  # skip_if(getRversion() < 3.4)
   load("../sbs_pps_input.RData")
 
   n_sbs <- 20
@@ -20,7 +20,7 @@ test_that("An SBS PPS sample works.", {
 })
 
 test_that("An SBS PPS sample works for PPS only.", {
-  skip_if(getRversion() < 3.4)
+  # skip_if(getRversion() < 3.4)
   load("../sbs_pps_input.RData")
 
   n_sbs <- 0
@@ -33,7 +33,7 @@ test_that("An SBS PPS sample works for PPS only.", {
 })
 
 test_that("An SBS PPS sample works for SBS only.", {
-  skip_if(getRversion() < 3.4)
+  # skip_if(getRversion() < 3.4)
   load("../sbs_pps_input.RData")
 
   n_sbs <- 20
