@@ -1,37 +1,37 @@
-IncluProbLv0 <- function(popsize,sampsize,rank,set){
+# IncluProbLv0 <- function(popsize,sampsize,rank,set){
+#
+#   #initialise alpha matrix nxn
+#   alphamat <- matrix(0, ncol = popsize, nrow = sampsize)
+#
+#   #calculate the combinatorix (put into function later)
+#   for (i in 1:popsize) {
+#     a <- choose(i - 1, rank - 1)
+#     b <- choose(popsize - i, set - rank)
+#     c <- choose(popsize, set)
+#     alphamat[, i] <- a * b / c
+#   }
+#   return(alphamat)
+# }
 
-  #initialise alpha matrix nxn
-  alphamat <- matrix(0, ncol = popsize, nrow = sampsize)
 
-  #calculate the combinatorix (put into function later)
-  for (i in 1:popsize) {
-    a <- choose(i - 1, rank - 1)
-    b <- choose(popsize - i, set - rank)
-    c <- choose(popsize, set)
-    alphamat[, i] <- a * b / c
-  }
-  return(alphamat)
-}
-
-
-inclusion_prob_lv0 <- function(popsize, sampsize, rank, set) {
-    alphamat <- matrix(
-        c(1, rep(0, set - 1)),
-        ncol = set,
-        nrow = popsize,
-        byrow = TRUE
-    )
-
-    for (i in 2:popsize) {
-        for (j in 2:set) {
-            alphamat[i, j] <- alphamat[i-1, j-1] + alphamat[i-1, j]
-        }
-    }
-    alphamat <- alphamat * rev(alphamat) / choose(popsize, set)
-
-    output <- rep(alphamat, length(rank)/set)
-    output <- matrix(output, ncol = popsize, byrow = TRUE)
-}
+# inclusion_prob_lv0 <- function(popsize, sampsize, rank, set) {
+#     alphamat <- matrix(
+#         c(1, rep(0, set - 1)),
+#         ncol = set,
+#         nrow = popsize,
+#         byrow = TRUE
+#     )
+#
+#     for (i in 2:popsize) {
+#         for (j in 2:set) {
+#             alphamat[i, j] <- alphamat[i-1, j-1] + alphamat[i-1, j]
+#         }
+#     }
+#     alphamat <- alphamat * rev(alphamat) / choose(popsize, set)
+#
+#     output <- rep(alphamat, length(rank)/set)
+#     output <- matrix(output, ncol = popsize, byrow = TRUE)
+# }
 
 #' @importFrom Rcpp sourceCpp
 #' @useDynLib RankedSetSampling, .registration = TRUE

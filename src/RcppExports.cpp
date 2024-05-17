@@ -23,9 +23,35 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// prod_c
+double prod_c(NumericVector x);
+RcppExport SEXP _RankedSetSampling_prod_c(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(prod_c(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// secondmat
+NumericMatrix secondmat(NumericMatrix firstorder, NumericVector prods, int popsize);
+RcppExport SEXP _RankedSetSampling_secondmat(SEXP firstorderSEXP, SEXP prodsSEXP, SEXP popsizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type firstorder(firstorderSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type prods(prodsSEXP);
+    Rcpp::traits::input_parameter< int >::type popsize(popsizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(secondmat(firstorder, prods, popsize));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_RankedSetSampling_pascal", (DL_FUNC) &_RankedSetSampling_pascal, 3},
+    {"_RankedSetSampling_prod_c", (DL_FUNC) &_RankedSetSampling_prod_c, 1},
+    {"_RankedSetSampling_secondmat", (DL_FUNC) &_RankedSetSampling_secondmat, 3},
     {NULL, NULL, 0}
 };
 

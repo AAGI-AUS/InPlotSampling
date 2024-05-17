@@ -6,3 +6,11 @@ pascal <- function(m, popsize, set) {
     .Call(`_RankedSetSampling_pascal`, m, popsize, set)
 }
 
+prod_c <- function(x) {
+    .Call(`_RankedSetSampling_prod_c`, x)
+}
+
+secondmat <- function(firstorder, prods, popsize) {
+    .Call(`_RankedSetSampling_secondmat`, firstorder, prods, popsize)
+}
+
