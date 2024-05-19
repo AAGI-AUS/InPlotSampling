@@ -6,16 +6,15 @@
 #' 3. X2-coordinate of population unit
 #' 4. Size measurements of population units
 #' @param n Sample sizes (SBS sample size, PPS sample size).
-#' @param parallelize A flag whether to parallelize the computational task.
+#' @param n_cores The number of cores to be used for computational tasks (specify 0 for max).
 #'
 #' @return A named list of:
 #' - heatmap: heat map of the sample
 #' - sample: SBS PPS sample of the population
 #'
-sbs_pps_sample <- function(population, n, parallelize = TRUE) {
-  verify_non_negative_whole(n[1], n[2], var_names = c("SBS sample size", "PPS sample size"))
+sbs_pps_sample <- function(population, n, n_cores = getOption("n_cores", 1)) {
+  verify_non_negative_whole(n[1], n[2], n_cores, var_names = c("SBS sample size", "PPS sample size", "n_cores"))
   verify_matrix_like(population, n_dimensions = 2, n_rows = sum(n), n_cols = 4)
-  verify_boolean(parallelize)
 
   sampled <- get_sbs_pps_sample_indices(population[, c(1, 4)], n)
   sbs_pps_indices <- sampled$sbs_pps_indices
@@ -26,7 +25,7 @@ sbs_pps_sample <- function(population, n, parallelize = TRUE) {
   measured_sizes <- population[, 4]
   weights <- c(rep(0, n[1]), measured_sizes[pps_indices] / sum(sizes_wo_sbs))
 
-  inclusion_probabilities <- calculate_inclusion_prob(population[, 4], n, parallelize)
+  inclusion_probabilities <- calculate_inclusion_prob(population[, 4], n, n_cores)
   df_sample <- data.frame(
     sbs_pps_indices,
     x1 = population[sbs_pps_indices, 2],

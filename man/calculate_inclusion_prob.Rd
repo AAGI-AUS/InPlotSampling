@@ -4,14 +4,18 @@
 \alias{calculate_inclusion_prob}
 \title{Calculate inclusion probabilities.}
 \usage{
-calculate_inclusion_prob(size_measurement, n, parallelize = TRUE)
+calculate_inclusion_prob(
+  size_measurement,
+  n,
+  n_cores = getOption("n_cores", 1)
+)
 }
 \arguments{
 \item{size_measurement}{Size measurements of population units.}
 
 \item{n}{Sample sizes (SBS sample size, PPS sample size).}
 
-\item{parallelize}{A flag whether to parallelize the computational task.}
+\item{n_cores}{The number of cores to be used for computational tasks (specify 0 for max).}
 }
 \value{
 A vector of inclusion probabilities.

@@ -44,17 +44,24 @@ calculate_first_order_prob <- function(i, size_measurement, n, total_size) {
 #'
 #' @param size_measurement Size measurements of population units.
 #' @param n Sample sizes (SBS sample size, PPS sample size).
-#' @param parallelize A flag whether to parallelize the computational task.
+#' @param n_cores The number of cores to be used for computational tasks (specify 0 for max).
 #'
 #' @return A vector of inclusion probabilities.
 #'
-calculate_inclusion_prob <- function(size_measurement, n, parallelize = TRUE) {
+calculate_inclusion_prob <- function(size_measurement, n, n_cores = getOption("n_cores", 1)) {
   n_population <- length(size_measurement)
   total_size <- sum(size_measurement)
 
   # switch between a single core and multiple cores
-  if (n_population > 250 && require(parallel) && parallelize) {
+  if (n_population > 250 && require(parallel) && n_cores > 1) {
     n_cores <- parallel::detectCores() - 1
+
+    # to avoid failure from devtools::check
+    is_core_limited <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "FALSE")
+    if (is_core_limited == "TRUE") {
+      n_cores <- 2
+    }
+
     clusters <- parallel::makeCluster(n_cores)
     parallel::clusterExport(clusters, varlist = c("calculate_first_order_prob"), envir = environment())
 

@@ -121,7 +121,7 @@ verify_rss_params <- function(pop, n, H, K) {
   }
 }
 
-verify_rssnrf_params <- function(pop, n, H, K) {
+verify_rss_wo_replace_params <- function(pop, n, H, K) {
   verify_rss_params(pop, n, H, K)
 
   n_population <- dim(pop)[[1]]

@@ -7,17 +7,7 @@
 JPSD2F(pop, n, H, tau, K, with_replacement = FALSE)
 }
 \arguments{
-\item{pop}{Population that will be sampled with an auxiliary parameter in the second column.}
-
-\item{n}{Sample size.}
-
-\item{H}{Set size for each raking group.}
-
 \item{tau}{A parameter which controls ranking quality.}
-
-\item{K}{Number of rankers.}
-
-\item{with_replacement}{A boolean which specifies whether to sample with replacement or not.}
 }
 \value{
 A matrix with ranks from each ranker.

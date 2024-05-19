@@ -16,10 +16,12 @@
 #' 6. Inclusion probability
 #' @param n_bootstraps Number of bootstrap samples.
 #' @param alpha The significance level.
+#' @param n_cores The number of cores to be used for computational tasks (specify 0 for max).
 #'
 #' @return A summary data frame of the estimator.
 #'
-sbs_pps_estimate <- function(population, n, y, sample_matrix, n_bootstraps = 100, alpha = 0.05) {
+sbs_pps_estimate <- function(
+    population, n, y, sample_matrix, n_bootstraps = 100, alpha = 0.05, n_cores = getOption("n_cores", 1)) {
   verify_sbs_pps_estimate_params(population, n, y, sample_matrix, n_bootstraps, alpha)
 
   n_population <- dim(population)[1]
@@ -32,7 +34,7 @@ sbs_pps_estimate <- function(population, n, y, sample_matrix, n_bootstraps = 100
     estimated_mean <- round(sum(y / sample_matrix[, 6]) / n_population, digits = 3)
 
     empirical_population <- get_empirical_population(sample_matrix[, 1], population, y)
-    empirical_inclusion_prob <- calculate_inclusion_prob(empirical_population[, 3], n)
+    empirical_inclusion_prob <- calculate_inclusion_prob(empirical_population[, 3], n, n_cores)
     empirical_population <- data.frame(empirical_population, empirical_inclusion_prob)
 
     estimated_variance <- round(bootstrap_sample(empirical_population, n, n_bootstraps), digits = 3)

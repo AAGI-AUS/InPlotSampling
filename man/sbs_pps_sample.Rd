@@ -4,7 +4,7 @@
 \alias{sbs_pps_sample}
 \title{Generate probability proportional to size (PPS) and spatially balanced sampling on the population provided.}
 \usage{
-sbs_pps_sample(population, n, parallelize = TRUE)
+sbs_pps_sample(population, n, n_cores = getOption("n_cores", 1))
 }
 \arguments{
 \item{population}{Population data frame to be sampled with 5 columns.
@@ -17,7 +17,7 @@ sbs_pps_sample(population, n, parallelize = TRUE)
 
 \item{n}{Sample sizes (SBS sample size, PPS sample size).}
 
-\item{parallelize}{A flag whether to parallelize the computational task.}
+\item{n_cores}{The number of cores to be used for computational tasks (specify 0 for max).}
 }
 \value{
 A named list of:

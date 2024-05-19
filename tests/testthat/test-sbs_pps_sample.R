@@ -96,27 +96,40 @@ test_that("Each sample sizes must be non-negative whole numbers.", {
   )
 })
 
-test_that("parallelize must be a boolean.", {
+test_that("The number of cores must be non-negative whole number.", {
   population <- matrix(1:48, ncol = 4)
   sample_sizes <- c(3, 3)
+  invalid_n_cores <- list(-1, 0.1, NULL, NA, FALSE, "1")
 
-  expect_error(
-    sbs_pps_sample(population, sample_sizes, 0),
-    "`parallelize` must be a boolean."
-  )
+  for (invalid in invalid_n_cores) {
+    expect_error(
+      sbs_pps_sample(population, sample_sizes, invalid),
+      "`n_cores` must be a non-negative whole number."
+    )
+  }
 
-  expect_error(
-    sbs_pps_sample(population, sample_sizes, "TRUE"),
-    "`parallelize` must be a boolean."
-  )
-
-  expect_error(
-    sbs_pps_sample(population, sample_sizes, NULL),
-    "`parallelize` must be a boolean."
-  )
-
-  expect_error(
-    sbs_pps_sample(population, sample_sizes, NA),
-    "`parallelize` must be a boolean."
-  )
+  # expect_error(
+  #   sbs_pps_sample(population, sample_sizes, -1),
+  #   "`parallelize` must be a boolean."
+  # )
+  #
+  # expect_error(
+  #   sbs_pps_sample(population, sample_sizes, 0.1),
+  #   "`parallelize` must be a boolean."
+  # )
+  #
+  # expect_error(
+  #   sbs_pps_sample(population, sample_sizes, 0.1),
+  #   "`parallelize` must be a boolean."
+  # )
+  #
+  # expect_error(
+  #   sbs_pps_sample(population, sample_sizes, NULL),
+  #   "`parallelize` must be a boolean."
+  # )
+  #
+  # expect_error(
+  #   sbs_pps_sample(population, sample_sizes, NA),
+  #   "`parallelize` must be a boolean."
+  # )
 })

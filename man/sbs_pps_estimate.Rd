@@ -10,7 +10,8 @@ sbs_pps_estimate(
   y,
   sample_matrix,
   n_bootstraps = 100,
-  alpha = 0.05
+  alpha = 0.05,
+  n_cores = getOption("n_cores", 1)
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ sbs_pps_estimate(
 \item{n_bootstraps}{Number of bootstrap samples.}
 
 \item{alpha}{The significance level.}
+
+\item{n_cores}{The number of cores to be used for computational tasks (specify 0 for max).}
 }
 \value{
 A summary data frame of the estimator.
