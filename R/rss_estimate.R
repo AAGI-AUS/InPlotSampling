@@ -20,7 +20,7 @@
 #' @return
 #' @keywords internal
 #'
-RSSEF <- function(data, set_size, replace, model, N, alpha) {
+rss_estimate <- function(data, set_size, replace, model, N, alpha) {
   # unused variable
   # RM <- data[, -1]
   RV <- data[, 2] # We need to be careful about this.

@@ -16,7 +16,7 @@
 #'   confidence intervals.
 #' @keywords internal
 #'
-jps_estimator_single <- function(ranks, y, set_size, N, coef, coef_del, replace, model_based, K) {
+jps_estimate_single <- function(ranks, y, set_size, N, coef, coef_del, replace, model_based, K) {
   y_ij <- expand.grid(y, y)
 
   # count ranks including zeros

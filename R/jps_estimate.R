@@ -15,7 +15,7 @@
 #'   confidence intervals.
 #' @export
 #'
-jps_estimator <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
+jps_estimate <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
   n_rankers <- ncol(data) - 1
 
   if (!replace && is.null(N)) {
@@ -57,7 +57,7 @@ jps_estimator <- function(data, set_size, replace = TRUE, model_based, N, alpha)
   ranks <- data[, -1]
   y <- data[, 1]
   if (n_rankers == 1) {
-    jps_estimates <- jps_estimator_single(
+    jps_estimates <- jps_estimate_single(
       ranks, y, set_size, N, coefd, coef_del, replace, model_based, n_rankers
     )
     estimators <- c("JPS", "SRS")
@@ -80,7 +80,7 @@ jps_estimator <- function(data, set_size, replace = TRUE, model_based, N, alpha)
   jps_estimates <- apply(
     ranks,
     2,
-    jps_estimator_single,
+    jps_estimate_single,
     y = y,
     set_size = set_size,
     N = N,
