@@ -1,8 +1,17 @@
 default_tolerance <- .Machine$double.eps^0.5
 
-# is_between <- function(x, lower, upper) {
-#   return(is_between_(lower, upper)(x))
-# }
+get_interval <- function(sample_mean, sample_size, std_error, alpha, round_digits = NULL) {
+  qt_term <- qt(1 - alpha / 2, sample_size - 1)
+  lower_bound <- sample_mean - qt_term * std_error
+  upper_bound <- sample_mean + qt_term * std_error
+
+  if (!is.null(round_digits)) {
+    lower_bound <- round(lower_bound, digits = round_digits)
+    upper_bound <- round(upper_bound, digits = round_digits)
+  }
+
+  return(list(lower_bound = lower_bound, upper_bound = upper_bound))
+}
 
 is_between_ <- function(lower, upper, lower_exclude = FALSE, upper_exclude = FALSE) {
   return(function(x) {

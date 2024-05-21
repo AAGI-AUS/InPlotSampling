@@ -1,111 +1,91 @@
-###########################################
-#  This function provides estimator for RSS data
-#  RSSK: n by (K+1) dimensional data matrix, the first column is Y-values,
-#  the next K columns are the ranks of K-ranking methods
-#  set_size: set Size
-# N: population size
-# model: if Modle=0 design based inference, if model=1, superpopulation model
-# replace: if replace=TRUE with replacmenet selection is used.
-# If replace=FALSE without replacement selection is used
-# B: Bootstrap replication
-#' This function provides estimator for RSS data
+#' This function provides an estimator for RSS data
 #'
-#' @param data An n by (K+1) dimensional data matrix, the first column is Y-values, the next K coulumns are the ranks of K-ranking methods
-#' @param set_size The set size
-#' @param replace Logical. Sample with replacement?
-#' @param model If Modle=0, use design based inference, if model=1, use superpopulation model
-#' @param N The population size
-#' @param alpha The significance level
+#' @param data A matrix with a response variable in the first column and ranks in the following columns.
+#' @param set_size Set size for each ranking group.
+#' @param replace A boolean which specifies whether to sample with replacement or not.
+#' @param model_based An inference mode:
+#' - `FALSE`: design based inference
+#' - `TRUE`: model based inference using super population model
+#' @param pop_size The population size. Must be provided if sampling without replacement, or if `model` is `1`.
+#' @param alpha A significance level.
 #'
 #' @return
 #' @keywords internal
 #'
-rss_estimate <- function(data, set_size, replace, model, N, alpha) {
-  # unused variable
-  # RM <- data[, -1]
-  RV <- data[, 2] # We need to be careful about this.
-  Y <- data[, 1] # We need to be careful about this. Need to ensure response is in col 1.
+rss_estimate <- function(data, set_size, replace, model_based, pop_size, alpha) {
+  first_ranker_ranks <- data[, 2]
+  y <- data[, 1]
   n <- nrow(data)
-  K <- ncol(data) - 1
-  #########################################################################
-  ########## Single ranker RSS estimator without replacement design
+  n_rankers <- ncol(data) - 1
+
   if (!replace) {
-    RSS.oneE <- mean(aggregate(Y, list(RV), FUN = mean)$x) # Single ranker RSS estimate
-    EST <- RSSED2F(RV, Y, set_size, N)
-    ### Confidence interval balanced RSS
-    LC <- EST[1] - qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
-    UC <- EST[1] + qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
-  }
-  #############################################################################
-  ###############################################################################
+    rss_estimated <- rss_estimate_single(first_ranker_ranks, y, set_size, pop_size)
+    rss_mean <- rss_estimated[1]
+    rss_variance <- rss_estimated[2]
+  } else {
+    rss_mean <- mean(aggregate(y, list(first_ranker_ranks), FUN = mean)$x)
 
-  ####################################################################################
-  ########### Single ranker RSS estimator with replacement design
-  if (replace) {
-    RSS.oneE <- mean(aggregate(Y, list(RV), FUN = mean)$x) # Single ranker RSS estimate
-    RSS.oneCount <- aggregate(RV, list(RV), FUN = length)$x
-    RSS.oneVar <- aggregate(Y, list(RV), FUN = var)$x
-    Hd <- length(RSS.oneVar[RSS.oneCount > 1])
-    RSS.oneVE <- sum(RSS.oneVar[RSS.oneCount > 1] / RSS.oneCount[RSS.oneCount > 1]) / Hd^2
-    EST <- c(RSS.oneE, RSS.oneVE)
-    LC <- EST[1] - qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
-    UC <- EST[1] + qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
-  }
-  ######################################################################################
-  ########################################################################################
-
-  ##########################################################################################
-  ######## Single ranker RSS estimator with under super population model ##################
-  if (model == 1) {
-    RSS.oneE <- mean(aggregate(Y, list(RV), FUN = mean)$x) # Single ranker RSS estimate
-    EST <- RSSED2F(RV, Y, set_size, N)
-    LC <- EST[1] - qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
-    UC <- EST[1] + qt(1 - alpha / 2, n - 1) * sqrt(EST[2])
+    rank_count <- aggregate(first_ranker_ranks, list(first_ranker_ranks), FUN = length)$x
+    rss_variances <- aggregate(y, list(first_ranker_ranks), FUN = var)$x[rank_count > 1]
+    rss_variance <- sum(rss_variances / rank_count[rank_count > 1]) / length(rss_variances)^2
   }
 
-  Lower.limit <- round(c(LC), digits = 3)
-  Upper.limit <- round(c(UC), digits = 3)
-  ST.error <- sqrt(EST[2])
-  Point.est <- EST[1]
-  if (K == 1) {
-    Confinterval <- paste(Lower.limit, Upper.limit, sep = ",")
-    Estimator <- c("RSS-1")
-    summary.table <- data.frame(Estimator, round(Point.est, digits = 3), round(ST.error, digits = 3), Confinterval, stringsAsFactors = F)
-    colnames(summary.table) <- c("Estimator", "point.est", "St.error", paste((1 - alpha) * 100, "% Confidence Interval", sep = ""))
+  if (model_based) {
+    rss_estimated <- rss_estimate_single(first_ranker_ranks, y, set_size, pop_size)
+    rss_mean <- rss_estimated[1]
+    rss_variance <- rss_estimated[2]
+  }
+
+  ci_col <- paste0((1 - alpha) * 100, "% Confidence Interval")
+  std_error <- sqrt(rss_variance)
+  interval <- get_interval(rss_mean, n, std_error, alpha, round_digits = 3)
+  lower_bound <- interval$lower_bound
+  upper_bound <- interval$upper_bound
+
+  if (n_rankers == 1) {
+    ci <- paste(lower_bound, upper_bound, sep = ",")
+    estimator_name <- c("RSS-1")
+    summary.table <- data.frame(
+      Estimator = estimator_name,
+      point.est = round(rss_mean, digits = 3),
+      St.error = round(std_error, digits = 3),
+      ci,
+      stringsAsFactors = FALSE
+    )
+    colnames(summary.table)[4] <- ci_col
+
     return(summary.table)
   }
 
+  if (replace) {
+    fc <- 1
+  } else {
+    fc <- 1 - n / (pop_size - 1)
+  }
+  jackknife_estimated <- jackknife_agreement_estimate(data[, -1], y, set_size, pop_size, fc)
+  agreement_mean <- jackknife_estimated$agreement_mean
+  jackknife_var <- jackknife_estimated$jackknife_var
 
-  #################################### 33
-  # agreement weight estimator
-  AW <- data[, -1] # Ranks
-  AW <- t(apply(data.frame(data[, -1]), 1, calculate_agreement_weights, set_size)) # agreemeent weights
-  eff.SS <- apply(AW, 2, sum)
-  Crosprod <- data[, 1] %*% AW
-  W.est <- mean(Crosprod[eff.SS > 0] / eff.SS[eff.SS > 0]) # RSS agreement weight estiamtor
-  AWY <- cbind(data[, 1], AW)
-  Jack.Repl.AWi <- apply(matrix(1:n, ncol = 1), 1, FWDel1, AWY = AWY) # Aggrement weight estimator
-  # when the i-th obseervation is deleted
-  if (replace) fc <- 1 else fc <- 1 - n / (N - 1)
-  J.var <- fc * (n - 1) * var(Jack.Repl.AWi) * ((n - 1) / n)^2 # Jackknife variance estimate  for aggreement weight JPS estimator
-  ##############################################################
+  jackknife_std_error <- sqrt(jackknife_var)
+  jackknife_interval <- get_interval(agreement_mean, n, jackknife_std_error, alpha, round_digits = 3)
+  jackknife_lower_bound <- jackknife_interval$lower_bound
+  jackknife_upper_bound <- jackknife_interval$upper_bound
 
+  lower_bounds <- c(lower_bound, jackknife_lower_bound)
+  upper_bounds <- c(upper_bound, jackknife_upper_bound)
+  std_errors <- c(std_error, jackknife_std_error)
+  means <- c(rss_mean, agreement_mean)
+  cis <- paste(lower_bounds, upper_bounds, sep = ",")
+  estimator_names <- c("RSS-1", " Aggregate Weighted")
 
+  summary.table <- data.frame(
+    Estimator = estimator_names,
+    point.est = round(means, digits = 3),
+    St.error = round(std_errors, digits = 3),
+    cis,
+    stringsAsFactors = F
+  )
+  colnames(summary.table)[4] <- ci_col
 
-  # Jackknife confidence interval based on weighted estimator
-  LWC <- W.est - qt(1 - alpha / 2, n - 1) * sqrt(J.var)
-  UWC <- W.est + qt(1 - alpha / 2, n - 1) * sqrt(J.var)
-
-
-  ############################################################################################
-  #############################################################################################
-  Lower.limit <- round(c(LC, LWC), digits = 3)
-  Upper.limit <- round(c(UC, UWC), digits = 3)
-  ST.error <- c(sqrt(EST[2]), sqrt(J.var))
-  Point.est <- c(EST[1], W.est)
-  Confinterval <- paste(Lower.limit, Upper.limit, sep = ",")
-  Estimator <- c("RSS-1", " Aggregate Weighted")
-  summary.table <- data.frame(Estimator, round(Point.est, digits = 3), round(ST.error, digits = 3), Confinterval, stringsAsFactors = F)
-  colnames(summary.table) <- c("Estimator", "point.est", "St.error", paste((1 - alpha) * 100, "% Confidence Interval", sep = ""))
   return(summary.table)
 }

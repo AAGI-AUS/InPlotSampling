@@ -1,7 +1,7 @@
 #' Generate ranked set sampling (RSS) on the population provided.
 #'
 #' @inheritParams rss_sample_w_replacement
-#' @param with_replacement A boolean which specifies whether to sample with replacement or not.
+#' @param replace A boolean which specifies whether to sample with replacement or not.
 #'
 #' @return A matrix with ranks from each ranker.
 #' @export
@@ -12,7 +12,7 @@
 #' # the number of samples to be ranked in each set
 #' H <- 3
 #'
-#' with_replacement <- FALSE
+#' replace <- FALSE
 #' sigma <- 4
 #' mu <- 10
 #' n_rankers <- 3
@@ -25,7 +25,7 @@
 #' x <- population + tau * rnorm(population_size, 0, 1)
 #'
 #' population <- cbind(population, x)
-#' rss_sample(population, n, H, n_rankers, with_replacement)
+#' rss_sample(population, n, H, n_rankers, replace)
 #' #>            [,1] [,2] [,3] [,4]
 #' #>  [1,]  8.910625    1    3    1
 #' #>  [2,] 12.317145    2    2    1
@@ -37,10 +37,10 @@
 #' #>  [8,]  9.134107    2    1    1
 #' #>  [9,] 12.960431    3    3    1
 #'
-rss_sample <- function(pop, n, H, K, with_replacement = FALSE) {
-  verify_boolean(with_replacement)
+rss_sample <- function(pop, n, H, K, replace = FALSE) {
+  verify_boolean(replace)
 
-  if (with_replacement) {
+  if (replace) {
     return(rss_sample_w_replacement(pop, n, H, K))
   }
   return(rss_sample_wo_replacement(pop, n, H, K))

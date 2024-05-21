@@ -99,7 +99,6 @@ jps_estimate <- function(data, set_size, replace = TRUE, model_based, N, alpha) 
   # observation is deleted
   jps_var_ith_deleted <- jps_estimates[c(3:(n + 2)), ]
   jps_mean_ith_deleted <- jps_estimates[-c(1:(n + 2)), ]
-  # if (replace) fc <- 1 else fc <- 1 - n / N # finite population correction factor
 
   # variance weighted
   jps_var_weighted_mean <- sum((1 / jps_variance_n) * jps_mean_n) / sum(1 / jps_variance_n)
@@ -118,13 +117,9 @@ jps_estimate <- function(data, set_size, replace = TRUE, model_based, N, alpha) 
   jackknife_variance <- fc * (n - 1) * var(jackknife_mean) * ((n - 1) / n)^2
 
   # agreement weighted
-  agreement_weights <- t(apply(data.frame(ranks), 1, calculate_agreement_weights, set_size = set_size))
-  aw_sum <- apply(agreement_weights, 2, sum)
-  cross_product <- y %*% agreement_weights
-  agreement_mean <- mean(cross_product[aw_sum > 0] / aw_sum[aw_sum > 0])
-  awy <- cbind(y, agreement_weights)
-  jackknife_agreement_mean <- apply(matrix(1:n, ncol = 1), 1, FWDel1, AWY = awy)
-  jackknife_agreement_var <- fc * (n - 1) * var(jackknife_agreement_mean) * ((n - 1) / n)^2
+  jackknife_estimated <- jackknife_agreement_estimate(data[, -1], y, set_size, N, fc)
+  agreement_mean <- jackknife_estimated$agreement_mean
+  jackknife_agreement_var <- jackknife_estimated$jackknife_var
 
   estimated_means <- c(jps_mean, jps_var_weighted_mean, agreement_mean, mean_best_ranker, mean(y))
   estimated_variances <- c(

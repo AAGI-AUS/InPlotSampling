@@ -16,8 +16,6 @@ jps_sample(pop, n, H, tau, K, with_replacement = FALSE)
 \item{tau}{A parameter which controls ranking quality.}
 
 \item{K}{Number of rankers.}
-
-\item{with_replacement}{A boolean which specifies whether to sample with replacement or not.}
 }
 \value{
 A matrix with ranks from each ranker.

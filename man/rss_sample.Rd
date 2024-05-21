@@ -4,7 +4,7 @@
 \alias{rss_sample}
 \title{Generate ranked set sampling (RSS) on the population provided.}
 \usage{
-rss_sample(pop, n, H, K, with_replacement = FALSE)
+rss_sample(pop, n, H, K, replace = FALSE)
 }
 \arguments{
 \item{pop}{Population that will be sampled with an auxiliary parameter in the second column.}
@@ -15,7 +15,7 @@ rss_sample(pop, n, H, K, with_replacement = FALSE)
 
 \item{K}{Number of rankers.}
 
-\item{with_replacement}{A boolean which specifies whether to sample with replacement or not.}
+\item{replace}{A boolean which specifies whether to sample with replacement or not.}
 }
 \value{
 A matrix with ranks from each ranker.
@@ -29,7 +29,7 @@ population_size <- 600
 # the number of samples to be ranked in each set
 H <- 3
 
-with_replacement <- FALSE
+replace <- FALSE
 sigma <- 4
 mu <- 10
 n_rankers <- 3
@@ -42,7 +42,7 @@ tau <- sigma * sqrt(1 / rho^2 - 1)
 x <- population + tau * rnorm(population_size, 0, 1)
 
 population <- cbind(population, x)
-rss_sample(population, n, H, n_rankers, with_replacement)
+rss_sample(population, n, H, n_rankers, replace)
 #>            [,1] [,2] [,3] [,4]
 #>  [1,]  8.910625    1    3    1
 #>  [2,] 12.317145    2    2    1

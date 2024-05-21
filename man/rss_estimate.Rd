@@ -2,24 +2,28 @@
 % Please edit documentation in R/rss_estimate.R
 \name{rss_estimate}
 \alias{rss_estimate}
-\title{This function provides estimator for RSS data}
+\title{This function provides an estimator for RSS data}
 \usage{
-rss_estimate(data, set_size, replace, model, N, alpha)
+rss_estimate(data, set_size, replace, model_based, pop_size, alpha)
 }
 \arguments{
-\item{data}{An n by (K+1) dimensional data matrix, the first column is Y-values, the next K coulumns are the ranks of K-ranking methods}
+\item{data}{A matrix with a response variable in the first column and ranks in the following columns.}
 
-\item{set_size}{The set size}
+\item{set_size}{Set size for each ranking group.}
 
-\item{replace}{Logical. Sample with replacement?}
+\item{replace}{A boolean which specifies whether to sample with replacement or not.}
 
-\item{model}{If Modle=0, use design based inference, if model=1, use superpopulation model}
+\item{model_based}{An inference mode:
+\itemize{
+\item \code{FALSE}: design based inference
+\item \code{TRUE}: model based inference using super population model
+}}
 
-\item{N}{The population size}
+\item{pop_size}{The population size. Must be provided if sampling without replacement, or if \code{model} is \code{1}.}
 
-\item{alpha}{The significance level}
+\item{alpha}{A significance level.}
 }
 \description{
-This function provides estimator for RSS data
+This function provides an estimator for RSS data
 }
 \keyword{internal}
