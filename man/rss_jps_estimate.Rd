@@ -61,6 +61,7 @@ n <- 30
 rhos <- rep(0.75, n_rankers)
 taus <- sigma * sqrt(1 / rhos^2 - 1)
 population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
+
 data <- RankedSetSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
 data <- data[order(data[, 2]), ]
 

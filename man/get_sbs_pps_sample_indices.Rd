@@ -14,6 +14,8 @@ get_sbs_pps_sample_indices(population, n, with_unique_pps = FALSE)
 }}
 
 \item{n}{Sample sizes (SBS sample size, PPS sample size).}
+
+\item{with_unique_pps}{A boolean to specify whether to use unique indices for pps sample or not.}
 }
 \value{
 A named list of:

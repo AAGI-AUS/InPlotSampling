@@ -74,6 +74,7 @@ sbs_pps_sample <- function(population, n, n_cores = getOption("n_cores", 1)) {
 #' 1. Halton numbers
 #' 2. Size measurements of population units
 #' @param n Sample sizes (SBS sample size, PPS sample size).
+#' @param with_unique_pps A boolean to specify whether to use unique indices for pps sample or not.
 #'
 #' @return A named list of:
 #' - sbs_pps_indices: sample indices
