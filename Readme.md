@@ -33,7 +33,7 @@ implement Ranked Set Sampling in practice.
 * [Installation](#installation)
 * [Examples](#examples)
   * [JPS Sample and Estimator](#jps-sample-and-estimator)
-  * [JPS Sample and Estimator](#jps-sample-and-estimator-1)
+  * [SBS PPS Sample and Estimator](#sbs-pps-sample-and-estimator)
 * [Citing this package](#citing-this-package)
 * [Related Reference](#related-reference)
 
@@ -67,7 +67,7 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 ### JPS Sample and Estimator
 
 <details>
-  <summary>snippet</summary>
+  <summary>JPS sample and estimator</summary>
 
   ``` r
   set.seed(112)
@@ -108,10 +108,10 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
   ```
 </details>
 
-### JPS Sample and Estimator
+### SBS PPS Sample and Estimator
 
 <details>
-  <summary>snippet</summary>
+  <summary>SBS PPS sample and estimator</summary>
 
   ``` r
   set.seed(112)
