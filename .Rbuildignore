@@ -8,4 +8,6 @@
 ^Readme.Rmd
 ^Readme.md
 JPS_multiranker_Min.pdf
-example.R
+^.devcontainer/
+^assets/
+.lintr
