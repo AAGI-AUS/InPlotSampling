@@ -36,10 +36,10 @@
 #' #>  [9,]  8.701285  2  1  2
 #' #> [10,] 13.323884  3  3  3
 #'
-jps_sample <- function(pop, n, H, tau, K, with_replacement = FALSE) {
-  verify_jps_params(pop, n, H, tau, K, with_replacement)
+jps_sample <- function(pop, n, H, tau, K, replace = FALSE) {
+  verify_jps_params(pop, n, H, tau, K, replace)
 
-  sampling_matrix <- matrix(sample(pop, n * H, replace = with_replacement), ncol = H, nrow = n)
+  sampling_matrix <- matrix(sample(pop, n * H, replace = replace), ncol = H, nrow = n)
 
   # rank each SRS unit post experimentally
   jps_matrix <- matrix(0, ncol = K + 1, nrow = n)

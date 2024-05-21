@@ -7,9 +7,9 @@
 calculate_agreement_weights(ranks, set_size)
 }
 \arguments{
-\item{set_size}{Set size}
+\item{ranks}{Ranking values}
 
-\item{RV}{Ranking values}
+\item{set_size}{Set size}
 }
 \value{
 A vector of agreement weights
