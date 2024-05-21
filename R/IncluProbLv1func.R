@@ -2,7 +2,7 @@ IncluProbLv1 <- function(popsize, sampsize, set, rank) {
   `%dopar%` <- foreach::`%dopar%`
 
   cl <- parallel::makeCluster(7)
-  parallel::registerDoParallel(cl)
+  doParallel::registerDoParallel(cl)
 
   i <- firstorder <- NULL
   # Looping over all members of the population

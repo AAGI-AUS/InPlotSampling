@@ -2,7 +2,7 @@ IncluProbLv2 <- function(popsize, sampsize, set, rank) {
   `%dopar%` <- foreach::`%dopar%`
 
   cl <- parallel::makeCluster(7)
-  parallel::registerDoParallel(cl)
+  doParallel::registerDoParallel(cl)
 
   i <- NULL
   firstorder <- foreach::foreach(i = 1:popsize, .combine = "cbind") %dopar% {

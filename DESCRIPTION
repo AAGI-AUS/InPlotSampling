@@ -30,6 +30,8 @@ Imports:
 Suggests:
     covr,
     testthat,
+    doParallel,
+    foreach,
     parallel
 LinkingTo:
     Rcpp

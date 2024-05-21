@@ -3,7 +3,7 @@ IncluProbLv12 <- function(popsize, sampsize, set, rank, pi) {
   `%:%` <- foreach::`%:%`
 
   cl <- parallel::makeCluster(7)
-  parallel::registerDoParallel(cl)
+  doParallel::registerDoParallel(cl)
 
   # secondorder <- matrix(rep(0, popsize ^ 2), ncol = popsize, nrow = popsize)
 
