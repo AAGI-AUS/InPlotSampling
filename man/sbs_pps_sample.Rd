@@ -17,7 +17,8 @@ sbs_pps_sample(population, n, n_cores = getOption("n_cores", 1))
 
 \item{n}{Sample sizes (SBS sample size, PPS sample size).}
 
-\item{n_cores}{The number of cores to be used for computational tasks (specify 0 for max).}
+\item{n_cores}{The number of cores to be used for computational tasks (specify 0 for max). This can also be
+set by calling \code{options}, e.g., \code{options(n_cores = 2)}.}
 }
 \value{
 A named list of:
