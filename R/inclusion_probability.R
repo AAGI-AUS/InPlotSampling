@@ -53,7 +53,7 @@ calculate_inclusion_prob <- function(size_measurement, n, n_cores = getOption("n
   total_size <- sum(size_measurement)
 
   # switch between a single core and multiple cores
-  if (n_population > 250 && require(parallel) && n_cores > 1) {
+  if (n_population > 250 && requireNamespace("parallel") && n_cores > 1) {
     n_cores <- parallel::detectCores() - 1
 
     # to avoid failure from devtools::check

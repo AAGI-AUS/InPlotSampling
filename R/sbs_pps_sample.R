@@ -6,13 +6,14 @@
 #' 3. X2-coordinate of population unit
 #' 4. Size measurements of population units
 #' @param n Sample sizes (SBS sample size, PPS sample size).
-#' @param n_cores The number of cores to be used for computational tasks (specify 0 for max).
+#' @param n_cores The number of cores to be used for computational tasks (specify 0 for max). This can also be
+#'   set by calling `options`, e.g., `options(n_cores = 2)`.
 #'
 #' @return A named list of:
 #' - heatmap: heat map of the sample
 #' - sample: SBS PPS sample of the population
 #' @export
-
+#'
 #' @examples
 #' set.seed(112)
 #'
