@@ -11,3 +11,5 @@ JPS_multiranker_Min.pdf
 ^.devcontainer/
 ^assets/
 .lintr
+^LICENSE\.md$
+^data-raw/Coombe_2019\.xlsx$

@@ -11,8 +11,8 @@ A data frame with 352 rows and 11 variables:
 \item{rootstock}{The rootstock that the vine is growing on (8 levels)}
 \item{row}{The row in the vineyard (10-20)}
 \item{panel}{The panel of the vines. A pair of vines is grouped into a panel (1-16)}
-\item{trunk_circ_18}{The trunk circumference of the vine in 2018, measured in cm at watering height (\~20 cm above the ground).}
-\item{trunk_circ_19}{The trunk circumference of the vine in 2019, measured in cm at watering height (\~20 cm above the ground).}
+\item{trunk_circ_18}{The trunk circumference of the vine in 2018, measured in cm at watering height (~20 cm above the ground).}
+\item{trunk_circ_19}{The trunk circumference of the vine in 2019, measured in cm at watering height (~20 cm above the ground).}
 \item{count_shoots}{Check this?}
 \item{non_count_shoots}{Check this?}
 \item{total_shoots}{Sum of \code{count_shoot} and \code{non_count_shoot}.}
