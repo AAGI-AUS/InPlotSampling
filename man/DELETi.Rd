@@ -11,9 +11,6 @@ DELETi(i, PASS)
 
 \item{PASS}{Values passed in}
 }
-\value{
-
-}
 \description{
 Title
 }

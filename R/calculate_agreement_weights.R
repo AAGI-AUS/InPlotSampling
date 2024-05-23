@@ -1,6 +1,6 @@
 #' Calculate Agreement Weights
 #'
-#' @param RV Ranking values
+#' @param ranks Ranking values
 #' @param set_size Set size
 #'
 #' @return A vector of agreement weights

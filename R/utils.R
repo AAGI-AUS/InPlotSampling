@@ -1,8 +1,17 @@
 default_tolerance <- .Machine$double.eps^0.5
 
-# is_between <- function(x, lower, upper) {
-#   return(is_between_(lower, upper)(x))
-# }
+get_interval <- function(sample_mean, sample_size, std_error, alpha, round_digits = NULL) {
+  qt_term <- qt(1 - alpha / 2, sample_size - 1)
+  lower_bound <- sample_mean - qt_term * std_error
+  upper_bound <- sample_mean + qt_term * std_error
+
+  if (!is.null(round_digits)) {
+    lower_bound <- round(lower_bound, digits = round_digits)
+    upper_bound <- round(upper_bound, digits = round_digits)
+  }
+
+  return(list(lower_bound = lower_bound, upper_bound = upper_bound))
+}
 
 is_between_ <- function(lower, upper, lower_exclude = FALSE, upper_exclude = FALSE) {
   return(function(x) {
@@ -75,16 +84,13 @@ must_be_ <- function(valid_values) {
   })
 }
 
-verify_one_sample_params <- function(data, set_size, method, confidence, replace, model, pop_size) {
+verify_rss_jps_estimate_params <- function(data, set_size, method, confidence, replace, model_based, pop_size) {
   verify_positive_whole_number(set_size)
-  verify_boolean(replace)
+  verify_boolean(replace, model_based)
   verify_between(confidence, lower = 0, upper = 1)
 
   valid_methods <- c("JPS", "RSS")
   verify_must_be(method, valid_values = valid_methods)
-
-  valid_models <- c(0, 1)
-  verify_must_be(model, valid_values = valid_models)
 
   if (!replace) {
     if (!is.numeric(pop_size)) {
@@ -94,7 +100,7 @@ verify_one_sample_params <- function(data, set_size, method, confidence, replace
     }
   }
 
-  if (model == 1 && !is.numeric(pop_size)) {
+  if (model_based && !is.numeric(pop_size)) {
     stop("The population size `pop_size` must be provided for super-population model")
   }
 }
@@ -124,7 +130,7 @@ verify_rss_params <- function(pop, n, H, K) {
   }
 }
 
-verify_rssnrf_params <- function(pop, n, H, K) {
+verify_rss_wo_replace_params <- function(pop, n, H, K) {
   verify_rss_params(pop, n, H, K)
 
   n_population <- dim(pop)[[1]]

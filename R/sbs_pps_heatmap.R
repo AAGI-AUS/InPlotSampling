@@ -23,7 +23,8 @@ sbs_pps_heatmap <- function(pop, sbs_indices, pps_indices) {
   measured_sizes <- pop[, 4]
 
   heatmap_data <- data.frame(measured_sizes, x1, x2, sbs_or_pps)
-  sbs_pps_data <- dplyr::filter(heatmap_data, sbs_or_pps != 0)
+  sbs_pps_data <- subset(heatmap_data, subset = sbs_or_pps != 0)
+  # sbs_pps_data <- dplyr::filter(heatmap_data, sbs_or_pps != 0)
   heatmap_ <- ggplot2::ggplot(heatmap_data, ggplot2::aes(x2, x1, fill = measured_sizes)) +
     ggplot2::geom_tile() +
     ggplot2::scale_fill_distiller(palette = "RdPu") +
