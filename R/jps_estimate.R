@@ -3,23 +3,21 @@
 #' @param data The data to use for estimation.
 #' @param set_size Set size for each raking group.
 #' @param replace Logical (default `TRUE`). Sample with replacement?
-#' @param model An inference mode:
-#' - `0`: design based inference
-#' - `1`: model based inference using super population model
+#' @param model_based An inference mode:
+#' - `FALSE`: design based inference
+#' - `TRUE`: model based inference using super population model
 #' @param N The population size.
 #' @param alpha The significance level.
 #'
 #' @importFrom stats aggregate qt rnorm sd var
 #'
-#' @return
-#' @keywords internal
+#' @return A `data.frame` with the point estimates provided by JPS estimators along with standard error and
+#'   confidence intervals.
+#' @export
 #'
-JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
+jps_estimate <- function(data, set_size, replace = TRUE, model_based, N, alpha) {
   n_rankers <- ncol(data) - 1
 
-  # if (is.null(N)) {
-  #   stop("Population size N must be provided for sampling without replacement")
-  # }
   if (!replace && is.null(N)) {
     stop("Population size N must be provided for sampling without replacement")
   }
@@ -51,17 +49,21 @@ JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
     fc <- 1 # finite population correction factor
   }
 
-  if (model == 1) {
+  if (model_based == 1) {
     coefd <- coefn
     coef_del <- coef_del1
   }
 
+  ranks <- data[, -1]
+  y <- data[, 1]
   if (n_rankers == 1) {
-    jps_estimates <- JPSEDF(data[, -1], data[, 1], set_size, N, coefd, coef_del, replace, model, n_rankers)
+    jps_estimates <- jps_estimate_single(
+      ranks, y, set_size, N, coefd, coef_del, replace, model_based, n_rankers
+    )
     estimators <- c("JPS", "SRS")
-    means <- round(c(jps_estimates[1], mean(data[, 1])), digits = 3)
+    means <- round(c(jps_estimates[1], mean(y)), digits = 3)
     # TODO: check std error calculation of jps variance
-    std_errors <- round(c(sqrt(jps_estimates[2]), sd(data[, 1]) / sqrt(n)), digits = 3)
+    std_errors <- round(c(sqrt(jps_estimates[2]), sd(y) / sqrt(n)), digits = 3)
 
     lower_bound <- round(means - qt(1 - alpha / 2, n - 1) * std_errors, digits = 3)
     upper_bound <- round(means + qt(1 - alpha / 2, n - 1) * std_errors, digits = 3)
@@ -76,16 +78,16 @@ JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
 
   # more than one ranker
   jps_estimates <- apply(
-    data[, -1],
+    ranks,
     2,
-    JPSEDF,
-    Y = data[, 1],
+    jps_estimate_single,
+    y = y,
     set_size = set_size,
     N = N,
     coef = coefd,
     coef_del = coef_del,
     replace = replace,
-    model = model,
+    model_based = model_based,
     n_rankers
   )
 
@@ -97,7 +99,6 @@ JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
   # observation is deleted
   jps_var_ith_deleted <- jps_estimates[c(3:(n + 2)), ]
   jps_mean_ith_deleted <- jps_estimates[-c(1:(n + 2)), ]
-  # if (replace) fc <- 1 else fc <- 1 - n / N # finite population correction factor
 
   # variance weighted
   jps_var_weighted_mean <- sum((1 / jps_variance_n) * jps_mean_n) / sum(1 / jps_variance_n)
@@ -116,21 +117,17 @@ JPSEF <- function(data, set_size, replace = TRUE, model, N, alpha) {
   jackknife_variance <- fc * (n - 1) * var(jackknife_mean) * ((n - 1) / n)^2
 
   # agreement weighted
-  agreement_weights <- t(apply(data.frame(data[, -1]), 1, calculate_agreement_weights, set_size = set_size))
-  aw_sum <- apply(agreement_weights, 2, sum)
-  cross_product <- data[, 1] %*% agreement_weights
-  agreement_mean <- mean(cross_product[aw_sum > 0] / aw_sum[aw_sum > 0])
-  awy <- cbind(data[, 1], agreement_weights)
-  jackknife_agreement_mean <- apply(matrix(1:n, ncol = 1), 1, FWDel1, AWY = awy)
-  jackknife_agreement_var <- fc * (n - 1) * var(jackknife_agreement_mean) * ((n - 1) / n)^2
+  jackknife_estimated <- jackknife_agreement_estimate(data[, -1], y, set_size, N, fc)
+  agreement_mean <- jackknife_estimated$agreement_mean
+  jackknife_agreement_var <- jackknife_estimated$jackknife_var
 
-  estimated_means <- c(jps_mean, jps_var_weighted_mean, agreement_mean, mean_best_ranker, mean(data[, 1]))
+  estimated_means <- c(jps_mean, jps_var_weighted_mean, agreement_mean, mean_best_ranker, mean(y))
   estimated_variances <- c(
     jackknife_variance,
     jackknife_var_weighted_var,
     jackknife_agreement_var,
     variance_best_ranker,
-    var(data[, 1]) / n
+    var(y) / n
   )
 
   min_variance_index <- which(estimated_variances == min(estimated_variances))

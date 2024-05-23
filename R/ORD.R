@@ -1,6 +1,6 @@
 #################################
 # This function orders the units in comparison set
-# in balanced ran ked set sample
+# in balanced ranked set sample
 # u[1]: is the  judgment rank to be measured
 # u[2:(H+1)]: Y values
 # u[H+2:(2H+1)]: auxilairy value
