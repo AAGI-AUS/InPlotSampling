@@ -32,7 +32,7 @@ test_that("An SBS PPS estimator works for PPS only.", {
 
 test_that("An SBS PPS estimator works for SBS only.", {
   load(test_path("data", "sbs_pps_input.RData"))
-  load(test_path("data", "expected_pps_estimate.RData"))
+  load(test_path("data", "expected_sbs_estimate.RData"))
 
   set.seed(112)
   sample_sizes <- c(20, 0)
