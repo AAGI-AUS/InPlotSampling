@@ -6,7 +6,7 @@ test_that("RSS JPS estimate works with JPS", {
 
 test_that("RSS JPS estimate works with RSS", {
   skip_if(getRversion() < "3.4")
-  load(test_path("data", "rss_data.Rdata")
+  load(test_path("data", "rss_data.Rdata"))
   expect_identical(rss_jps_estimate(Data, 3, "RSS", 0.95, FALSE, FALSE, 600), saved_rss_output)
 })
 
