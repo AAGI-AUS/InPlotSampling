@@ -1,5 +1,4 @@
 test_that("An SBS PPS estimator works.", {
-  skip_if(getRversion() < "3.4")
   load("../sbs_pps_input.RData")
   load("../expected_sbs_pps_estimate.RData")
 
@@ -16,7 +15,6 @@ test_that("An SBS PPS estimator works.", {
 })
 
 test_that("An SBS PPS estimator works for PPS only.", {
-  skip_if(getRversion() < "3.4")
   load("../sbs_pps_input.RData")
   load("../expected_pps_estimate.RData")
 
@@ -33,7 +31,6 @@ test_that("An SBS PPS estimator works for PPS only.", {
 })
 
 test_that("An SBS PPS estimator works for SBS only.", {
-  skip_if(getRversion() < "3.4")
   load("../sbs_pps_input.RData")
   load("../expected_sbs_estimate.RData")
 

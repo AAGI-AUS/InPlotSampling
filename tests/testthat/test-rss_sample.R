@@ -1,5 +1,4 @@
 test_that("RSS has a correct output.", {
-  skip_if(getRversion() < "3.4")
   matrix_ <- matrix(1:200, ncol = 2)
 
   rss_matrix_w_replacement <- rss_sample(matrix_, 100, 10, 2, TRUE)

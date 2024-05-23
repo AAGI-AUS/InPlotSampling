@@ -22,12 +22,12 @@ URL: https://biometryhub.github.io/RankedSetSampling/
 BugReports: https://github.com/biometryhub/RankedSetSampling/issues
 Depends:
     R (>= 3.5.0)
-Imports:
+Imports: 
     Rcpp,
     ggplot2,
     SDaA,
     FNN
-Suggests:
+Suggests: 
     covr,
     testthat,
     parallel
