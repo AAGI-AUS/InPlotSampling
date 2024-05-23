@@ -1,5 +1,5 @@
 test_that("An SBS PPS sample works.", {
-  load("../sbs_pps_input.RData")
+  load(test_path("data", "sbs_pps_input.RData"))
 
   n_sbs <- 20
   n_pps <- 20
@@ -19,7 +19,7 @@ test_that("An SBS PPS sample works.", {
 })
 
 test_that("An SBS PPS sample works for PPS only.", {
-  load("../sbs_pps_input.RData")
+  load(test_path("data", "sbs_pps_input.RData"))
 
   n_sbs <- 0
   n_pps <- 20
@@ -31,7 +31,7 @@ test_that("An SBS PPS sample works for PPS only.", {
 })
 
 test_that("An SBS PPS sample works for SBS only.", {
-  load("../sbs_pps_input.RData")
+  load(test_path("data", "sbs_pps_input.RData"))
 
   n_sbs <- 20
   n_pps <- 0

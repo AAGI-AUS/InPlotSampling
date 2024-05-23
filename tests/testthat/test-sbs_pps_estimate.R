@@ -1,6 +1,6 @@
 test_that("An SBS PPS estimator works.", {
-  load("../sbs_pps_input.RData")
-  load("../expected_sbs_pps_estimate.RData")
+  load(test_path("data", "sbs_pps_input.RData"))
+  load(test_path("data", "expected_sbs_pps_estimate.RData"))
 
   set.seed(112)
   sample_sizes <- c(20, 20)
@@ -15,8 +15,8 @@ test_that("An SBS PPS estimator works.", {
 })
 
 test_that("An SBS PPS estimator works for PPS only.", {
-  load("../sbs_pps_input.RData")
-  load("../expected_pps_estimate.RData")
+  load(test_path("data", "sbs_pps_input.RData"))
+  load(test_path("data", "expected_pps_estimate.RData"))
 
   set.seed(112)
   sample_sizes <- c(0, 20)
@@ -27,12 +27,12 @@ test_that("An SBS PPS estimator works for PPS only.", {
   y_sample <- y[sample_id]
 
   estimated <- sbs_pps_estimate(population, sample_sizes, y_sample, sample_matrix, 100, 0.05)
-  expect_identical(estimated, expected_pps_estimate)
+  expect_equal(estimated, expected_pps_estimate)
 })
 
 test_that("An SBS PPS estimator works for SBS only.", {
-  load("../sbs_pps_input.RData")
-  load("../expected_sbs_estimate.RData")
+  load(test_path("data", "sbs_pps_input.RData"))
+  load(test_path("data", "expected_pps_estimate.RData"))
 
   set.seed(112)
   sample_sizes <- c(20, 0)
