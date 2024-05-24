@@ -9,19 +9,57 @@
 has not yet been a stable, usable release suitable for the
 public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![Codecov test
-coverage](https://codecov.io/gh/biometryhub/RankedSetSampling/branch/master/graph/badge.svg)](https://codecov.io/gh/biometryhub/RankedSetSampling?branch=master)
+coverage](https://codecov.io/gh/biometryhub/RankedSetSampling/branch/main/graph/badge.svg)](https://codecov.io/gh/biometryhub/RankedSetSampling?branch=main)
 [![R build
 status](https://github.com/biometryhub/RankedSetSampling/workflows/R-CMD-check/badge.svg)](https://github.com/biometryhub/RankedSetSampling/actions)
 ![pkgdown](https://github.com/biometryhub/RankedSetSampling/workflows/pkgdown/badge.svg)
 <br> [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1-orange.svg?style=flat-square)](/commits/master)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2021--03--18-yellowgreen.svg)](/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](/commits/main)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2024--05--24-yellowgreen.svg)](/commits/main)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 <!-- badges: end -->
 
 The RankedSetSampling package provides a way for researchers to easily
 implement Ranked Set Sampling in practice.
+
+## Table of Contents
+
+<!-- vim-markdown-toc GFM -->
+
+- [Sampling Methods](#sampling-methods)
+  - [JPS Sampling](#jps-sampling)
+  - [RSS Sampling](#rss-sampling)
+- [Installation](#installation)
+- [Examples](#examples)
+  - [JPS Sample and Estimator](#jps-sample-and-estimator)
+  - [SBS PPS Sample and Estimator](#sbs-pps-sample-and-estimator)
+- [Citing this package](#citing-this-package)
+- [Related Reference](#related-reference)
+
+<!-- vim-markdown-toc -->
+
+## Sampling Methods
+
+### JPS Sampling
+
+Sampling is made following the diagram below.
+
+<figure>
+<img src="man/figures/jps-diagram.drawio.svg"
+alt="JPS sampling diagram" />
+<figcaption aria-hidden="true">JPS sampling diagram</figcaption>
+</figure>
+
+### RSS Sampling
+
+Sampling is made following the diagram below.
+
+<figure>
+<img src="man/figures/rss-diagram.drawio.svg"
+alt="RSS sampling diagram" />
+<figcaption aria-hidden="true">RSS sampling diagram</figcaption>
+</figure>
 
 ## Installation
 
@@ -36,7 +74,7 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 
 This package includes some example data files, which can be seen at
 [population](reference/population.html) and
-[emergence\_ranks](reference/emergence_ranks.html). After installing the
+[emergence_ranks](reference/emergence_ranks.html). After installing the
 package as above, the package can be used as in the following example:
 
 ``` r
@@ -51,13 +89,6 @@ JPS.Estimates <- OneSample(data = emergence_ranks, set_size = 4,
                            pop_size = nrow(population))
 
 print(JPS.Estimates)
-#>          Estimator Estimate Standard Error 95% Confidence intervals
-#> 1       UnWeighted    1.117          0.238              0.606,1.627
-#> 2      Sd.Weighted    1.114          0.253              0.572,1.656
-#> 3 Aggregate Weight    1.108          0.210              0.657,1.559
-#> 4     JPS Estimate    1.021          0.269              0.443,1.599
-#> 5     SRS estimate    1.200          0.262              0.638,1.762
-#> 6          Minimum    1.108          0.210              0.657,1.559
 ```
 
 # Citing this package
@@ -65,13 +96,12 @@ print(JPS.Estimates)
 This package can be cited using `citation("RankedSetSampling")` which
 generates
 
-
     To cite package 'RankedSetSampling' in publications use:
 
-      Omer Ozturk, Sam Rogers, Olena Kravchuk and Peter Kasprzak (2021).
-      RankedSetSampling: Easing the Application of Ranked Set Sampling in
-      Practice. R package version 0.0.1.
-      https://biometryhub.github.io/RankedSetSampling/
+      Ozturk O, Rogers S, Kravchuk O, Kasprzak P (2021).
+      _RankedSetSampling: Easing the Application of Ranked Set Sampling in
+      Practice_. R package version 0.1.0,
+      <https://biometryhub.github.io/RankedSetSampling/>.
 
     A BibTeX entry for LaTeX users is
 
@@ -79,13 +109,14 @@ generates
         title = {RankedSetSampling: Easing the Application of Ranked Set Sampling in Practice},
         author = {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprzak},
         year = {2021},
-        note = {R package version 0.0.1},
+        note = {R package version 0.1.0},
         url = {https://biometryhub.github.io/RankedSetSampling/},
       }
 
 # Related Reference
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-Ozturk2021" class="csl-entry">
 

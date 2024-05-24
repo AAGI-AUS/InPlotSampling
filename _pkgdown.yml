@@ -3,17 +3,18 @@ url: https://biometryhub.github.io/RankedSetSampling/
 destination: docs
 
 template:
+  bootstrap: 5
   params:
     ganalytics: G-K4JQ08EC5Q
 
-reference:
-- title: Functions
-  desc: The Key Function for Ranked Set Sampling Analysis
-- contents:
-  - starts_with("one")
-- title: Data
-  desc: Data Files for Demonstration
-- contents:
-  - coombe2019
-  - population
-  - emergence_ranks
+# reference:
+# - title: Functions
+#   desc: The Key Function for Ranked Set Sampling Analysis
+# - contents:
+#   - starts_with("one")
+# - title: Data
+#   desc: Data Files for Demonstration
+# - contents:
+#   - coombe2019
+#   - population
+#   - emergence_ranks

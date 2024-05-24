@@ -11,9 +11,6 @@ TRIPLEF(uv, H, n)
 
 \item{n}{The sample size}
 }
-\value{
-
-}
 \description{
 Calculate the triple sum
 }

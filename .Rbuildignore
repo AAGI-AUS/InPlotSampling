@@ -8,4 +8,8 @@
 ^Readme.Rmd
 ^Readme.md
 JPS_multiranker_Min.pdf
-example.R
+^.devcontainer/
+^assets/
+.lintr
+^LICENSE\.md$
+^data-raw/Coombe_2019\.xlsx$

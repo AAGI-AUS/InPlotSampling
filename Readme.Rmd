@@ -1,6 +1,6 @@
 ---
 output: github_document
-bibliography: Reference.bib
+bibliography: inst/Reference.bib
 nocite: | 
   @Ozturk2021
 ---
@@ -11,7 +11,7 @@ nocite: |
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/Readme-",
+  fig.path = "man/figures",
   out.width = "100%"
 )
 ```
@@ -26,17 +26,47 @@ min.r <- substr(description[,"Depends"], 7, 11)
 
 <!-- badges: start -->
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
-[![Codecov test coverage](https://codecov.io/gh/biometryhub/RankedSetSampling/branch/master/graph/badge.svg)](https://codecov.io/gh/biometryhub/RankedSetSampling?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/biometryhub/RankedSetSampling/branch/main/graph/badge.svg)](https://codecov.io/gh/biometryhub/RankedSetSampling?branch=main)
 [![R build status](https://github.com/biometryhub/RankedSetSampling/workflows/R-CMD-check/badge.svg)](https://github.com/biometryhub/RankedSetSampling/actions)
 ![pkgdown](https://github.com/biometryhub/RankedSetSampling/workflows/pkgdown/badge.svg)
 <br>
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-`r min.r`-6666ff.svg)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-`r gsub('-', '--', version)`-orange.svg?style=flat-square)](/commits/master)
-[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-`r gsub('-', '--', version)`-orange.svg?style=flat-square)](/commits/main)
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/main)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 <!-- badges: end -->
 
 The RankedSetSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice.
+
+## Table of Contents
+
+<!-- vim-markdown-toc GFM -->
+
+* [Sampling Methods](#sampling-methods)
+  * [JPS Sampling](#jps-sampling)
+  * [RSS Sampling](#rss-sampling)
+* [Installation](#installation)
+* [Examples](#examples)
+  * [JPS Sample and Estimator](#jps-sample-and-estimator)
+  * [SBS PPS Sample and Estimator](#sbs-pps-sample-and-estimator)
+* [Citing this package](#citing-this-package)
+* [Related Reference](#related-reference)
+
+<!-- vim-markdown-toc -->
+
+## Sampling Methods
+
+### JPS Sampling
+
+Sampling is made following the diagram below.
+
+![JPS sampling diagram](man/figures/jps-diagram.drawio.svg)
+
+### RSS Sampling
+
+Sampling is made following the diagram below.
+
+![RSS sampling diagram](man/figures/rss-diagram.drawio.svg)
 
 ## Installation
 
@@ -53,7 +83,7 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 
 This package includes some example data files, which can be seen at [population](reference/population.html) and [emergence_ranks](reference/emergence_ranks.html). After installing the package as above, the package can be used as in the following example:
 
-```{r}
+```{r, eval=FALSE}
 # load the package
 library(RankedSetSampling)
 
