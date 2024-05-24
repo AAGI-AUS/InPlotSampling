@@ -1,57 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//index.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/404.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/CoefF.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/DELETi.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/JPSD2F.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/Readme.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/JPSED0F.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/authors.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/JPSEDF.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/index.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/JPSEF.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/DELETi.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/JPSLF.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/RankedSetSampling.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/ListF.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/TRIPLEF.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/OneSample.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/bootstrap_sample.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/RSSED2F.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/calculate_agreement_weights.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/RSSEF.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/calculate_coefficients.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/RankedSetSampling.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/calculate_first_order_prob.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/TRIPLEF.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/calculate_inclusion_prob.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/WEIGHTF.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/coombe2019.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/coombe2019.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/emergence_ranks.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/emergence_ranks.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/get_empirical_population.html</loc>
   </url>
   <url>
-    <loc>https://biometryhub.github.io/RankedSetSampling//reference/population.html</loc>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/get_sbs_pps_sample_indices.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/impute_w_knn.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/jps_estimate.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/jps_estimate_single.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/jps_sample.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/population.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/rss_estimate.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/rss_estimate_single.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/rss_jps_estimate.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/rss_sample.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/rss_sample_w_replacement.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/rss_sample_wo_replacement.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/sbs_pps_estimate.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/sbs_pps_heatmap.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/sbs_pps_sample.html</loc>
+  </url>
+  <url>
+    <loc>https://biometryhub.github.io/RankedSetSampling/reference/single_bootstrap.html</loc>
   </url>
 </urlset>
