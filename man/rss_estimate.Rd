@@ -19,7 +19,11 @@ rss_estimate(data, set_size, replace, model_based, pop_size, alpha)
 \item \code{TRUE}: model based inference using super population model
 }}
 
-\item{pop_size}{The population size. Must be provided if sampling without replacement, or if \code{model} is \code{1}.}
+\item{pop_size}{The population size. Must be provided if
+\itemize{
+\item sampling without replacement, or
+\item \code{model_based} is \code{TRUE}.
+}}
 
 \item{alpha}{A significance level.}
 }

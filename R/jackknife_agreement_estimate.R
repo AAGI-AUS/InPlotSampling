@@ -1,4 +1,6 @@
 # TODO: add doc
+#' @keywords internal
+#'
 jackknife_agreement_estimate <- function(ranks, y, set_size, pop_size, fc) {
   n <- nrow(ranks)
 

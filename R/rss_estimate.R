@@ -6,7 +6,9 @@
 #' @param model_based An inference mode:
 #' - `FALSE`: design based inference
 #' - `TRUE`: model based inference using super population model
-#' @param pop_size The population size. Must be provided if sampling without replacement, or if `model` is `1`.
+#' @param pop_size The population size. Must be provided if
+#' - sampling without replacement, or
+#' - `model_based` is `TRUE`.
 #' @param alpha A significance level.
 #'
 #' @return

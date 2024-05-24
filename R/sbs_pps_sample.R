@@ -1,6 +1,6 @@
 #' Generate probability proportional to size (PPS) and spatially balanced sampling on the population provided.
 #'
-#' @param population Population data frame to be sampled with 5 columns.
+#' @param population Population data frame to be sampled with 4 columns.
 #' 1. Halton numbers
 #' 2. X1-coordinate of population unit
 #' 3. X2-coordinate of population unit

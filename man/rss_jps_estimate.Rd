@@ -35,7 +35,11 @@ rss_jps_estimate(
 \item \code{TRUE}: model based inference using super population model
 }}
 
-\item{pop_size}{The population size. Must be provided if sampling without replacement, or if \code{model} is \code{1}.}
+\item{pop_size}{The population size. Must be provided if
+\itemize{
+\item sampling without replacement, or
+\item \code{model_based} is \code{TRUE}.
+}}
 }
 \value{
 A \code{data.frame} with the point estimates provided by different types of estimators along with standard
