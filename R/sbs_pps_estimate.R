@@ -1,11 +1,6 @@
 #' Compute an estimator for SBS PPS sampled data.
 #'
-#' @param population Population data frame to be sampled with 4 columns.
-#' 1. Halton numbers
-#' 2. X1-coordinate of population unit
-#' 3. X2-coordinate of population unit
-#' 4. Size measurement of population unit
-#' @param n Sample sizes (SBS sample size, PPS sample size).
+#' @inheritParams sbs_pps_sample
 #' @param y Sample response values.
 #' @param sample_matrix Sample data frame to be sampled with 6 columns.
 #' 1. Halton numbers
@@ -16,7 +11,6 @@
 #' 6. Inclusion probability
 #' @param n_bootstraps Number of bootstrap samples.
 #' @param alpha The significance level.
-#' @param n_cores The number of cores to be used for computational tasks (specify 0 for max).
 #'
 #' @return A summary data frame of the estimator.
 #' @export

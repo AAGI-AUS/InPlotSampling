@@ -6,6 +6,7 @@
 #' @param total_size Sum of size measurement.
 #'
 #' @return A vector of inclusion probabilities.
+#' @keywords internal
 #'
 calculate_first_order_prob <- function(i, size_measurement, n, total_size) {
   n_population <- length(size_measurement)
@@ -47,6 +48,7 @@ calculate_first_order_prob <- function(i, size_measurement, n, total_size) {
 #' @param n_cores The number of cores to be used for computational tasks (specify 0 for max).
 #'
 #' @return A vector of inclusion probabilities.
+#' @keywords internal
 #'
 calculate_inclusion_prob <- function(size_measurement, n, n_cores = getOption("n_cores", 1)) {
   n_population <- length(size_measurement)

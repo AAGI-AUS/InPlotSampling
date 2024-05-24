@@ -21,3 +21,4 @@ A vector of inclusion probabilities.
 \description{
 Calculate first order inclusion probability.
 }
+\keyword{internal}

@@ -7,7 +7,7 @@
 sbs_pps_sample(population, n, n_cores = getOption("n_cores", 1))
 }
 \arguments{
-\item{population}{Population data frame to be sampled with 5 columns.
+\item{population}{Population data frame to be sampled with 4 columns.
 \enumerate{
 \item Halton numbers
 \item X1-coordinate of population unit

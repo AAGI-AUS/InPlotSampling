@@ -20,7 +20,7 @@ sbs_pps_estimate(
 \item Halton numbers
 \item X1-coordinate of population unit
 \item X2-coordinate of population unit
-\item Size measurement of population unit
+\item Size measurements of population units
 }}
 
 \item{n}{Sample sizes (SBS sample size, PPS sample size).}
@@ -41,7 +41,8 @@ sbs_pps_estimate(
 
 \item{alpha}{The significance level.}
 
-\item{n_cores}{The number of cores to be used for computational tasks (specify 0 for max).}
+\item{n_cores}{The number of cores to be used for computational tasks (specify 0 for max). This can also be
+set by calling \code{options}, e.g., \code{options(n_cores = 2)}.}
 }
 \value{
 A summary data frame of the estimator.

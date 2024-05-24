@@ -23,3 +23,4 @@ A vector of inclusion probabilities.
 \description{
 Calculate inclusion probabilities.
 }
+\keyword{internal}
