@@ -7,7 +7,7 @@
 calculate_coefficients(H, n)
 }
 \arguments{
-\item{H}{Set size for each raking group.}
+\item{H}{Set size for each ranking group.}
 
 \item{n}{Sample size.}
 }

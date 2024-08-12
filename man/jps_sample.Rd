@@ -4,20 +4,22 @@
 \alias{jps_sample}
 \title{Generate JPS sampling on the provided population.}
 \usage{
-jps_sample(pop, n, H, tau, K, replace = FALSE)
+jps_sample(pop, n, H, tau, K, replace = FALSE, with_index = FALSE)
 }
 \arguments{
-\item{pop}{Population that will be sampled with an auxiliary parameter in the second column.}
+\item{pop}{Population that will be sampled.}
 
 \item{n}{Sample size.}
 
-\item{H}{Set size for each raking group.}
+\item{H}{Set size for each ranking group.}
 
 \item{tau}{A parameter which controls ranking quality.}
 
 \item{K}{Number of rankers.}
 
 \item{replace}{A boolean which specifies whether to sample with replacement or not.}
+
+\item{with_index}{A boolean which specifies whether to return the index of the sampled population.}
 }
 \value{
 A matrix with ranks from each ranker.

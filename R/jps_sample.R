@@ -1,7 +1,12 @@
 #' Generate JPS sampling on the provided population.
 #'
-#' @inheritParams rss_sample
+#' @param pop Population that will be sampled.
+#' @param n Sample size.
+#' @param H Set size for each ranking group.
+#' @param K Number of rankers.
 #' @param tau A parameter which controls ranking quality.
+#' @param replace A boolean which specifies whether to sample with replacement or not.
+#' @param with_index A boolean which specifies whether to return the index of the sampled population.
 #'
 #' @return A matrix with ranks from each ranker.
 #' @export
@@ -36,10 +41,11 @@
 #' #>  [9,]  8.701285  2  1  2
 #' #> [10,] 13.323884  3  3  3
 #'
-jps_sample <- function(pop, n, H, tau, K, replace = FALSE) {
-  verify_jps_params(pop, n, H, tau, K, replace)
+jps_sample <- function(pop, n, H, tau, K, replace = FALSE, with_index = FALSE) {
+  verify_jps_params(pop, n, H, tau, K, replace, with_index)
 
-  sampling_matrix <- matrix(sample(pop, n * H, replace = replace), ncol = H, nrow = n)
+  sampling_indices <- sample(seq_along(pop), n * H, replace = replace)
+  sampling_matrix <- matrix(pop[sampling_indices], ncol = H, nrow = n)
 
   # rank each SRS unit post experimentally
   jps_matrix <- matrix(0, ncol = K + 1, nrow = n)
@@ -55,6 +61,10 @@ jps_sample <- function(pop, n, H, tau, K, replace = FALSE) {
   }
 
   colnames(jps_matrix) <- c("Y", paste0("R", 1:K))
+  if (with_index) {
+    jps_matrix <- cbind(sampling_indices[1:n], jps_matrix)
+    colnames(jps_matrix)[1] <- "i"
+  }
+
   return(jps_matrix)
 }
-#' @export

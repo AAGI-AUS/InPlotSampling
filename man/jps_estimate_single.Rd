@@ -21,7 +21,7 @@ jps_estimate_single(
 
 \item{y}{Response measurements.}
 
-\item{set_size}{Set size for each raking group.}
+\item{set_size}{Set size for each ranking group.}
 
 \item{N}{Finite population size.}
 

@@ -11,7 +11,7 @@ rss_sample_wo_replacement(pop, n, H, K)
 
 \item{n}{Sample size.}
 
-\item{H}{Set size for each raking group.}
+\item{H}{Set size for each ranking group.}
 
 \item{K}{Number of rankers.}
 }

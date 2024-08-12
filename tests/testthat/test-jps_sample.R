@@ -20,5 +20,6 @@ test_that("Inputs are valid.", {
   expect_error(jps_sample(population, 30, 2, tau, 4), "The length of `tau` must equal to `K`.")
   expect_error(jps_sample(population, 50, 4, tau, k), "The number of population must be at least `nH`.")
   expect_error(jps_sample(population, 10, 20, tau, k), "`n` must >= `H`.")
-  expect_error(jps_sample(population, 30, 2, tau, k, "T"), "`with_replacement` must be a boolean.")
+  expect_error(jps_sample(population, 30, 2, tau, k, "T"), "`replace` must be a boolean.")
+  expect_error(jps_sample(population, 30, 2, tau, k, TRUE, "T"), "`with_index` must be a boolean.")
 })

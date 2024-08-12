@@ -139,9 +139,9 @@ verify_rss_wo_replace_params <- function(pop, n, H, K) {
   }
 }
 
-verify_jps_params <- function(pop, n, H, tau, K, with_replacement) {
+verify_jps_params <- function(pop, n, H, tau, K, replace, with_index) {
   verify_positive_whole_number(n, H, K)
-  verify_boolean(with_replacement)
+  verify_boolean(replace, with_index)
 
   if (n < H) {
     stop("`n` must >= `H`.")
@@ -153,7 +153,7 @@ verify_jps_params <- function(pop, n, H, tau, K, with_replacement) {
   }
 
   n_population <- length(pop)
-  if (!with_replacement) {
+  if (!replace) {
     if (n_population < n * H) {
       stop("The number of population must be at least `nH`.")
     }
