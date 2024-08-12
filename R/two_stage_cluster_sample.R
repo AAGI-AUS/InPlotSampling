@@ -4,10 +4,13 @@
 #' 1. Parent id: an index to denotes the parent of the record
 #' 2. Parent auxiliary parameter: an auxiliary parameter for ranking parents
 #' 3. Child auxiliary parameter: an auxiliary parameter for ranking children
-#' @param sampling_strategies (first stage sampling strategy, second stage sampling strategy)
+#' @param sampling_strategies (first stage sampling strategy, second stage sampling strategy), e.g.,
+#'   `c('srs', 'jps')`.
 #' - `'srs'`: simple random sampling without replacement
 #' - `'jps'`: JPS sampling without replacement
 #' - `'jps_replace'`: JPS sampling with replacement
+#' @param n Number of samples to be ranked in the first stage.
+#' @param H Set size for each ranking group in the first stage.
 #'
 #' @return A matrix with ranks from each ranker.
 #' @export
@@ -45,4 +48,17 @@
 #'
 two_stage_cluster_sample <- function(pop, sampling_strategies, n, H, ni, Hi) {
   verify_boolean(replace)
+
+  parent <- unique(pop[, c(1, 2)])
+  first_stage_strategy <- sampling_strategies[1]
+  second_stage_strategy <- sampling_strategies[2]
+
+  if (first_stage_strategy == "srs") {
+    first_stage_indices <- sample(parent[, 1], n)
+  } else if (first_stage_strategy == "jps") {
+    first_stage_indices <- jps_sample(parent, n, H, 0, 1, FALSE)
+  } else if (first_stage_strategy == "jps_replace") {
+    first_stage_indices <- jps_sample(parent, n, H, 0, 1, TRUE)
+  }
+  first_stage_indices
 }

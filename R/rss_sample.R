@@ -50,7 +50,7 @@ rss_sample <- function(pop, n, H, K, replace = FALSE) {
 #'
 #' @param pop Population that will be sampled with an auxiliary parameter in the second column.
 #' @param n Sample size.
-#' @param H Set size for each raking group.
+#' @param H Set size for each ranking group.
 #' @param K Number of rankers.
 #'
 #' @return A matrix with ranks from each ranker.
