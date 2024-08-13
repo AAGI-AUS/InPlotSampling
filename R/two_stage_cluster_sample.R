@@ -8,9 +8,14 @@
 #'   `c('srs', 'jps')`.
 #' - `'srs'`: simple random sampling without replacement
 #' - `'jps'`: JPS sampling
-#' @param n Number of samples to be ranked in the first stage.
+#' @param n Number of samples in the first stage.
 #' @param H Set size for each ranking group in the first stage.
 #' @param replace A boolean which specifies whether to sample with replacement or not in the first stage
+#'   (applicable only for JPS sampling).
+#' @param ni Number(s) of samples in the second stage. Can be a single number or a vector of `n` numbers.
+#' @param Hi Set size for each ranking group in the second stage. Can be a single number or a vector of `n`
+#'   numbers.
+#' @param replace_i A boolean which specifies whether to sample with replacement or not in the second stage
 #'   (applicable only for JPS sampling).
 #'
 #' @return A matrix with ranks from each ranker.
@@ -50,21 +55,47 @@
 two_stage_cluster_sample <- function(pop, sampling_strategies, n, H, replace, ni, Hi, replace_i) {
   # TODO: verify params and add tests
 
+  pop <- cbind(pop, seq_len(dim(pop)[1]))
   parent <- unique(pop[, c(1, 2)])
-  first_stage_strategy <- sampling_strategies[1]
-  second_stage_strategy <- sampling_strategies[2]
+  first_strategy <- sampling_strategies[1]
+  second_strategy <- sampling_strategies[2]
 
   # first stage
-  if (first_stage_strategy == "srs") {
+  if (first_strategy == "srs") {
     first_stage_indices <- sample(seq_len(dim(parent)[1]), n)
     first_stage_sample <- cbind(parent[first_stage_indices, ], 0)
-  } else if (first_stage_strategy == "jps") {
+  } else if (first_strategy == "jps") {
     first_stage_sample <- jps_sample(parent[, 2], n, H, 0, 1, replace, TRUE)
 
     first_stage_indices <- first_stage_sample[, 1]
     first_stage_sample[, 1] <- parent[first_stage_indices, 1]
   }
   first_stage_sample <- first_stage_sample[, c(1, 3)]
+  # first_sampled_pop <- pop[pop[, 1] %in% first_stage_indices, ]
+
+  if (length(ni) == 1) {
+    ni <- rep(ni, n)
+  }
+  if (length(Hi) == 1) {
+    Hi <- rep(Hi, n)
+  }
+
+  sampling_matrix <- matrix(nrow = 0, ncol = 5)
+  for (i in 1:n) {
+    parent_filter <- pop[, 1] == first_stage_sample[i, 1]
+    children <- pop[parent_filter, c(4, 3)]
+
+    if (second_strategy == "srs") {
+      second_stage_indices <- sample(seq_len(dim(children)[1]), ni[i])
+      second_stage_sample <- cbind(children[second_stage_indices, ], 0)
+    } else if (second_strategy == "jps") {
+      second_stage_sample <- jps_sample(children[, 2], ni[i], Hi[i], 0, 1, replace, TRUE)
+
+      second_stage_indices <- second_stage_sample[, 1]
+      second_stage_sample[, 1] <- children[second_stage_indices, 1]
+    }
+    print(second_stage_sample)
+  }
 
   return(first_stage_sample)
 }
@@ -87,14 +118,4 @@ parent_aux <- abs(qnorm(1:parent_size / (parent_size + 1), mu, sigma) + 5 * rnor
 child_aux <- abs(parent_aux + 10 * rnorm(parent_size * child_size, 0, 1))
 
 population <- cbind(parent_indices, rep(parent_aux, child_size), child_aux)
-two_stage_cluster_sample(population, sampling_strategies, n, H, replace, 0, 0, 0)
-#>            [,1] [,2] [,3] [,4]
-#>  [1,]  8.910625    1    3    1
-#>  [2,] 12.317145    2    2    1
-#>  [3,] 11.619746    3    3    2
-#>  [4,]  8.307549    1    2    1
-#>  [5,]  5.089992    2    2    3
-#>  [6,]  7.233575    3    3    3
-#>  [7,] 11.601654    1    2    2
-#>  [8,]  9.134107    2    1    1
-#>  [9,] 12.960431    3    3    1
+two_stage_cluster_sample(population, sampling_strategies, n, H, replace, 6, 3, FALSE)
