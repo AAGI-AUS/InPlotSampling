@@ -68,6 +68,15 @@ is_whole_number <- function(x, tol = default_tolerance) {
   return(abs(x - round(x)) < tol)
 }
 
+is_positive_whole_numbers <- function(x, tol = default_tolerance) {
+  for (i in x) {
+    if (!is_positive_whole_number(i, tol)) {
+      return(FALSE)
+    }
+  }
+  return(TRUE)
+}
+
 must_be <- function(x, valid_values) {
   return(must_be_(valid_values)(x))
 }
@@ -160,6 +169,28 @@ verify_jps_params <- function(pop, n, H, tau, K, replace, with_index) {
   }
 }
 
+verify_two_stage_params <- function(pop, sampling_strategies, n, H, replace, ni, Hi, replace_i) {
+  verify_positive_whole_number(n, H)
+  verify_boolean(replace, replace_i)
+  verify_boolean(ni, Hi)
+
+  if (n < H) {
+    stop("`n` must >= `H`.")
+  }
+
+
+  if (length(tau) != K) {
+    stop("The length of `tau` must equal to `K`.")
+  }
+
+  n_population <- length(pop)
+  if (!replace) {
+    if (n_population < n * H) {
+      stop("The number of population must be at least `nH`.")
+    }
+  }
+}
+
 verify_between <- function(
     ..., lower = -Inf, upper = Inf, lower_exclude = FALSE, upper_exclude = FALSE, var_names = NULL) {
   if (lower != -Inf && upper != Inf) {
@@ -222,6 +253,10 @@ verify_non_negative_whole <- function(..., var_names = NULL) {
 
 verify_positive_whole_number <- function(..., var_names = NULL) {
   verify_data_type(is_positive_whole_number, "a positive whole number", var_names, ...)
+}
+
+verify_positive_whole_numbers <- function(..., var_names = NULL) {
+  verify_data_type(is_positive_whole_numbers, "a vector of positive whole numbers", var_names, ...)
 }
 
 verify_must_be <- function(..., valid_values, var_names = NULL) {
