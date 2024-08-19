@@ -11,6 +11,8 @@ test_that("Two-stage cluster sample has a correct output.", {
 
   jps_jps_matrix <- two_stage_cluster_sample(population, c("jps", "jps"), 4, 3, FALSE, 6, 3, FALSE)
   expect_equal(dim(jps_jps_matrix), c(24, 5))
+  expect_true(all(jps_jps_matrix[, 2] %in% 1:3))
+  expect_true(all(jps_jps_matrix[, 5] %in% 1:3))
 
   srs_jps_matrix <- two_stage_cluster_sample(population, c("srs", "jps"), 4, 3, FALSE, 6, 3, FALSE)
   expect_equal(dim(srs_jps_matrix), c(24, 5))
