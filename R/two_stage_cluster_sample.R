@@ -67,7 +67,7 @@
 #' #> [24,]       223           3     9523  8.1783058          1
 #'
 two_stage_cluster_sample <- function(pop, sampling_strategies, n, H, replace, ni, Hi, replace_i) {
-  # TODO: verify params and add tests
+  verify_two_stage_params(pop, sampling_strategies, n, H, replace, ni, Hi, replace_i)
 
   pop <- cbind(pop, seq_len(dim(pop)[1]))
   parent <- unique(pop[, c(1, 2)])

@@ -172,19 +172,34 @@ verify_jps_params <- function(pop, n, H, tau, K, replace, with_index) {
 verify_two_stage_params <- function(pop, sampling_strategies, n, H, replace, ni, Hi, replace_i) {
   verify_positive_whole_number(n, H)
   verify_boolean(replace, replace_i)
-  verify_boolean(ni, Hi)
+  verify_positive_whole_numbers(ni, Hi)
+
+  if (length(ni) != 1 && length(ni) != n) {
+    stop("`ni` must be a vector of 1 or `n` values.")
+  }
+
+  if (length(Hi) != 1 && length(Hi) != n) {
+    stop("`Hi` must be a vector of 1 or `n` values.")
+  }
+
+  if (length(sampling_strategies) != 2) {
+    stop("`sampling_strategies` must be a vector of 2 values.")
+  }
+
+  if (!all(sampling_strategies %in% c("srs", "jps"))) {
+    stop("`sampling_strategies` must be a vector of `'srs'` and/or `'jps'`.")
+  }
 
   if (n < H) {
-    stop("`n` must >= `H`.")
+    stop("`n` must be at least `H`.")
   }
 
-
-  if (length(tau) != K) {
-    stop("The length of `tau` must equal to `K`.")
+  if (!all(ni >= Hi)) {
+    stop("ith value of `ni` must be at least ith value of `Hi`.")
   }
 
-  n_population <- length(pop)
-  if (!replace) {
+  n_population <- dim(pop)[[1]]
+  if (!replace && sampling_strategies[1] == "jps") {
     if (n_population < n * H) {
       stop("The number of population must be at least `nH`.")
     }
