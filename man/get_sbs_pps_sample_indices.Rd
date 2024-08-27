@@ -29,3 +29,4 @@ A named list of:
 \description{
 Generate SBS PPS sample indices.
 }
+\keyword{internal}

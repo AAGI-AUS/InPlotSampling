@@ -1,6 +1,6 @@
 #' This function computes the coefficient of variance estimator
 #'
-#' @param H Set size for each raking group.
+#' @param H Set size for each ranking group.
 #' @param n Sample size.
 #'
 #' @return

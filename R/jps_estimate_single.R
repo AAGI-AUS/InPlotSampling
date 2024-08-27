@@ -2,7 +2,7 @@
 #'
 #' @param ranks Ranks of Y.
 #' @param y Response measurements.
-#' @param set_size Set size for each raking group.
+#' @param set_size Set size for each ranking group.
 #' @param N Finite population size.
 #' @param coef Coefficients used in variance computation when sample size is n.
 #' @param coef_del Coefficients used in variance computation when the i-th unit is deleted.

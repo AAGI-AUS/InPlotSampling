@@ -9,7 +9,7 @@ jps_estimate(data, set_size, replace = TRUE, model_based, N, alpha)
 \arguments{
 \item{data}{The data to use for estimation.}
 
-\item{set_size}{Set size for each raking group.}
+\item{set_size}{Set size for each ranking group.}
 
 \item{replace}{Logical (default \code{TRUE}). Sample with replacement?}
 
