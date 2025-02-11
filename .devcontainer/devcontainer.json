@@ -1,9 +1,14 @@
 {
   "name": "tidyverse-container",
-  "image": "ghcr.io/rocker-org/devcontainer/r-ver:4"
+  "image": "ghcr.io/rocker-org/devcontainer/r-ver:4",
   "features": {
     "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-      "packages": "pacman"
+      "packages": [
+        "pacman",
+        "ggplot2",
+        "SDaA",
+        "FNN"
+      ]
     }
   }
 }
