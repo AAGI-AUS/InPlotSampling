@@ -1,4 +1,4 @@
 library(testthat)
-library(RankedSetSampling)
+library(InPlotSampling)
 
-test_check("RankedSetSampling")
+test_check("InPlotSampling")
