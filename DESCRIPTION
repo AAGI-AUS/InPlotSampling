@@ -1,5 +1,5 @@
 Type: Package
-Package: RankedSetSampling
+Package: InPlotSampling
 Title: Easing the Application of Ranked Set Sampling in Practice
 Version: 0.1.0
 Date: 2021-02-09
@@ -11,15 +11,15 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-5291-3600")),
     person("Peter", "Kasprzak", , "peter.kasprzak@adelaide.edu.au", role = "aut")
   )
-Description: The RankedSetSampling package provides a way for researchers
+Description: The InPlotSampling package provides a way for researchers
     to easily implement Ranked Set Sampling in practice.  Ranked Set
     Sampling was originally described by McIntyre (1952) (reprinted in
     2005) <doi:10.1198/000313005X54180>. This package takes work by Omer
     and Kravchuk (2021) <https://doi.org/10.1007/s13253-021-00439-1> and
     enables easy use of the methods.
 License: MIT + file LICENSE
-URL: https://biometryhub.github.io/RankedSetSampling/
-BugReports: https://github.com/biometryhub/RankedSetSampling/issues
+URL: https://biometryhub.github.io/InPlotSampling/
+BugReports: https://github.com/biometryhub/InPlotSampling/issues
 Depends:
     R (>= 3.5.0)
 Imports: 
@@ -36,4 +36,4 @@ LinkingTo:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

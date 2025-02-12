@@ -66,7 +66,7 @@ rhos <- rep(0.75, n_rankers)
 taus <- sigma * sqrt(1 / rhos^2 - 1)
 population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
 
-data <- RankedSetSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
+data <- InPlotSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
 data <- data[order(data[, 2]), ]
 
 rss_jps_estimate(
@@ -105,7 +105,7 @@ tau <- sigma * sqrt(1 / rho^2 - 1)
 x <- population + tau * rnorm(population_size, 0, 1)
 
 population <- cbind(population, x)
-data <- RankedSetSampling::rss_sample(population, n, H, n_rankers, with_replacement)
+data <- InPlotSampling::rss_sample(population, n, H, n_rankers, with_replacement)
 data <- data[order(data[, 2]), ]
 
 rss_estimates <- rss_jps_estimate(

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# RankedSetSampling
+# InPlotSampling
 
 <!-- badges: start -->
 
@@ -11,17 +11,17 @@ public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus
 [![Codecov test
 coverage](https://codecov.io/gh/biometryhub/RankedSetSampling/branch/main/graph/badge.svg)](https://codecov.io/gh/biometryhub/RankedSetSampling?branch=main)
 [![R build
-status](https://github.com/biometryhub/RankedSetSampling/workflows/R-CMD-check/badge.svg)](https://github.com/biometryhub/RankedSetSampling/actions)
-![pkgdown](https://github.com/biometryhub/RankedSetSampling/workflows/pkgdown/badge.svg)
+status](https://github.com/biometryhub/InPlotSampling/workflows/R-CMD-check/badge.svg)](https://github.com/biometryhub/InPlotSampling/actions)
+![pkgdown](https://github.com/biometryhub/InPlotSampling/workflows/pkgdown/badge.svg)
 <br> [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](/commits/main)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--05--29-yellowgreen.svg)](/commits/main)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--02--11-yellowgreen.svg)](/commits/main)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 
 <!-- badges: end -->
 
-The RankedSetSampling package provides a way for researchers to easily
+The InPlotSampling package provides a way for researchers to easily
 implement Ranked Set Sampling in practice.
 
 ## Table of Contents
@@ -68,7 +68,7 @@ Use the following code to install this package:
 
 ``` r
 if (!require("remotes")) install.packages("remotes")
-remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
+remotes::install_github("biometryhub/InPlotSampling", upgrade = FALSE)
 ```
 
 ## Examples
@@ -76,7 +76,9 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 ### JPS Sample and Estimator
 
 <details>
+
 <summary>
+
 JPS sample and estimator
 </summary>
 
@@ -97,10 +99,10 @@ JPS sample and estimator
   taus <- sigma * sqrt(1 / rhos^2 - 1)
   population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
 
-  data <- RankedSetSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
+  data <- InPlotSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
   data <- data[order(data[, 2]), ]
 
-  RankedSetSampling::rss_jps_estimate(
+  InPlotSampling::rss_jps_estimate(
     data,
     set_size = H,
     method = "JPS",
@@ -123,7 +125,9 @@ JPS sample and estimator
 ### SBS PPS Sample and Estimator
 
 <details>
+
 <summary>
+
 SBS PPS sample and estimator
 </summary>
 
@@ -161,24 +165,23 @@ SBS PPS sample and estimator
 
 # Citing this package
 
-This package can be cited using `citation("RankedSetSampling")` which
+This package can be cited using `citation("InPlotSampling")` which
 generates
 
-    To cite package 'RankedSetSampling' in publications use:
+    To cite package 'InPlotSampling' in publications use:
 
-      Ozturk O, Rogers S, Kravchuk O, Kasprzak P (2021).
-      _RankedSetSampling: Easing the Application of Ranked Set Sampling in
-      Practice_. R package version 0.1.0,
-      <https://biometryhub.github.io/RankedSetSampling/>.
+      Ozturk O, Rogers S, Kravchuk O, Kasprzak P (2021). _InPlotSampling:
+      Easing the Application of Ranked Set Sampling in Practice_. R package
+      version 0.1.0, <https://biometryhub.github.io/InPlotSampling/>.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
-        title = {RankedSetSampling: Easing the Application of Ranked Set Sampling in Practice},
+        title = {InPlotSampling: Easing the Application of Ranked Set Sampling in Practice},
         author = {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprzak},
         year = {2021},
         note = {R package version 0.1.0},
-        url = {https://biometryhub.github.io/RankedSetSampling/},
+        url = {https://biometryhub.github.io/InPlotSampling/},
       }
 
 # Related Reference

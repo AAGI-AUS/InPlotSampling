@@ -1,7 +1,7 @@
 #' Computes the estimator for JPS data
 #'
 #' @param data The data to use for estimation.
-#' @param set_size Set size for each raking group.
+#' @param set_size Set size for each ranking group.
 #' @param replace Logical (default `TRUE`). Sample with replacement?
 #' @param model_based An inference mode:
 #' - `FALSE`: design based inference

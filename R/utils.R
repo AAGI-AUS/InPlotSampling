@@ -68,6 +68,15 @@ is_whole_number <- function(x, tol = default_tolerance) {
   return(abs(x - round(x)) < tol)
 }
 
+is_positive_whole_numbers <- function(x, tol = default_tolerance) {
+  for (i in x) {
+    if (!is_positive_whole_number(i, tol)) {
+      return(FALSE)
+    }
+  }
+  return(TRUE)
+}
+
 must_be <- function(x, valid_values) {
   return(must_be_(valid_values)(x))
 }
@@ -139,9 +148,9 @@ verify_rss_wo_replace_params <- function(pop, n, H, K) {
   }
 }
 
-verify_jps_params <- function(pop, n, H, tau, K, with_replacement) {
+verify_jps_params <- function(pop, n, H, tau, K, replace, with_index) {
   verify_positive_whole_number(n, H, K)
-  verify_boolean(with_replacement)
+  verify_boolean(replace, with_index)
 
   if (n < H) {
     stop("`n` must >= `H`.")
@@ -153,7 +162,44 @@ verify_jps_params <- function(pop, n, H, tau, K, with_replacement) {
   }
 
   n_population <- length(pop)
-  if (!with_replacement) {
+  if (!replace) {
+    if (n_population < n * H) {
+      stop("The number of population must be at least `nH`.")
+    }
+  }
+}
+
+verify_two_stage_params <- function(pop, sampling_strategies, n, H, replace, ni, Hi, replace_i) {
+  verify_positive_whole_number(n, H)
+  verify_boolean(replace, replace_i)
+  verify_positive_whole_numbers(ni, Hi)
+
+  if (length(ni) != 1 && length(ni) != n) {
+    stop("`ni` must be a vector of 1 or `n` values.")
+  }
+
+  if (length(Hi) != 1 && length(Hi) != n) {
+    stop("`Hi` must be a vector of 1 or `n` values.")
+  }
+
+  if (length(sampling_strategies) != 2) {
+    stop("`sampling_strategies` must be a vector of 2 values.")
+  }
+
+  if (!all(sampling_strategies %in% c("srs", "jps"))) {
+    stop("`sampling_strategies` must be a vector of `'srs'` and/or `'jps'`.")
+  }
+
+  if (n < H) {
+    stop("`n` must be at least `H`.")
+  }
+
+  if (!all(ni >= Hi)) {
+    stop("ith value of `ni` must be at least ith value of `Hi`.")
+  }
+
+  n_population <- dim(pop)[[1]]
+  if (!replace && sampling_strategies[1] == "jps") {
     if (n_population < n * H) {
       stop("The number of population must be at least `nH`.")
     }
@@ -222,6 +268,10 @@ verify_non_negative_whole <- function(..., var_names = NULL) {
 
 verify_positive_whole_number <- function(..., var_names = NULL) {
   verify_data_type(is_positive_whole_number, "a positive whole number", var_names, ...)
+}
+
+verify_positive_whole_numbers <- function(..., var_names = NULL) {
+  verify_data_type(is_positive_whole_numbers, "a vector of positive whole numbers", var_names, ...)
 }
 
 verify_must_be <- function(..., valid_values, var_names = NULL) {

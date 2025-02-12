@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# RankedSetSampling
+# InPlotSampling
 
 ```{r, echo = FALSE}
 description <- read.dcf("DESCRIPTION")
@@ -28,8 +28,8 @@ min.r <- substr(description[, "Depends"], 7, 11)
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![Codecov test coverage](https://codecov.io/gh/biometryhub/RankedSetSampling/branch/main/graph/badge.svg)](https://codecov.io/gh/biometryhub/RankedSetSampling?branch=main)
-[![R build status](https://github.com/biometryhub/RankedSetSampling/workflows/R-CMD-check/badge.svg)](https://github.com/biometryhub/RankedSetSampling/actions)
-![pkgdown](https://github.com/biometryhub/RankedSetSampling/workflows/pkgdown/badge.svg)
+[![R build status](https://github.com/biometryhub/InPlotSampling/workflows/R-CMD-check/badge.svg)](https://github.com/biometryhub/InPlotSampling/actions)
+![pkgdown](https://github.com/biometryhub/InPlotSampling/workflows/pkgdown/badge.svg)
 <br>
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-`r min.r`-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-`r gsub('-', '--', version)`-orange.svg?style=flat-square)](/commits/main)
@@ -38,7 +38,7 @@ min.r <- substr(description[, "Depends"], 7, 11)
 
 <!-- badges: end -->
 
-The RankedSetSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice.
+The InPlotSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice.
 
 ## Table of Contents
 
@@ -76,7 +76,7 @@ Use the following code to install this package:
 
 ```{r eval=F}
 if (!require("remotes")) install.packages("remotes")
-remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
+remotes::install_github("biometryhub/InPlotSampling", upgrade = FALSE)
 ```
 
 ## Examples
@@ -103,10 +103,10 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
   taus <- sigma * sqrt(1 / rhos^2 - 1)
   population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
 
-  data <- RankedSetSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
+  data <- InPlotSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
   data <- data[order(data[, 2]), ]
 
-  RankedSetSampling::rss_jps_estimate(
+  InPlotSampling::rss_jps_estimate(
     data,
     set_size = H,
     method = "JPS",
@@ -163,10 +163,10 @@ remotes::install_github("biometryhub/RankedSetSampling", upgrade = FALSE)
 
 # Citing this package
 
-This package can be cited using `citation("RankedSetSampling")` which generates
+This package can be cited using `citation("InPlotSampling")` which generates
 
 ```{r echo=F, comment = NA}
-citation("RankedSetSampling")
+citation("InPlotSampling")
 ```
 
 # Related Reference

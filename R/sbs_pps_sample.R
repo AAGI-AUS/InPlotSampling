@@ -82,6 +82,7 @@ sbs_pps_sample <- function(population, n, n_cores = getOption("n_cores", 1)) {
 #' - sbs_indices: sbs sample indices
 #' - pps_indices: pps sample indices
 #' - sizes_wo_sbs: measured sizes without sbs sample
+#' @keywords internal
 #'
 get_sbs_pps_sample_indices <- function(population, n, with_unique_pps = FALSE) {
   n_population <- dim(population)[1]
