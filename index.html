@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Easing the Application of Ranked Set Sampling in Practice • RankedSetSampling</title>
+<title>Easing the Application of Ranked Set Sampling in Practice • InPlotSampling</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Easing the Application of Ranked Set Sampling in Practice">
-<meta name="description" content="The RankedSetSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice. Ranked Set Sampling was originally described by McIntyre (1952) (reprinted in 2005) &lt;doi:10.1198/000313005X54180&gt;. This package takes work by Omer and Kravchuk (2021) &lt;https://doi.org/10.1007/s13253-021-00439-1&gt; and enables easy use of the methods.">
-<meta property="og:description" content="The RankedSetSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice. Ranked Set Sampling was originally described by McIntyre (1952) (reprinted in 2005) &lt;doi:10.1198/000313005X54180&gt;. This package takes work by Omer and Kravchuk (2021) &lt;https://doi.org/10.1007/s13253-021-00439-1&gt; and enables easy use of the methods.">
+<meta name="description" content="The InPlotSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice. Ranked Set Sampling was originally described by McIntyre (1952) (reprinted in 2005) &lt;doi:10.1198/000313005X54180&gt;. This package takes work by Omer and Kravchuk (2021) &lt;https://doi.org/10.1007/s13253-021-00439-1&gt; and enables easy use of the methods.">
+<meta property="og:description" content="The InPlotSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice. Ranked Set Sampling was originally described by McIntyre (1952) (reprinted in 2005) &lt;doi:10.1198/000313005X54180&gt;. This package takes work by Omer and Kravchuk (2021) &lt;https://doi.org/10.1007/s13253-021-00439-1&gt; and enables easy use of the methods.">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-K4JQ08EC5Q"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -27,7 +27,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">RankedSetSampling</a>
+    <a class="navbar-brand me-2" href="index.html">InPlotSampling</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
@@ -44,7 +44,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/biometryhub/RankedSetSampling/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/biometryhub/InPlotSampling/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -53,12 +53,12 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="rankedsetsampling">RankedSetSampling<a class="anchor" aria-label="anchor" href="#rankedsetsampling"></a>
+<div class="page-header"><h1 id="inplotsampling">InPlotSampling<a class="anchor" aria-label="anchor" href="#inplotsampling"></a>
 </h1></div>
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The RankedSetSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice.</p>
+<p>The InPlotSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice.</p>
 <div class="section level2">
 <h2 id="table-of-contents">Table of Contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
 </h2>
@@ -110,7 +110,7 @@ RSS sampling diagram
 <p>Use the following code to install this package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"biometryhub/RankedSetSampling"</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"biometryhub/InPlotSampling"</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -137,10 +137,10 @@ JPS sample and estimator
 <span>  <span class="va">taus</span> <span class="op">&lt;-</span> <span class="va">sigma</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">rhos</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">population_size</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">population_size</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">RankedSetSampling</span><span class="fu">::</span><span class="fu"><a href="reference/jps_sample.html">jps_sample</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">n</span>, <span class="va">H</span>, <span class="va">taus</span>, <span class="va">n_rankers</span>, <span class="va">with_replacement</span><span class="op">)</span></span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/jps_sample.html">jps_sample</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">n</span>, <span class="va">H</span>, <span class="va">taus</span>, <span class="va">n_rankers</span>, <span class="va">with_replacement</span><span class="op">)</span></span>
 <span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="op">]</span></span>
 <span></span>
-<span>  <span class="fu">RankedSetSampling</span><span class="fu">::</span><span class="fu"><a href="reference/rss_jps_estimate.html">rss_jps_estimate</a></span><span class="op">(</span></span>
+<span>  <span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/rss_jps_estimate.html">rss_jps_estimate</a></span><span class="op">(</span></span>
 <span>    <span class="va">data</span>,</span>
 <span>    set_size <span class="op">=</span> <span class="va">H</span>,</span>
 <span>    method <span class="op">=</span> <span class="st">"JPS"</span>,</span>
@@ -198,23 +198,22 @@ SBS PPS sample and estimator
 <div class="section level1">
 <h1 id="citing-this-package">Citing this package<a class="anchor" aria-label="anchor" href="#citing-this-package"></a>
 </h1>
-<p>This package can be cited using <code>citation("RankedSetSampling")</code> which generates</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>To cite package <span class="st">'RankedSetSampling'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
+<p>This package can be cited using <code>citation("InPlotSampling")</code> which generates</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>To cite package <span class="st">'InPlotSampling'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  Ozturk O, Rogers S, Kravchuk O, Kasprzak <span class="fu">P</span> (<span class="dv">2021</span>).</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  _RankedSetSampling<span class="sc">:</span> Easing the Application of Ranked Set Sampling <span class="cf">in</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  Practice_. R package version <span class="dv">0</span>.<span class="fl">1.0</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>biometryhub.github.io<span class="sc">/</span>RankedSetSampling<span class="sc">/</span><span class="er">&gt;</span>.</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    title <span class="ot">=</span> {RankedSetSampling<span class="sc">:</span> Easing the Application of Ranked Set Sampling <span class="cf">in</span> Practice},</span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    author <span class="ot">=</span> {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprzak},</span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2021</span>},</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">1.0</span>},</span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>biometryhub.github.io<span class="sc">/</span>RankedSetSampling<span class="sc">/</span>},</span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  }</span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  Ozturk O, Rogers S, Kravchuk O, Kasprzak <span class="fu">P</span> (<span class="dv">2021</span>). _InPlotSampling<span class="sc">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  Easing the Application of Ranked Set Sampling <span class="cf">in</span> Practice_. R package</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">1.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>biometryhub.github.io<span class="sc">/</span>InPlotSampling<span class="sc">/</span><span class="er">&gt;</span>.</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    title <span class="ot">=</span> {InPlotSampling<span class="sc">:</span> Easing the Application of Ranked Set Sampling <span class="cf">in</span> Practice},</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    author <span class="ot">=</span> {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprzak},</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2021</span>},</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">1.0</span>},</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>biometryhub.github.io<span class="sc">/</span>InPlotSampling<span class="sc">/</span>},</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div class="section level1">
 <h1 id="related-reference">Related Reference<a class="anchor" aria-label="anchor" href="#related-reference"></a>
@@ -229,8 +228,8 @@ Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified Assessment C
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/biometryhub/RankedSetSampling/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/biometryhub/RankedSetSampling/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/biometryhub/InPlotSampling/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/biometryhub/InPlotSampling/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -246,7 +245,7 @@ Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified Assessment C
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing RankedSetSampling</a></li>
+<li><a href="authors.html#citation">Citing InPlotSampling</a></li>
 </ul>
 </div>
 
@@ -265,10 +264,10 @@ Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified Assessment C
 <ul class="list-unstyled">
 <li><a href="http://www.repostatus.org/#wip" class="external-link"><img src="http://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://codecov.io/gh/biometryhub/RankedSetSampling?branch=main" class="external-link"><img src="https://codecov.io/gh/biometryhub/RankedSetSampling/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/biometryhub/RankedSetSampling/actions" class="external-link"><img src="https://github.com/biometryhub/RankedSetSampling/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/biometryhub/InPlotSampling/actions" class="external-link"><img src="https://github.com/biometryhub/InPlotSampling/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg" alt="minimal R version"></a></li>
 <li><a href="/commits/main"><img src="https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square" alt="packageversion"></a></li>
-<li><a href="/commits/main"><img src="https://img.shields.io/badge/last%20change-2024--05--29-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/main"><img src="https://img.shields.io/badge/last%20change-2025--02--11-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/" class="external-link"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 </ul>
 </div>
