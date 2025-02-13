@@ -11,8 +11,8 @@ The InPlotSampling package provides a way for researchers to easily implement Ra
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://biometryhub.github.io/InPlotSampling/}
-  \item Report bugs at \url{https://github.com/biometryhub/InPlotSampling/issues}
+  \item \url{https://aagi-aus.github.io/InPlotSampling/}
+  \item Report bugs at \url{https://github.com/AAGI-AUS/InPlotSampling/issues}
 }
 
 }

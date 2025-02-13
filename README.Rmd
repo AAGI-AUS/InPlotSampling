@@ -28,8 +28,8 @@ min.r <- substr(description[, "Depends"], 7, 11)
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![Codecov test coverage](https://codecov.io/gh/biometryhub/RankedSetSampling/branch/main/graph/badge.svg)](https://codecov.io/gh/biometryhub/RankedSetSampling?branch=main)
-[![R build status](https://github.com/biometryhub/InPlotSampling/workflows/R-CMD-check/badge.svg)](https://github.com/biometryhub/InPlotSampling/actions)
-![pkgdown](https://github.com/biometryhub/InPlotSampling/workflows/pkgdown/badge.svg)
+[![R build status](https://github.com/AAGI-AUS/InPlotSampling/workflows/R-CMD-check/badge.svg)](https://github.com/AAGI-AUS/InPlotSampling/actions)
+![pkgdown](https://github.com/AAGI-AUS/InPlotSampling/workflows/pkgdown/badge.svg)
 <br>
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-`r min.r`-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-`r gsub('-', '--', version)`-orange.svg?style=flat-square)](/commits/main)
@@ -76,7 +76,7 @@ Use the following code to install this package:
 
 ```{r eval=F}
 if (!require("remotes")) install.packages("remotes")
-remotes::install_github("biometryhub/InPlotSampling", upgrade = FALSE)
+remotes::install_github("AAGI-AUS/InPlotSampling", upgrade = FALSE)
 ```
 
 ## Examples

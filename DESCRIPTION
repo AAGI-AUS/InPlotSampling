@@ -18,8 +18,8 @@ Description: The InPlotSampling package provides a way for researchers
     and Kravchuk (2021) <https://doi.org/10.1007/s13253-021-00439-1> and
     enables easy use of the methods.
 License: MIT + file LICENSE
-URL: https://biometryhub.github.io/InPlotSampling/
-BugReports: https://github.com/biometryhub/InPlotSampling/issues
+URL: https://aagi-aus.github.io/InPlotSampling/
+BugReports: https://github.com/AAGI-AUS/InPlotSampling/issues
 Depends:
     R (>= 3.5.0)
 Imports: 
