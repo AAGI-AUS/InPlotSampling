@@ -58,7 +58,14 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The InPlotSampling package provides a way for researchers to easily implement Ranked Set Sampling in practice.</p>
+<p>The InPlotSampling package provides a way for researchers to easily implement these sampling methods in practice.</p>
+<ul>
+<li>Judgment post-stratified (JPS) sampling</li>
+<li>Ranked set sampling (RSS)</li>
+<li>Porbability-proportional to size (PPS) sampling</li>
+<li>Spatially balanced sampling (SBS)</li>
+<li>Two-stage cluster sampling</li>
+</ul>
 <div class="section level2">
 <h2 id="table-of-contents">Table of Contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
 </h2>
@@ -68,7 +75,7 @@
 <a href="#sampling-methods">Sampling Methods</a>
 <ul>
 <li><a href="#jps-sampling">JPS Sampling</a></li>
-<li><a href="#rss-sampling">RSS Sampling</a></li>
+<li><a href="#rss-sampling">RSS</a></li>
 </ul>
 </li>
 <li><a href="#installation">Installation</a></li>
@@ -96,11 +103,11 @@ JPS sampling diagram
 </figcaption></figure>
 </div>
 <div class="section level3">
-<h3 id="rss-sampling">RSS Sampling<a class="anchor" aria-label="anchor" href="#rss-sampling"></a>
+<h3 id="rss">RSS<a class="anchor" aria-label="anchor" href="#rss"></a>
 </h3>
 <p>Sampling is made following the diagram below.</p>
-<figure><img src="reference/figures/rss-diagram.drawio.svg" alt="RSS sampling diagram"><figcaption aria-hidden="true">
-RSS sampling diagram
+<figure><img src="reference/figures/rss-diagram.drawio.svg" alt="RSS diagram"><figcaption aria-hidden="true">
+RSS diagram
 </figcaption></figure>
 </div>
 </div>
@@ -110,7 +117,7 @@ RSS sampling diagram
 <p>Use the following code to install this package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"biometryhub/InPlotSampling"</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"AAGI-AUS/InPlotSampling"</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -121,41 +128,41 @@ RSS sampling diagram
 <details><summary>
 JPS sample and estimator
 </summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">112</span><span class="op">)</span></span>
-<span>  <span class="va">population_size</span> <span class="op">&lt;-</span> <span class="fl">600</span></span>
-<span>  <span class="co"># the number of samples to be ranked in each set</span></span>
-<span>  <span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">112</span><span class="op">)</span></span>
+<span><span class="va">population_size</span> <span class="op">&lt;-</span> <span class="fl">600</span></span>
+<span><span class="co"># the number of samples to be ranked in each set</span></span>
+<span><span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span></span>
-<span>  <span class="va">with_replacement</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
-<span>  <span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
-<span>  <span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span>  <span class="va">n_rankers</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
-<span>  <span class="co"># sample size</span></span>
-<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
+<span><span class="va">with_replacement</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
+<span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">n_rankers</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span><span class="co"># sample size</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
 <span></span>
-<span>  <span class="va">rhos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="va">n_rankers</span><span class="op">)</span></span>
-<span>  <span class="va">taus</span> <span class="op">&lt;-</span> <span class="va">sigma</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">rhos</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">population_size</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">population_size</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span></span>
+<span><span class="va">rhos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="va">n_rankers</span><span class="op">)</span></span>
+<span><span class="va">taus</span> <span class="op">&lt;-</span> <span class="va">sigma</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">rhos</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">population_size</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">population_size</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/jps_sample.html">jps_sample</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">n</span>, <span class="va">H</span>, <span class="va">taus</span>, <span class="va">n_rankers</span>, <span class="va">with_replacement</span><span class="op">)</span></span>
-<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/jps_sample.html">jps_sample</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">n</span>, <span class="va">H</span>, <span class="va">taus</span>, <span class="va">n_rankers</span>, <span class="va">with_replacement</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="op">]</span></span>
 <span></span>
-<span>  <span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/rss_jps_estimate.html">rss_jps_estimate</a></span><span class="op">(</span></span>
-<span>    <span class="va">data</span>,</span>
-<span>    set_size <span class="op">=</span> <span class="va">H</span>,</span>
-<span>    method <span class="op">=</span> <span class="st">"JPS"</span>,</span>
-<span>    confidence <span class="op">=</span> <span class="fl">0.80</span>,</span>
-<span>    replace <span class="op">=</span> <span class="va">with_replacement</span>,</span>
-<span>    model_based <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>    pop_size <span class="op">=</span> <span class="va">population_size</span></span>
-<span>  <span class="op">)</span></span>
-<span>  <span class="co">#&gt;          Estimator Estimate Standard Error 80% Confidence intervals</span></span>
-<span>  <span class="co">#&gt; 1       UnWeighted    9.570          0.526               8.88,10.26</span></span>
-<span>  <span class="co">#&gt; 2      Sd.Weighted    9.595          0.569             8.849,10.341</span></span>
-<span>  <span class="co">#&gt; 3 Aggregate Weight    9.542          0.500             8.887,10.198</span></span>
-<span>  <span class="co">#&gt; 4     JPS Estimate    9.502          0.650             8.651,10.354</span></span>
-<span>  <span class="co">#&gt; 5     SRS estimate    9.793          0.783             8.766,10.821</span></span>
-<span>  <span class="co">#&gt; 6          Minimum    9.542          0.500             8.887,10.198</span></span></code></pre></div>
+<span><span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/rss_jps_estimate.html">rss_jps_estimate</a></span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  set_size <span class="op">=</span> <span class="va">H</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"JPS"</span>,</span>
+<span>  confidence <span class="op">=</span> <span class="fl">0.80</span>,</span>
+<span>  replace <span class="op">=</span> <span class="va">with_replacement</span>,</span>
+<span>  model_based <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  pop_size <span class="op">=</span> <span class="va">population_size</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;          Estimator Estimate Standard Error 80% Confidence intervals</span></span>
+<span><span class="co">#&gt; 1       UnWeighted    9.570          0.526               8.88,10.26</span></span>
+<span><span class="co">#&gt; 2      Sd.Weighted    9.595          0.569             8.849,10.341</span></span>
+<span><span class="co">#&gt; 3 Aggregate Weight    9.542          0.500             8.887,10.198</span></span>
+<span><span class="co">#&gt; 4     JPS Estimate    9.502          0.650             8.651,10.354</span></span>
+<span><span class="co">#&gt; 5     SRS estimate    9.793          0.783             8.766,10.821</span></span>
+<span><span class="co">#&gt; 6          Minimum    9.542          0.500             8.887,10.198</span></span></code></pre></div>
 </details>
 </div>
 <div class="section level3">
@@ -164,33 +171,33 @@ JPS sample and estimator
 <details><summary>
 SBS PPS sample and estimator
 </summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">112</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">112</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="co"># SBS sample size, PPS sample size</span></span>
-<span>  <span class="va">sample_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co"># SBS sample size, PPS sample size</span></span>
+<span><span class="va">sample_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">n_population</span> <span class="op">&lt;-</span> <span class="fl">233</span></span>
-<span>  <span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="va">n_population</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, <span class="va">n_population</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> <span class="fl">13</span></span>
-<span>  <span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, <span class="va">n_population</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> <span class="fl">8</span></span>
-<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n_population</span>, min <span class="op">=</span> <span class="fl">1</span>, max <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span></span>
-<span>  <span class="va">measured_sizes</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n_population</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">n_population</span> <span class="op">&lt;-</span> <span class="fl">233</span></span>
+<span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="va">n_population</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, <span class="va">n_population</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> <span class="fl">13</span></span>
+<span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, <span class="va">n_population</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> <span class="fl">8</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n_population</span>, min <span class="op">=</span> <span class="fl">1</span>, max <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span><span class="va">measured_sizes</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n_population</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">k</span>, <span class="va">x1</span>, <span class="va">x2</span>, <span class="va">measured_sizes</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span>  <span class="va">sample_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sbs_pps_sample.html">sbs_pps_sample</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">sample_sizes</span><span class="op">)</span></span>
+<span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">k</span>, <span class="va">x1</span>, <span class="va">x2</span>, <span class="va">measured_sizes</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">sample_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sbs_pps_sample.html">sbs_pps_sample</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">sample_sizes</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="co"># estimate the population mean and construct a confidence interval</span></span>
-<span>  <span class="va">df_sample</span> <span class="op">&lt;-</span> <span class="va">sample_result</span><span class="op">$</span><span class="va">sample</span></span>
-<span>  <span class="va">sample_id</span> <span class="op">&lt;-</span> <span class="va">df_sample</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
-<span>  <span class="va">y_sample</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">sample_id</span><span class="op">]</span></span>
+<span><span class="co"># estimate the population mean and construct a confidence interval</span></span>
+<span><span class="va">df_sample</span> <span class="op">&lt;-</span> <span class="va">sample_result</span><span class="op">$</span><span class="va">sample</span></span>
+<span><span class="va">sample_id</span> <span class="op">&lt;-</span> <span class="va">df_sample</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">y_sample</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">sample_id</span><span class="op">]</span></span>
 <span></span>
-<span>  <span class="va">sbs_pps_estimates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sbs_pps_estimate.html">sbs_pps_estimate</a></span><span class="op">(</span></span>
-<span>    <span class="va">population</span>, <span class="va">sample_sizes</span>, <span class="va">y_sample</span>, <span class="va">df_sample</span>,</span>
-<span>    n_bootstrap <span class="op">=</span> <span class="fl">100</span>, alpha <span class="op">=</span> <span class="fl">0.05</span></span>
-<span>  <span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sbs_pps_estimates</span><span class="op">)</span></span>
-<span>  <span class="co">#&gt;   n1 n2 Estimate  St.error 95% Confidence intervals</span></span>
-<span>  <span class="co">#&gt; 1  5  5    2.849 0.1760682              2.451,3.247</span></span></code></pre></div>
+<span><span class="va">sbs_pps_estimates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sbs_pps_estimate.html">sbs_pps_estimate</a></span><span class="op">(</span></span>
+<span>  <span class="va">population</span>, <span class="va">sample_sizes</span>, <span class="va">y_sample</span>, <span class="va">df_sample</span>,</span>
+<span>  n_bootstrap <span class="op">=</span> <span class="fl">100</span>, alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sbs_pps_estimates</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   n1 n2 Estimate  St.error 95% Confidence intervals</span></span>
+<span><span class="co">#&gt; 1  5  5    2.849 0.1760682              2.451,3.247</span></span></code></pre></div>
 </details>
 </div>
 </div>
@@ -203,7 +210,7 @@ SBS PPS sample and estimator
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  Ozturk O, Rogers S, Kravchuk O, Kasprzak <span class="fu">P</span> (<span class="dv">2021</span>). _InPlotSampling<span class="sc">:</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  Easing the Application of Ranked Set Sampling <span class="cf">in</span> Practice_. R package</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">1.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>biometryhub.github.io<span class="sc">/</span>InPlotSampling<span class="sc">/</span><span class="er">&gt;</span>.</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">1.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>aagi<span class="sc">-</span>aus.github.io<span class="sc">/</span>InPlotSampling<span class="sc">/</span><span class="er">&gt;</span>.</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
@@ -212,7 +219,7 @@ SBS PPS sample and estimator
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    author <span class="ot">=</span> {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprzak},</span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2021</span>},</span>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">1.0</span>},</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>biometryhub.github.io<span class="sc">/</span>InPlotSampling<span class="sc">/</span>},</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>aagi<span class="sc">-</span>aus.github.io<span class="sc">/</span>InPlotSampling<span class="sc">/</span>},</span>
 <span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div class="section level1">
@@ -264,10 +271,10 @@ Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified Assessment C
 <ul class="list-unstyled">
 <li><a href="http://www.repostatus.org/#wip" class="external-link"><img src="http://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://codecov.io/gh/biometryhub/RankedSetSampling?branch=main" class="external-link"><img src="https://codecov.io/gh/biometryhub/RankedSetSampling/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/biometryhub/InPlotSampling/actions" class="external-link"><img src="https://github.com/biometryhub/InPlotSampling/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/AAGI-AUS/InPlotSampling/actions" class="external-link"><img src="https://github.com/AAGI-AUS/InPlotSampling/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg" alt="minimal R version"></a></li>
 <li><a href="/commits/main"><img src="https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square" alt="packageversion"></a></li>
-<li><a href="/commits/main"><img src="https://img.shields.io/badge/last%20change-2025--02--11-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/main"><img src="https://img.shields.io/badge/last%20change-2025--02--14-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/" class="external-link"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 </ul>
 </div>
