@@ -84,45 +84,45 @@ remotes::install_github("AAGI-AUS/InPlotSampling", upgrade = FALSE)
 ### JPS Sample and Estimator
 
 <details>
-  <summary>JPS sample and estimator</summary>
+<summary>JPS sample and estimator</summary>
 
-  ``` r
-  set.seed(112)
-  population_size <- 600
-  # the number of samples to be ranked in each set
-  H <- 3
+``` r
+set.seed(112)
+population_size <- 600
+# the number of samples to be ranked in each set
+H <- 3
 
-  with_replacement <- FALSE
-  sigma <- 4
-  mu <- 10
-  n_rankers <- 3
-  # sample size
-  n <- 30
+with_replacement <- FALSE
+sigma <- 4
+mu <- 10
+n_rankers <- 3
+# sample size
+n <- 30
 
-  rhos <- rep(0.75, n_rankers)
-  taus <- sigma * sqrt(1 / rhos^2 - 1)
-  population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
+rhos <- rep(0.75, n_rankers)
+taus <- sigma * sqrt(1 / rhos^2 - 1)
+population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
 
-  data <- InPlotSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
-  data <- data[order(data[, 2]), ]
+data <- InPlotSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
+data <- data[order(data[, 2]), ]
 
-  InPlotSampling::rss_jps_estimate(
-    data,
-    set_size = H,
-    method = "JPS",
-    confidence = 0.80,
-    replace = with_replacement,
-    model_based = FALSE,
-    pop_size = population_size
-  )
-  #>          Estimator Estimate Standard Error 80% Confidence intervals
-  #> 1       UnWeighted    9.570          0.526               8.88,10.26
-  #> 2      Sd.Weighted    9.595          0.569             8.849,10.341
-  #> 3 Aggregate Weight    9.542          0.500             8.887,10.198
-  #> 4     JPS Estimate    9.502          0.650             8.651,10.354
-  #> 5     SRS estimate    9.793          0.783             8.766,10.821
-  #> 6          Minimum    9.542          0.500             8.887,10.198
-  ```
+InPlotSampling::rss_jps_estimate(
+  data,
+  set_size = H,
+  method = "JPS",
+  confidence = 0.80,
+  replace = with_replacement,
+  model_based = FALSE,
+  pop_size = population_size
+)
+#>          Estimator Estimate Standard Error 80% Confidence intervals
+#> 1       UnWeighted    9.570          0.526               8.88,10.26
+#> 2      Sd.Weighted    9.595          0.569             8.849,10.341
+#> 3 Aggregate Weight    9.542          0.500             8.887,10.198
+#> 4     JPS Estimate    9.502          0.650             8.651,10.354
+#> 5     SRS estimate    9.793          0.783             8.766,10.821
+#> 6          Minimum    9.542          0.500             8.887,10.198
+```
 </details>
 
 ### SBS PPS Sample and Estimator

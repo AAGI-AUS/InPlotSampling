@@ -11,12 +11,12 @@ public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus
 [![Codecov test
 coverage](https://codecov.io/gh/biometryhub/RankedSetSampling/branch/main/graph/badge.svg)](https://codecov.io/gh/biometryhub/RankedSetSampling?branch=main)
 [![R build
-status](https://github.com/biometryhub/InPlotSampling/workflows/R-CMD-check/badge.svg)](https://github.com/biometryhub/InPlotSampling/actions)
-![pkgdown](https://github.com/biometryhub/InPlotSampling/workflows/pkgdown/badge.svg)
+status](https://github.com/AAGI-AUS/InPlotSampling/workflows/R-CMD-check/badge.svg)](https://github.com/AAGI-AUS/InPlotSampling/actions)
+![pkgdown](https://github.com/AAGI-AUS/InPlotSampling/workflows/pkgdown/badge.svg)
 <br> [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](/commits/main)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2025--02--11-yellowgreen.svg)](/commits/main)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--02--14-yellowgreen.svg)](/commits/main)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 
 <!-- badges: end -->
@@ -68,7 +68,7 @@ Use the following code to install this package:
 
 ``` r
 if (!require("remotes")) install.packages("remotes")
-remotes::install_github("biometryhub/InPlotSampling", upgrade = FALSE)
+remotes::install_github("AAGI-AUS/InPlotSampling", upgrade = FALSE)
 ```
 
 ## Examples
@@ -76,48 +76,46 @@ remotes::install_github("biometryhub/InPlotSampling", upgrade = FALSE)
 ### JPS Sample and Estimator
 
 <details>
-
 <summary>
-
 JPS sample and estimator
 </summary>
 
 ``` r
-  set.seed(112)
-  population_size <- 600
-  # the number of samples to be ranked in each set
-  H <- 3
+set.seed(112)
+population_size <- 600
+# the number of samples to be ranked in each set
+H <- 3
 
-  with_replacement <- FALSE
-  sigma <- 4
-  mu <- 10
-  n_rankers <- 3
-  # sample size
-  n <- 30
+with_replacement <- FALSE
+sigma <- 4
+mu <- 10
+n_rankers <- 3
+# sample size
+n <- 30
 
-  rhos <- rep(0.75, n_rankers)
-  taus <- sigma * sqrt(1 / rhos^2 - 1)
-  population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
+rhos <- rep(0.75, n_rankers)
+taus <- sigma * sqrt(1 / rhos^2 - 1)
+population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
 
-  data <- InPlotSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
-  data <- data[order(data[, 2]), ]
+data <- InPlotSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
+data <- data[order(data[, 2]), ]
 
-  InPlotSampling::rss_jps_estimate(
-    data,
-    set_size = H,
-    method = "JPS",
-    confidence = 0.80,
-    replace = with_replacement,
-    model_based = FALSE,
-    pop_size = population_size
-  )
-  #>          Estimator Estimate Standard Error 80% Confidence intervals
-  #> 1       UnWeighted    9.570          0.526               8.88,10.26
-  #> 2      Sd.Weighted    9.595          0.569             8.849,10.341
-  #> 3 Aggregate Weight    9.542          0.500             8.887,10.198
-  #> 4     JPS Estimate    9.502          0.650             8.651,10.354
-  #> 5     SRS estimate    9.793          0.783             8.766,10.821
-  #> 6          Minimum    9.542          0.500             8.887,10.198
+InPlotSampling::rss_jps_estimate(
+  data,
+  set_size = H,
+  method = "JPS",
+  confidence = 0.80,
+  replace = with_replacement,
+  model_based = FALSE,
+  pop_size = population_size
+)
+#>          Estimator Estimate Standard Error 80% Confidence intervals
+#> 1       UnWeighted    9.570          0.526               8.88,10.26
+#> 2      Sd.Weighted    9.595          0.569             8.849,10.341
+#> 3 Aggregate Weight    9.542          0.500             8.887,10.198
+#> 4     JPS Estimate    9.502          0.650             8.651,10.354
+#> 5     SRS estimate    9.793          0.783             8.766,10.821
+#> 6          Minimum    9.542          0.500             8.887,10.198
 ```
 
 </details>
@@ -125,9 +123,7 @@ JPS sample and estimator
 ### SBS PPS Sample and Estimator
 
 <details>
-
 <summary>
-
 SBS PPS sample and estimator
 </summary>
 
@@ -172,7 +168,7 @@ generates
 
       Ozturk O, Rogers S, Kravchuk O, Kasprzak P (2021). _InPlotSampling:
       Easing the Application of Ranked Set Sampling in Practice_. R package
-      version 0.1.0, <https://biometryhub.github.io/InPlotSampling/>.
+      version 0.1.0, <https://aagi-aus.github.io/InPlotSampling/>.
 
     A BibTeX entry for LaTeX users is
 
@@ -181,7 +177,7 @@ generates
         author = {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprzak},
         year = {2021},
         note = {R package version 0.1.0},
-        url = {https://biometryhub.github.io/InPlotSampling/},
+        url = {https://aagi-aus.github.io/InPlotSampling/},
       }
 
 # Related Reference
