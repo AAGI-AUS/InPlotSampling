@@ -34,15 +34,15 @@ implement these sampling methods in practice.
 
 <!-- vim-markdown-toc GFM -->
 
-- [Sampling Methods](#sampling-methods)
-  - [JPS Sampling](#jps-sampling)
-  - [RSS](#rss-sampling)
-- [Installation](#installation)
-- [Examples](#examples)
-  - [JPS Sample and Estimator](#jps-sample-and-estimator)
-  - [SBS PPS Sample and Estimator](#sbs-pps-sample-and-estimator)
-- [Citing this package](#citing-this-package)
-- [Related Reference](#related-reference)
+    * [Sampling Methods](#sampling-methods)
+        * [JPS Sampling](#jps-sampling)
+        * [RSS](#rss)
+    * [Installation](#installation)
+    * [Examples](#examples)
+        * [JPS Sample and Estimator](#jps-sample-and-estimator)
+        * [SBS PPS Sample and Estimator](#sbs-pps-sample-and-estimator)
+* [Citing this package](#citing-this-package)
+* [Related Reference](#related-reference)
 
 <!-- vim-markdown-toc -->
 
@@ -81,9 +81,7 @@ remotes::install_github("AAGI-AUS/InPlotSampling", upgrade = FALSE)
 ### JPS Sample and Estimator
 
 <details>
-
 <summary>
-
 JPS sample and estimator
 </summary>
 
@@ -130,9 +128,7 @@ InPlotSampling::rss_jps_estimate(
 ### SBS PPS Sample and Estimator
 
 <details>
-
 <summary>
-
 SBS PPS sample and estimator
 </summary>
 
