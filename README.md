@@ -16,7 +16,7 @@ status](https://github.com/AAGI-AUS/InPlotSampling/workflows/R-CMD-check/badge.s
 <br> [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](/commits/main)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2025--02--14-yellowgreen.svg)](/commits/main)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--11--12-yellowgreen.svg)](/commits/main)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 
 <!-- badges: end -->
@@ -81,7 +81,9 @@ remotes::install_github("AAGI-AUS/InPlotSampling", upgrade = FALSE)
 ### JPS Sample and Estimator
 
 <details>
+
 <summary>
+
 JPS sample and estimator
 </summary>
 
@@ -128,7 +130,9 @@ InPlotSampling::rss_jps_estimate(
 ### SBS PPS Sample and Estimator
 
 <details>
+
 <summary>
+
 SBS PPS sample and estimator
 </summary>
 
@@ -146,18 +150,17 @@ y <- (x1 + x2) * runif(n = n_population, min = 1, max = 2) + 1
 measured_sizes <- y * runif(n = n_population, min = 0, max = 4)
 
 population <- matrix(cbind(k, x1, x2, measured_sizes), ncol = 4)
-sample_result <- sbs_pps_sample(population, sample_sizes)
+sample_result <- InPlotSampling::sbs_pps_sample(population, sample_sizes)
 
 # estimate the population mean and construct a confidence interval
 df_sample <- sample_result$sample
 sample_id <- df_sample[, 1]
 y_sample <- y[sample_id]
 
-sbs_pps_estimates <- sbs_pps_estimate(
+InPlotSampling::sbs_pps_estimate(
   population, sample_sizes, y_sample, df_sample,
   n_bootstrap = 100, alpha = 0.05
 )
-print(sbs_pps_estimates)
 #>   n1 n2 Estimate  St.error 95% Confidence intervals
 #> 1  5  5    2.849 0.1760682              2.451,3.247
 ```
