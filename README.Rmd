@@ -43,7 +43,7 @@ practice.
 
 - Judgment post-stratified (JPS) sampling
 - Ranked set sampling (RSS)
-- Porbability-proportional to size (PPS) sampling
+- Probability-proportional to size (PPS) sampling
 - Spatially balanced sampling (SBS)
 - Two-stage cluster sampling
 
@@ -82,7 +82,9 @@ Sampling is made following the diagram below.
 Use the following code to install this package:
 
 ```{r, eval=F}
-if (!require("remotes")) install.packages("remotes")
+if (!require("remotes")) {
+  install.packages("remotes")
+}
 remotes::install_github("AAGI-AUS/InPlotSampling", upgrade = FALSE)
 ```
 
@@ -110,7 +112,14 @@ rhos <- rep(0.75, n_rankers)
 taus <- sigma * sqrt(1 / rhos^2 - 1)
 population <- qnorm((1:population_size) / (population_size + 1), mu, sigma)
 
-data <- InPlotSampling::jps_sample(population, n, H, taus, n_rankers, with_replacement)
+data <- InPlotSampling::jps_sample(
+  population,
+  n,
+  H,
+  taus,
+  n_rankers,
+  with_replacement
+)
 data <- data[order(data[, 2]), ]
 
 InPlotSampling::rss_jps_estimate(
@@ -159,8 +168,12 @@ sample_id <- df_sample[, 1]
 y_sample <- y[sample_id]
 
 sbs_pps_estimates <- sbs_pps_estimate(
-  population, sample_sizes, y_sample, df_sample,
-  n_bootstrap = 100, alpha = 0.05
+  population,
+  sample_sizes,
+  y_sample,
+  df_sample,
+  n_bootstrap = 100,
+  alpha = 0.05
 )
 print(sbs_pps_estimates)
 #>   n1 n2 Estimate  St.error 95% Confidence intervals
