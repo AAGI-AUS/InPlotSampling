@@ -62,7 +62,7 @@
 <ul>
 <li>Judgment post-stratified (JPS) sampling</li>
 <li>Ranked set sampling (RSS)</li>
-<li>Porbability-proportional to size (PPS) sampling</li>
+<li>Probability-proportional to size (PPS) sampling</li>
 <li>Spatially balanced sampling (SBS)</li>
 <li>Two-stage cluster sampling</li>
 </ul>
@@ -98,17 +98,17 @@
 <h3 id="jps-sampling">JPS Sampling<a class="anchor" aria-label="anchor" href="#jps-sampling"></a>
 </h3>
 <p>Sampling is made following the diagram below.</p>
-<figure><img src="reference/figures/jps-diagram.drawio.svg" alt="JPS sampling diagram"><figcaption aria-hidden="true">
-JPS sampling diagram
-</figcaption></figure>
+<div class="float">
+<img src="reference/figures/jps-diagram.drawio.svg" alt="JPS sampling diagram"><div class="figcaption">JPS sampling diagram</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="rss">RSS<a class="anchor" aria-label="anchor" href="#rss"></a>
 </h3>
 <p>Sampling is made following the diagram below.</p>
-<figure><img src="reference/figures/rss-diagram.drawio.svg" alt="RSS diagram"><figcaption aria-hidden="true">
-RSS diagram
-</figcaption></figure>
+<div class="float">
+<img src="reference/figures/rss-diagram.drawio.svg" alt="RSS diagram"><div class="figcaption">RSS diagram</div>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -116,7 +116,9 @@ RSS diagram
 </h2>
 <p>Use the following code to install this package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"AAGI-AUS/InPlotSampling"</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -144,7 +146,14 @@ JPS sample and estimator
 <span><span class="va">taus</span> <span class="op">&lt;-</span> <span class="va">sigma</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">rhos</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">population_size</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">population_size</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/jps_sample.html">jps_sample</a></span><span class="op">(</span><span class="va">population</span>, <span class="va">n</span>, <span class="va">H</span>, <span class="va">taus</span>, <span class="va">n_rankers</span>, <span class="va">with_replacement</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/jps_sample.html">jps_sample</a></span><span class="op">(</span></span>
+<span>  <span class="va">population</span>,</span>
+<span>  <span class="va">n</span>,</span>
+<span>  <span class="va">H</span>,</span>
+<span>  <span class="va">taus</span>,</span>
+<span>  <span class="va">n_rankers</span>,</span>
+<span>  <span class="va">with_replacement</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="fu">InPlotSampling</span><span class="fu">::</span><span class="fu"><a href="reference/rss_jps_estimate.html">rss_jps_estimate</a></span><span class="op">(</span></span>
@@ -192,8 +201,12 @@ SBS PPS sample and estimator
 <span><span class="va">y_sample</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">sample_id</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">sbs_pps_estimates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sbs_pps_estimate.html">sbs_pps_estimate</a></span><span class="op">(</span></span>
-<span>  <span class="va">population</span>, <span class="va">sample_sizes</span>, <span class="va">y_sample</span>, <span class="va">df_sample</span>,</span>
-<span>  n_bootstrap <span class="op">=</span> <span class="fl">100</span>, alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span>  <span class="va">population</span>,</span>
+<span>  <span class="va">sample_sizes</span>,</span>
+<span>  <span class="va">y_sample</span>,</span>
+<span>  <span class="va">df_sample</span>,</span>
+<span>  n_bootstrap <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.05</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sbs_pps_estimates</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   n1 n2 Estimate  St.error 95% Confidence intervals</span></span>
@@ -206,30 +219,12 @@ SBS PPS sample and estimator
 <h1 id="citing-this-package">Citing this package<a class="anchor" aria-label="anchor" href="#citing-this-package"></a>
 </h1>
 <p>This package can be cited using <code>citation("InPlotSampling")</code> which generates</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>To cite package <span class="st">'InPlotSampling'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  Ozturk O, Rogers S, Kravchuk O, Kasprzak <span class="fu">P</span> (<span class="dv">2021</span>). _InPlotSampling<span class="sc">:</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  Easing the Application of Ranked Set Sampling <span class="cf">in</span> Practice_. R package</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">1.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>aagi<span class="sc">-</span>aus.github.io<span class="sc">/</span>InPlotSampling<span class="sc">/</span><span class="er">&gt;</span>.</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    title <span class="ot">=</span> {InPlotSampling<span class="sc">:</span> Easing the Application of Ranked Set Sampling <span class="cf">in</span> Practice},</span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    author <span class="ot">=</span> {Omer Ozturk and Sam Rogers and Olena Kravchuk and Peter Kasprzak},</span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2021</span>},</span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">1.0</span>},</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>aagi<span class="sc">-</span>aus.github.io<span class="sc">/</span>InPlotSampling<span class="sc">/</span>},</span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  }</span></code></pre></div>
+<pre><code>Error in `citation()`:
+! there is no package called 'InPlotSampling'</code></pre>
 </div>
 <div class="section level1">
 <h1 id="related-reference">Related Reference<a class="anchor" aria-label="anchor" href="#related-reference"></a>
 </h1>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div id="ref-Ozturk2021" class="csl-entry">
-Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified Assessment Combining Ranking Information from Multiple Sources, with a Field Phenotyping Example.” <em>Journal of Agricultural, Biological and Environmental Statistics</em>. <a href="https://doi.org/10.1007/s13253-021-00439-1" class="external-link uri">https://doi.org/10.1007/s13253-021-00439-1</a>.
-</div>
-</div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
@@ -259,10 +254,10 @@ Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified Assessment C
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Omer Ozturk <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0235-4772" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Sam Rogers <br><small class="roles"> Maintainer, author </small>  </li>
-<li>Olena Kravchuk <br><small class="roles"> Author, data contributor </small> <a href="https://orcid.org/0000-0001-5291-3600" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Peter Kasprzak <br><small class="roles"> Author </small>  </li>
+<li>Omer Ozturk <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0235-4772" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Sam Rogers <br><small class="roles"> Maintainer, author </small>   </li>
+<li>Olena Kravchuk <br><small class="roles"> Author, data contributor </small> <a href="https://orcid.org/0000-0001-5291-3600" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Peter Kasprzak <br><small class="roles"> Author </small>   </li>
 </ul>
 </div>
 
@@ -274,7 +269,7 @@ Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified Assessment C
 <li><a href="https://github.com/AAGI-AUS/InPlotSampling/actions" class="external-link"><img src="https://github.com/AAGI-AUS/InPlotSampling/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg" alt="minimal R version"></a></li>
 <li><a href="/commits/main"><img src="https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square" alt="packageversion"></a></li>
-<li><a href="/commits/main"><img src="https://img.shields.io/badge/last%20change-2025--02--14-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/main"><img src="https://img.shields.io/badge/last%20change-2026--03--27-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/" class="external-link"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 </ul>
 </div>
@@ -288,7 +283,7 @@ Ozturk, Omer, and Olena Kravchuk. 2021. “Judgment Post-Stratified Assessment C
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
